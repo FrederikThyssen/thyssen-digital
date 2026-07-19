@@ -31,6 +31,8 @@ const buttonVariants = cva(
 type BaseButtonProps = VariantProps<typeof buttonVariants> & {
   children: ReactNode;
   className?: string;
+  leadingIcon?: ReactNode;
+  trailingIcon?: ReactNode;
 };
 
 type ButtonAsButton = BaseButtonProps &
@@ -51,8 +53,16 @@ function isLinkButton(props: ButtonProps): props is ButtonAsLink {
 }
 
 export function Button(props: ButtonProps) {
-  const { className, variant, size, disabled, children } = props;
+  const { className, variant, size, disabled, children, leadingIcon, trailingIcon } =
+    props;
   const classes = cn(buttonVariants({ variant, size }), className);
+  const content = (
+    <>
+      {leadingIcon}
+      {children}
+      {trailingIcon}
+    </>
+  );
 
   if (isLinkButton(props)) {
     const anchorProps = { ...props };
@@ -61,6 +71,8 @@ export function Button(props: ButtonProps) {
     delete anchorProps.size;
     delete anchorProps.disabled;
     delete anchorProps.children;
+    delete anchorProps.leadingIcon;
+    delete anchorProps.trailingIcon;
 
     return (
       <a
@@ -68,7 +80,7 @@ export function Button(props: ButtonProps) {
         className={cn(classes, disabled && "pointer-events-none opacity-50")}
         {...anchorProps}
       >
-        {children}
+        {content}
       </a>
     );
   }
@@ -78,10 +90,12 @@ export function Button(props: ButtonProps) {
   delete buttonProps.variant;
   delete buttonProps.size;
   delete buttonProps.children;
+  delete buttonProps.leadingIcon;
+  delete buttonProps.trailingIcon;
 
   return (
     <button className={classes} disabled={disabled} {...buttonProps}>
-      {children}
+      {content}
     </button>
   );
 }

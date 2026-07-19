@@ -5,13 +5,18 @@
 Les tokens sont définis dans `src/app/globals.css` sous forme de variables CSS sémantiques :
 
 - `--background`, `--foreground`
+- `--background-secondary`
 - `--muted`, `--muted-foreground`
-- `--surface`, `--surface-hover`
-- `--border`
+- `--subtle-foreground`, `--inverse-foreground`
+- `--surface`, `--surface-subtle`, `--surface-elevated`, `--surface-hover`, `--surface-glass`
+- `--border`, `--border-strong`
 - `--primary`, `--primary-foreground`
 - `--accent-cyan`, `--accent-violet`
+- `--gradient-primary`, `--gradient-halo`
 - `--radius-sm`, `--radius-md`, `--radius-lg`, `--radius-xl`
-- `--shadow-soft`, `--shadow-glow`
+- `--shadow-soft`, `--shadow-card`, `--shadow-glow`
+- `--duration-fast`, `--duration-standard`, `--duration-slow`
+- `--ease-standard`, `--ease-expressive`
 
 ## Typographie
 
@@ -45,6 +50,8 @@ Le composant fonctionne comme bouton natif ou comme lien via la prop `href`.
 
 Les surfaces utilisent `--surface`, `--surface-hover` et `--border`. Les composants ne doivent pas disperser de couleurs arbitraires lorsque des tokens existent.
 
+Sprint 1.5 ajoute `Card`, `GlassPanel`, `Divider`, `Badge` et des composants de fond décoratifs. Le glassmorphism reste un accent ponctuel, pas une direction générale appliquée partout.
+
 ## Règles couleur
 
 Le bleu électrique est l'accent principal. Le cyan sert aux états ou détails utiles. Le violet reste discret. Aucun effet RGB, néon agressif ou cyberpunk ne doit être introduit.
@@ -56,3 +63,5 @@ Le focus visible est global. Les contrastes doivent rester suffisants, les liens
 ## Motion réduite
 
 `prefers-reduced-motion` est pris en charge globalement. Les animations futures devront respecter cette préférence.
+
+Les primitives Motion (`FadeIn`, `FadeUp`, `FadeLeft`, `FadeRight`, `ScaleIn`, `Stagger`, `StaggerItem`) utilisent des déplacements courts, une opacité progressive et des durées encadrées.
