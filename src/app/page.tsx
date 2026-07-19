@@ -1,7 +1,11 @@
 import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { ContactSection } from "@/components/sections/contact";
+import { FaqSection } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
-import { Container } from "@/components/ui/container";
-import { Divider } from "@/components/ui/divider";
+import { ProcessSection } from "@/components/sections/process";
+import { ProjectsSection } from "@/components/sections/projects";
+import { ServicesSection } from "@/components/sections/services";
 
 export default function Home() {
   return (
@@ -9,26 +13,13 @@ export default function Home() {
       <SiteHeader />
       <main id="contenu">
         <Hero />
-        <PlaceholderSection id="services" title="Services" />
-        <PlaceholderSection id="realisations" title="Réalisations" />
-        <PlaceholderSection id="a-propos" title="À propos" />
-        <PlaceholderSection id="contact" title="Contact" />
+        <ServicesSection />
+        <ProjectsSection />
+        <ProcessSection />
+        <FaqSection />
+        <ContactSection />
       </main>
+      <SiteFooter />
     </>
-  );
-}
-
-function PlaceholderSection({ id, title }: { id: string; title: string }) {
-  return (
-    <section className="py-16" id={id}>
-      <Container>
-        <Divider variant="gradient" />
-        <div className="py-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent-cyan">
-            {title}
-          </p>
-        </div>
-      </Container>
-    </section>
   );
 }
