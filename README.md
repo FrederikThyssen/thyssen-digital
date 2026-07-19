@@ -39,9 +39,11 @@ docs/
 
 ## État actuel
 
-Sprint 1 : fondations techniques uniquement. La page d'accueil est une page de contrôle temporaire pour vérifier Next.js, Tailwind CSS, les tokens de base et les composants UI initiaux.
+Sprint 1 : fondations techniques.
+
+Sprint 1.5 : Design Language codé avec composants UI réutilisables, primitives Motion sobres, fonds décoratifs légers et documentation dédiée. La page d'accueil reste une galerie de contrôle temporaire.
 
 ## Sprints suivants
 
-- Sprint 2 : direction créative plus avancée et structure d'accueil réelle.
+- Sprint 2 : Hero, navigation et structure d'accueil réelle.
 - Sprints suivants : sections marketing, réalisations, navigation finale, contact, animations et assets de marque définitifs.
