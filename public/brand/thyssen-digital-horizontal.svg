@@ -7,7 +7,7 @@
       <stop offset="1" stop-color="#8c6dff"/>
     </linearGradient>
   </defs>
-  <path fill="url(#td-horizontal-accent)" d="M10 10h28c12 0 22 9.2 22 22S50 54 38 54H26V22H10V10Zm28 34c6.7 0 12-5.1 12-12S44.7 20 38 20h-2v24h2Zm-2-24H20v8h8v22h8V20Z"/>
+  <path fill="url(#td-horizontal-accent)" fill-rule="evenodd" d="M6 8h33c14 0 23 9.8 23 24s-9 24-23 24H21V24H6V8Zm30 35h4c6.8 0 11-4.4 11-11s-4.2-11-11-11h-4v22Z" clip-rule="evenodd"/>
   <text x="78" y="30" fill="#f7f9fc" font-family="Inter, Arial, sans-serif" font-size="17" font-weight="700" letter-spacing="4">THYSSEN</text>
   <text x="78" y="49" fill="#9aa8bd" font-family="Inter, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="3.2">DIGITAL</text>
 </svg>

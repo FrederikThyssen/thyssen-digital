@@ -33,7 +33,7 @@ export function SiteHeader() {
       <div
         className={cn(
           "mx-auto max-w-6xl rounded-xl border border-border bg-surface-glass shadow-soft backdrop-blur-md transition-colors duration-200 ease-standard",
-          isScrolled && "border-border-strong bg-surface-elevated",
+          isScrolled && "border-border-strong bg-background-secondary/90 shadow-card",
         )}
       >
         <nav
@@ -57,7 +57,7 @@ export function SiteHeader() {
           <div className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => (
               <a
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:bg-surface hover:text-foreground"
+                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
                 href={item.href}
                 key={item.href}
               >
@@ -67,7 +67,7 @@ export function SiteHeader() {
           </div>
 
           <div className="hidden lg:block">
-            <Button href="#contact" size="sm">
+            <Button className="shadow-none" href="#contact" size="sm">
               Parler de votre projet
             </Button>
           </div>
@@ -93,7 +93,7 @@ export function SiteHeader() {
             <div className="border-t border-border px-4 pb-4 pt-2">
               {navItems.map((item) => (
                 <a
-                  className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:bg-surface hover:text-foreground"
+                  className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
                   href={item.href}
                   key={item.href}
                   onClick={() => setIsOpen(false)}
