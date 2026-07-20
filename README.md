@@ -39,11 +39,12 @@ docs/
 
 ## État actuel
 
-Sprint 1 : fondations techniques.
+- Sprint 1 : fondations techniques.
+- Sprint 1.5 : Design Language codé avec composants UI réutilisables, primitives Motion sobres, fonds décoratifs légers et documentation dédiée.
+- Sprint 2 : Hero premium et navbar responsive.
+- Sprint 3 : homepage complète V1 avec services, réalisations, processus, FAQ, contact et footer.
+- Sprint 4 : identité vectorielle TD, favicon, visuels projets dédiés et finitions du footer.
 
-Sprint 1.5 : Design Language codé avec composants UI réutilisables, primitives Motion sobres, fonds décoratifs légers et documentation dédiée. La page d'accueil reste une galerie de contrôle temporaire.
+## Assets de marque
 
-## Sprints suivants
-
-- Sprint 2 : Hero, navigation et structure d'accueil réelle.
-- Sprints suivants : sections marketing, réalisations, navigation finale, contact, animations et assets de marque définitifs.
+Les variantes SVG sont disponibles dans `public/brand/` et documentées dans `docs/05-brand-assets.md`.
