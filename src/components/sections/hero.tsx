@@ -21,7 +21,7 @@ export function Hero() {
           priority
           quality={100}
           sizes="100vw"
-          src="/hero/homepage-reference.png"
+          src="/images/image8.png"
         />
       </div>
 
@@ -33,7 +33,7 @@ export function Hero() {
           priority
           quality={100}
           sizes="100vw"
-          src="/hero/homepage-hero-background.png"
+          src="/images/image9.png"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.82),rgb(5_7_13_/_0.5)_62%,rgb(5_7_13_/_0.22))]" />
       </div>
