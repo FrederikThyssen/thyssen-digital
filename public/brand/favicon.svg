@@ -24,10 +24,10 @@
     </filter>
   </defs>
   <g transform="translate(0 16)">
-    <path d="M12 17h69c27.5 0 45 17.4 45 39 0 22.6-18.2 40-45.7 40H42V43H20L12 17Zm54 55h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66v32Z" fill="#167dff" filter="url(#td-favicon-glow)" opacity=".58"/>
-    <path fill="url(#td-favicon-base)" fill-rule="evenodd" d="M12 17h69c27.5 0 45 17.4 45 39 0 22.6-18.2 40-45.7 40H42V43H20L12 17Zm54 55h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66v32Z" clip-rule="evenodd"/>
-    <path d="M12 17h69c14 0 25.4 4.5 33.3 12.2H23L20 43 12 17Z" fill="url(#td-favicon-top)"/>
-    <path d="M80.5 17C108 17 126 34.6 126 56c0 22.6-18.2 40-45.7 40H66V72h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66V17h14.5Z" fill="url(#td-favicon-edge)" opacity=".82"/>
-    <path d="M66 40h14.5c12.2 0 21 6.2 21 16 0 9.6-8.8 16-21 16H66V40Z" fill="#05070d" opacity=".78"/>
+    <path d="M12 17h76l8 25H64v54H42V42H20L12 17Zm60 0h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" fill="#167dff" filter="url(#td-favicon-glow)" opacity=".58"/>
+    <path fill="url(#td-favicon-base)" fill-rule="evenodd" d="M12 17h76l8 25H64v54H42V42H20L12 17Zm60 0h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" clip-rule="evenodd"/>
+    <path d="M12 17h76l8 25H20L12 17Z" fill="url(#td-favicon-top)"/>
+    <path d="M72 17h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" fill="url(#td-favicon-edge)" opacity=".82"/>
+    <path d="M72 40h8.5c12.2 0 21 6.2 21 16 0 9.6-8.8 16-21 16H72V40Z" fill="#05070d" opacity=".78"/>
   </g>
 </svg>
