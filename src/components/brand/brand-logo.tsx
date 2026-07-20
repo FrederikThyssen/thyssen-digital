@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useId } from "react";
 
 import { BRAND_NAME, BRAND_SIGNATURE } from "@/lib/constants";
@@ -27,6 +28,36 @@ export function BrandLogo({
 }: BrandLogoProps) {
   const gradientId = useId();
   const label = showSignature ? `${BRAND_NAME} - ${BRAND_SIGNATURE}` : BRAND_NAME;
+  const useOfficialRaster = tone === "accent";
+
+  if (useOfficialRaster) {
+    return (
+      <span
+        aria-hidden={decorative || undefined}
+        aria-label={decorative ? undefined : label}
+        className={cn("inline-flex items-center text-foreground", className)}
+        role={decorative ? undefined : "img"}
+      >
+        <Image
+          alt=""
+          aria-hidden="true"
+          className={cn(
+            "block shrink-0 object-contain",
+            variant === "mark" ? "h-10 w-auto" : "h-14 w-auto",
+          )}
+          decoding="async"
+          height={variant === "mark" ? 620 : 1140}
+          src={
+            variant === "mark"
+              ? "/brand/logo-official-mark.png"
+              : "/brand/logo-official-full.png"
+          }
+          unoptimized
+          width={variant === "mark" ? 940 : 1424}
+        />
+      </span>
+    );
+  }
 
   return (
     <span
