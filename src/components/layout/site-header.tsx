@@ -3,7 +3,7 @@
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
-import { BrandMarkPlaceholder } from "@/components/ui/brand-mark-placeholder";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -45,10 +45,13 @@ export function SiteHeader() {
             href="#accueil"
             onClick={() => setIsOpen(false)}
           >
-            <BrandMarkPlaceholder className="size-10 text-xs" />
-            <span className="hidden text-sm font-semibold tracking-[0.22em] text-foreground sm:block">
-              THYSSEN DIGITAL
-            </span>
+            <BrandLogo
+              className="[&_span_span]:hidden sm:[&_span_span]:block"
+              decorative
+              tone="accent"
+              variant="horizontal"
+            />
+            <span className="sr-only">THYSSEN DIGITAL</span>
           </a>
 
           <div className="hidden items-center gap-1 lg:flex">

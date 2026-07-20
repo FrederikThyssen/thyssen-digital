@@ -31,6 +31,7 @@ export const defaultMetadata: Metadata = {
     follow: true,
   },
   icons: {
+    apple: "/brand/td-mark-accent.svg",
     icon: "/brand/favicon.svg",
     shortcut: "/brand/favicon.svg",
   },
