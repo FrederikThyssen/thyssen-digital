@@ -31,25 +31,25 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6 lg:pt-8 lg:opacity-0">
       <div
         className={cn(
-          "mx-auto max-w-[82rem] rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard",
+          "mx-auto max-w-[82rem] rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard lg:border-transparent lg:bg-transparent lg:shadow-none lg:backdrop-blur-0",
           isScrolled &&
-            "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)]",
+            "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)] lg:border-transparent lg:bg-transparent lg:shadow-none",
         )}
       >
         <nav
           aria-label="Navigation principale"
-          className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8"
+          className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-10 lg:px-0"
         >
           <a
-            className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+            className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
             href="#accueil"
             onClick={() => setIsOpen(false)}
           >
             <BrandLogo
-              className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs"
+              className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs lg:opacity-0"
               decorative
               tone="accent"
               variant="horizontal"
@@ -57,7 +57,7 @@ export function SiteHeader() {
             <span className="sr-only">THYSSEN DIGITAL</span>
           </a>
 
-          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
+          <div className="hidden items-center gap-6 lg:flex lg:opacity-0 xl:gap-7">
             {navItems.map((item) => (
               <a
                 className="rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
@@ -69,7 +69,7 @@ export function SiteHeader() {
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:block lg:opacity-0">
             <Button
               className="min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(140_83_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))]"
               href="#contact"
