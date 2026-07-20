@@ -1,10 +1,8 @@
 import { ArrowRight, Boxes, Code2, Database, ShieldCheck } from "lucide-react";
 
-import { FadeIn, FadeUp, ScaleIn, Stagger } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { GlassPanel } from "@/components/ui/glass-panel";
 
 const trustItems = ["La Pince", "Fred Music", "TruckMaps"];
 
@@ -43,17 +41,17 @@ export function Hero() {
     >
       <HeroBackground />
 
-      <Container className="relative grid min-h-[calc(100vh-7rem)] gap-12 pb-16 pt-10 lg:grid-cols-[0.94fr_1.06fr] lg:items-center lg:pb-20">
+      <Container className="relative grid min-h-[calc(100vh-7rem)] max-w-[82rem] gap-12 pb-16 pt-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-center lg:pb-20">
         <div className="relative z-10 max-w-3xl">
-          <FadeUp>
+          <div>
             <Badge className="gap-2 rounded-full border-white/10 bg-white/[0.045] px-3 py-2 text-[0.625rem] text-foreground/80 backdrop-blur-md">
               <span className="size-1.5 rounded-full bg-accent-cyan shadow-[0_0_12px_rgb(80_227_255_/_0.9)]" />
               Freelance premium
             </Badge>
-          </FadeUp>
+          </div>
 
-          <FadeUp delay={0.08}>
-            <h1 className="mt-8 max-w-4xl text-[clamp(3.3rem,8vw,6.75rem)] font-semibold leading-[0.88] tracking-normal text-foreground">
+          <div>
+            <h1 className="mt-8 max-w-3xl text-[clamp(3rem,6vw,5.35rem)] font-semibold leading-[0.92] tracking-normal text-foreground">
               <span className="block">Concevoir.</span>
               <span className="block bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-transparent">
                 Développer.
@@ -62,20 +60,17 @@ export function Hero() {
                 Performer.
               </span>
             </h1>
-          </FadeUp>
+          </div>
 
-          <FadeUp delay={0.16}>
+          <div>
             <p className="mt-8 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
               Développement web, applications sur mesure, automatisations et
               interfaces élégantes. Je transforme vos idées en produits digitaux
               fiables, rapides et évolutifs.
             </p>
-          </FadeUp>
+          </div>
 
-          <FadeUp
-            className="mt-9 flex flex-col gap-3 sm:flex-row"
-            delay={0.24}
-          >
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <Button
               className="min-h-14 rounded-xl border-white/10 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(34_167_255)_45%,rgb(140_83_255))] px-6 shadow-[0_0_42px_rgb(47_124_255_/_0.38)] hover:bg-[linear-gradient(135deg,rgb(31_111_255),rgb(80_227_255)_45%,rgb(124_58_237))]"
               href="#contact"
@@ -92,9 +87,9 @@ export function Hero() {
             >
               Voir mes réalisations
             </Button>
-          </FadeUp>
+          </div>
 
-          <FadeUp delay={0.32}>
+          <div>
             <div className="mt-14 border-t border-white/10 pt-6">
               <p className="text-xs text-subtle-foreground">Ils m&apos;ont fait confiance</p>
               <div className="mt-5 flex flex-wrap items-center gap-x-10 gap-y-4 text-sm font-medium text-foreground/70">
@@ -106,33 +101,33 @@ export function Hero() {
                 ))}
               </div>
             </div>
-          </FadeUp>
+          </div>
         </div>
 
-        <FadeIn
+        <div
           aria-hidden="true"
           className="relative min-h-[440px] lg:min-h-[660px]"
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_58%,rgb(80_227_255_/_0.2),transparent_24%),radial-gradient(circle_at_72%_48%,rgb(140_109_255_/_0.2),transparent_30%)] blur-2xl" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_48%,rgb(80_227_255_/_0.28),transparent_24%),radial-gradient(circle_at_74%_54%,rgb(140_109_255_/_0.24),transparent_31%)] blur-2xl" />
           <HologramMark />
-          <div className="absolute inset-x-[12%] bottom-16 h-28 rounded-[50%] border border-primary/35 bg-primary/10 blur-[1px]" />
-          <div className="absolute inset-x-[18%] bottom-20 h-14 rounded-[50%] border border-accent-violet/45" />
-          <div className="absolute bottom-28 left-1/2 h-px w-[70%] -translate-x-1/2 bg-gradient-to-r from-transparent via-accent-cyan to-transparent" />
+          <div className="absolute inset-x-[4%] bottom-20 h-32 rounded-[50%] border border-primary/35 bg-primary/10 blur-[1px]" />
+          <div className="absolute inset-x-[16%] bottom-28 h-16 rounded-[50%] border border-accent-violet/45" />
+          <div className="absolute bottom-36 left-1/2 h-px w-[78%] -translate-x-1/2 bg-gradient-to-r from-transparent via-accent-cyan to-transparent" />
 
-          <Stagger className="absolute inset-0">
+          <div className="absolute inset-0">
             {floatingCards.map((item, index) => {
               const Icon = item.icon;
 
               return (
-                <ScaleIn
+                <div
                   className={[
-                    "absolute hidden min-w-44 rounded-2xl border border-white/10 bg-background/45 p-4 shadow-[0_20px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl md:block",
+                    "absolute hidden min-w-44 rounded-2xl border border-white/10 bg-background/42 p-4 shadow-[0_20px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl md:block",
                     item.className,
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  delay={0.18 + index * 0.06}
                   key={item.label}
+                  style={{ transitionDelay: `${index * 60}ms` }}
                 >
                   <div className="flex items-center justify-between gap-4">
                     <div>
@@ -147,11 +142,11 @@ export function Hero() {
                       <Icon aria-hidden="true" className="size-4" />
                     </span>
                   </div>
-                </ScaleIn>
+                </div>
               );
             })}
-          </Stagger>
-        </FadeIn>
+          </div>
+        </div>
       </Container>
     </section>
   );
@@ -172,10 +167,13 @@ function HeroBackground() {
 
 function HologramMark() {
   return (
-    <GlassPanel className="absolute left-1/2 top-1/2 grid size-[min(82vw,34rem)] -translate-x-1/2 -translate-y-1/2 place-items-center border-white/10 bg-white/[0.025] shadow-[0_0_120px_rgb(47_124_255_/_0.16)]">
-      <div className="absolute inset-8 rounded-full border border-primary/15" />
-      <div className="absolute inset-16 rounded-full border border-accent-cyan/15" />
-      <svg className="relative z-10 h-[68%] w-[78%] drop-shadow-[0_0_34px_rgb(80_227_255_/_0.42)]" viewBox="0 0 420 360">
+    <div className="absolute left-1/2 top-1/2 grid size-[min(86vw,39rem)] -translate-x-1/2 -translate-y-1/2 place-items-center">
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,rgb(47_124_255_/_0.12),transparent_60%)]" />
+      <div className="absolute inset-10 rounded-full border border-primary/15" />
+      <div className="absolute inset-20 rounded-full border border-accent-cyan/15" />
+      <div className="absolute bottom-[15%] h-24 w-[72%] rounded-[50%] border border-white/10 bg-background/35 shadow-[0_24px_80px_rgb(0_0_0_/_0.4)] backdrop-blur-md" />
+      <div className="absolute bottom-[17%] h-10 w-[54%] rounded-[50%] border border-accent-violet/35" />
+      <svg className="relative z-10 h-[72%] w-[84%] drop-shadow-[0_0_38px_rgb(80_227_255_/_0.46)]" viewBox="0 0 420 360">
         <defs>
           <linearGradient id="hero-td" x1="52" x2="368" y1="50" y2="310" gradientUnits="userSpaceOnUse">
             <stop stopColor="#2f7cff" />
@@ -190,7 +188,7 @@ function HologramMark() {
         <path
           d="M42 54h216c78 0 132 55 132 126S336 306 258 306H136V120H62L42 54Zm190 190h32c38 0 66-26 66-64s-28-64-66-64h-32v128Z"
           fill="url(#hero-td)"
-          fillOpacity=".18"
+          fillOpacity=".16"
           stroke="url(#hero-td-line)"
           strokeWidth="2"
         />
@@ -205,9 +203,9 @@ function HologramMark() {
         <path d="M232 116v128" stroke="#50e3ff" strokeOpacity=".48" strokeWidth="2" />
         <path d="M70 74h190" stroke="white" strokeOpacity=".38" strokeWidth="2" />
       </svg>
-      <div className="absolute bottom-16 rounded-full border border-white/10 bg-background/60 px-8 py-3 text-xs font-medium uppercase tracking-[0.24em] text-accent-cyan backdrop-blur-md">
+      <div className="absolute bottom-[20%] rounded-full border border-white/10 bg-background/60 px-8 py-3 text-xs font-medium uppercase tracking-[0.24em] text-accent-cyan backdrop-blur-md">
         Thyssen Digital
       </div>
-    </GlassPanel>
+    </div>
   );
 }
