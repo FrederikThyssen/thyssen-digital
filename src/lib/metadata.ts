@@ -13,6 +13,9 @@ export const defaultMetadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: BRAND_NAME,
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     title: BRAND_NAME,
     description: SITE_DESCRIPTION,
