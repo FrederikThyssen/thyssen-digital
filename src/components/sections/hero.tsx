@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, ChevronDown } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
 
 const trustItems = ["La Pince", "Fred Music", "TruckMaps", "Nomad Trans", "RoadLink"];
@@ -48,6 +48,17 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 hidden min-h-svh lg:block">
+        <div
+          aria-hidden="true"
+          className="absolute left-[5.28%] top-[20.9%] flex h-[3.9rem] w-[14rem] items-center rounded-2xl border border-white/[0.07] bg-[#050713]/80 pl-3 shadow-[0_0_42px_rgb(19_80_255_/_0.12)] backdrop-blur-md"
+        >
+          <BrandLogo
+            decorative
+            imageClassName="h-[3.25rem]"
+            tone="accent"
+            variant="mark"
+          />
+        </div>
         <a
           aria-label="Discutons de votre projet"
           className="absolute left-[5.45%] top-[63.55%] h-[3.35rem] w-[17.65rem] rounded-[1rem] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
@@ -67,10 +78,14 @@ export function Hero() {
 
       <div className="relative z-10 flex min-h-svh flex-col justify-end px-6 pb-12 pt-32 sm:px-10 lg:hidden">
         <div className="max-w-xl">
-          <Badge className="gap-2 rounded-full border-white/14 bg-white/[0.035] px-3 py-2 text-[0.65rem] text-foreground/88 backdrop-blur-md">
-            <span className="size-1.5 rounded-full bg-accent-violet shadow-[0_0_12px_rgb(124_58_237_/_0.95)]" />
-            Freelance premium
-          </Badge>
+          <div className="inline-flex rounded-2xl border border-white/[0.07] bg-[#050713]/70 px-3 py-2 shadow-[0_0_42px_rgb(19_80_255_/_0.14)] backdrop-blur-md">
+            <BrandLogo
+              decorative
+              imageClassName="h-[3.35rem]"
+              tone="accent"
+              variant="mark"
+            />
+          </div>
 
           <h2 className="mt-7 text-[clamp(3rem,14vw,5.1rem)] font-semibold leading-[0.98] tracking-normal text-foreground">
             <span className="block">Des solutions</span>

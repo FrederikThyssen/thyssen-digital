@@ -8,6 +8,7 @@ type BrandLogoProps = {
   variant?: "mark" | "horizontal";
   tone?: "default" | "white" | "black" | "accent";
   className?: string;
+  imageClassName?: string;
   showSignature?: boolean;
   decorative?: boolean;
 };
@@ -23,6 +24,7 @@ export function BrandLogo({
   variant = "horizontal",
   tone = "default",
   className,
+  imageClassName,
   showSignature = false,
   decorative = false,
 }: BrandLogoProps) {
@@ -44,6 +46,7 @@ export function BrandLogo({
           className={cn(
             "block shrink-0 object-contain",
             variant === "mark" ? "h-10 w-auto" : "h-14 w-auto",
+            imageClassName,
           )}
           decoding="async"
           height={variant === "mark" ? 620 : 1140}

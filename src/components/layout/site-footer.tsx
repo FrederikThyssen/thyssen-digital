@@ -47,7 +47,12 @@ export function SiteFooter() {
               className="inline-flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
               href="#accueil"
             >
-              <BrandLogo decorative tone="accent" variant="horizontal" />
+              <BrandLogo
+                decorative
+                imageClassName="h-36 sm:h-44"
+                tone="accent"
+                variant="horizontal"
+              />
               <span className="sr-only">{BRAND_NAME}</span>
             </a>
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
