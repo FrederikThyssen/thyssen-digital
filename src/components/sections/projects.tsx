@@ -2,9 +2,6 @@ import { Clock } from "lucide-react";
 
 import { BackgroundGlow } from "@/components/backgrounds";
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
-import { FredMusicVisual } from "@/components/projects/fred-music-visual";
-import { LaPinceVisual } from "@/components/projects/la-pince-visual";
-import { TruckMapsVisual } from "@/components/projects/truckmaps-visual";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,33 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
-
-const projects = [
-  {
-    name: "TruckMaps",
-    description:
-      "Application mobile pour chauffeurs poids lourds, centrée sur la recherche, l'itinéraire et les points d'intérêt utiles sur la route.",
-    stack: ["React Native", "Node.js", "Express", "TypeScript", "PostgreSQL"],
-    visual: TruckMapsVisual,
-    featured: true,
-  },
-  {
-    name: "Fred Music",
-    description:
-      "Site professionnel pour une activité DJ et événementielle, avec une présence sobre, responsive et orientée conversion.",
-    stack: ["Site vitrine", "Responsive", "SEO", "Administration"],
-    visual: FredMusicVisual,
-    featured: false,
-  },
-  {
-    name: "La Pince",
-    description:
-      "Projet d'équipe développé durant la formation CDA, avec un rôle important sur les fondations backend.",
-    stack: ["React", "TypeScript", "Node.js", "Express", "Prisma", "PostgreSQL", "Docker"],
-    visual: LaPinceVisual,
-    featured: false,
-  },
-];
+import { projects, type ProjectCaseStudy } from "@/data/projects";
 
 export function ProjectsSection() {
   return (
@@ -75,7 +46,7 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectCard({ project }: { project: (typeof projects)[number] }) {
+function ProjectCard({ project }: { project: ProjectCaseStudy }) {
   const Visual = project.visual;
 
   return (
@@ -125,13 +96,12 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
           </CardContent>
           <CardFooter>
             <Button
-              disabled
               leadingIcon={<Clock aria-hidden="true" className="size-4" />}
+              href={`/projets/${project.slug}`}
               size="sm"
-              type="button"
               variant={project.featured ? "primary" : "secondary"}
             >
-              Étude de cas prochainement
+              Lire l&apos;étude de cas
             </Button>
           </CardFooter>
         </div>
