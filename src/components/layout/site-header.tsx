@@ -12,6 +12,7 @@ const navItems = [
   { label: "Réalisations", href: "#realisations" },
   { label: "À propos", href: "#a-propos" },
   { label: "Processus", href: "#a-propos" },
+  { label: "Avis", href: "#faq" },
   { label: "FAQ", href: "#faq" },
   { label: "Contact", href: "#contact" },
 ];
@@ -30,17 +31,17 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-4 sm:px-6">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6">
       <div
         className={cn(
-          "mx-auto max-w-[82rem] rounded-2xl border border-white/10 bg-background/45 shadow-[0_18px_80px_rgb(0_0_0_/_0.28)] backdrop-blur-xl transition-all duration-200 ease-standard",
+          "mx-auto max-w-[82rem] rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard",
           isScrolled &&
             "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)]",
         )}
       >
         <nav
           aria-label="Navigation principale"
-          className="flex min-h-[74px] items-center justify-between gap-4 px-5 sm:px-8"
+          className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8"
         >
           <a
             className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
@@ -56,12 +57,12 @@ export function SiteHeader() {
             <span className="sr-only">THYSSEN DIGITAL</span>
           </a>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
             {navItems.map((item) => (
               <a
-                className="rounded-md text-[0.8125rem] font-medium text-foreground/82 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                className="rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
                 href={item.href}
-                key={item.href}
+                key={item.label}
               >
                 {item.label}
               </a>
@@ -102,7 +103,7 @@ export function SiteHeader() {
                 <a
                   className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
                   href={item.href}
-                  key={item.href}
+                  key={item.label}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
