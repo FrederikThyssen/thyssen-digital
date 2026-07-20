@@ -1,12 +1,33 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
   <title>Thyssen Digital</title>
-  <rect width="64" height="64" rx="14" fill="#070b14"/>
+  <rect width="128" height="128" rx="26" fill="#070b14"/>
   <defs>
-    <linearGradient id="td-favicon-accent" x1="10" x2="58" y1="12" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2f7cff"/>
-      <stop offset=".58" stop-color="#50e3ff"/>
-      <stop offset="1" stop-color="#8c6dff"/>
+    <linearGradient id="td-favicon-base" x1="13" x2="114" y1="34" y2="104" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1350ff"/>
+      <stop offset=".38" stop-color="#00e5ff"/>
+      <stop offset=".68" stop-color="#2377ff"/>
+      <stop offset="1" stop-color="#7d2cff"/>
     </linearGradient>
+    <linearGradient id="td-favicon-top" x1="10" x2="104" y1="33" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1350ff"/>
+      <stop offset=".55" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#65f5ff"/>
+    </linearGradient>
+    <linearGradient id="td-favicon-edge" x1="78" x2="123" y1="46" y2="99" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#62f6ff"/>
+      <stop offset=".42" stop-color="#167dff"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="td-favicon-glow" x="-18" y="0" width="164" height="142" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="5"/>
+      <feColorMatrix values="0 0 0 0 0.04 0 0 0 0 0.44 0 0 0 0 1 0 0 0 .72 0"/>
+    </filter>
   </defs>
-  <path fill="url(#td-favicon-accent)" fill-rule="evenodd" d="M6 8h32c14.2 0 24 10 24 24S52.2 56 38 56H20V23H9L6 8Zm29 34h4c7 0 12-4 12-10S46 22 39 22h-4v20Z" clip-rule="evenodd"/>
+  <g transform="translate(0 16)">
+    <path d="M12 17h69c27.5 0 45 17.4 45 39 0 22.6-18.2 40-45.7 40H42V43H20L12 17Zm54 55h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66v32Z" fill="#167dff" filter="url(#td-favicon-glow)" opacity=".58"/>
+    <path fill="url(#td-favicon-base)" fill-rule="evenodd" d="M12 17h69c27.5 0 45 17.4 45 39 0 22.6-18.2 40-45.7 40H42V43H20L12 17Zm54 55h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66v32Z" clip-rule="evenodd"/>
+    <path d="M12 17h69c14 0 25.4 4.5 33.3 12.2H23L20 43 12 17Z" fill="url(#td-favicon-top)"/>
+    <path d="M80.5 17C108 17 126 34.6 126 56c0 22.6-18.2 40-45.7 40H66V72h14.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H66V17h14.5Z" fill="url(#td-favicon-edge)" opacity=".82"/>
+    <path d="M66 40h14.5c12.2 0 21 6.2 21 16 0 9.6-8.8 16-21 16H66V40Z" fill="#05070d" opacity=".78"/>
+  </g>
 </svg>
