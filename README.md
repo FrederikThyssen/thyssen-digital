@@ -21,6 +21,18 @@ npm run lint
 npm run build
 ```
 
+## Formulaire de contact
+
+Le formulaire utilise une route API Next.js compatible Resend.
+
+Variables utiles :
+
+```bash
+RESEND_API_KEY=
+CONTACT_TO_EMAIL=contact@thyssendigital.fr
+CONTACT_FROM_EMAIL="Thyssen Digital <onboarding@resend.dev>"
+```
+
 ## Architecture
 
 ```text

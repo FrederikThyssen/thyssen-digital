@@ -3,7 +3,13 @@ import { Code2, Link, Mail } from "lucide-react";
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
-import { BRAND_NAME, BRAND_SIGNATURE, CONTACT_EMAIL } from "@/lib/constants";
+import {
+  BRAND_NAME,
+  BRAND_SIGNATURE,
+  CONTACT_EMAIL,
+  GITHUB_URL,
+  LINKEDIN_URL,
+} from "@/lib/constants";
 
 const footerNav = [
   { label: "Accueil", href: "#accueil" },
@@ -16,12 +22,12 @@ const footerNav = [
 const socialLinks = [
   {
     label: "Github",
-    href: "https://github.com/FrederikThyssen",
+    href: GITHUB_URL,
     icon: Code2,
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: LINKEDIN_URL,
     icon: Link,
   },
   {
