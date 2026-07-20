@@ -1,9 +1,9 @@
 import { Code2, Link, Mail } from "lucide-react";
 
-import { BrandMarkPlaceholder } from "@/components/ui/brand-mark-placeholder";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
-import { BRAND_NAME, CONTACT_EMAIL } from "@/lib/constants";
+import { BRAND_NAME, BRAND_SIGNATURE, CONTACT_EMAIL } from "@/lib/constants";
 
 const footerNav = [
   { label: "Accueil", href: "#accueil" },
@@ -31,6 +31,11 @@ const socialLinks = [
   },
 ];
 
+const legalLinks = [
+  { label: "Mentions légales", href: "/mentions-legales" },
+  { label: "Politique de confidentialité", href: "/politique-confidentialite" },
+];
+
 export function SiteFooter() {
   return (
     <footer className="pb-10 pt-16">
@@ -42,21 +47,37 @@ export function SiteFooter() {
               className="inline-flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
               href="#accueil"
             >
-              <BrandMarkPlaceholder className="size-10 text-xs" />
-              <span className="text-sm font-semibold tracking-[0.22em] text-foreground">
-                {BRAND_NAME}
-              </span>
+              <BrandLogo decorative tone="accent" variant="horizontal" />
+              <span className="sr-only">{BRAND_NAME}</span>
             </a>
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
               Studio digital premium pour concevoir, développer et faire évoluer
               des expériences web performantes.
             </p>
+            <p className="mt-3 text-xs font-medium tracking-[0.14em] text-subtle-foreground">
+              {BRAND_SIGNATURE}
+            </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-8 sm:grid-cols-3">
             <nav aria-label="Navigation du pied de page">
               <ul className="grid gap-2">
                 {footerNav.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                      href={item.href}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <nav aria-label="Liens légaux">
+              <ul className="grid gap-2">
+                {legalLinks.map((item) => (
                   <li key={item.href}>
                     <a
                       className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
@@ -92,6 +113,9 @@ export function SiteFooter() {
 
         <p className="mt-10 text-xs text-subtle-foreground">
           © {new Date().getFullYear()} {BRAND_NAME}. Tous droits réservés.
+        </p>
+        <p className="mt-2 text-xs text-subtle-foreground">
+          Conçu et développé avec Next.js et TypeScript.
         </p>
       </Container>
     </footer>

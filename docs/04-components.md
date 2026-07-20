@@ -6,9 +6,9 @@ Sprint 1.5 fournit des primitives réutilisables pour assembler les écrans des 
 
 ```tsx
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { FadeIn, FadeUp, ScaleIn, Stagger, StaggerItem } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
-import { BrandMarkPlaceholder } from "@/components/ui/brand-mark-placeholder";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Divider } from "@/components/ui/divider";
@@ -54,9 +54,26 @@ Surface glassmorphism très mesurée. À réserver aux zones qui bénéficient r
 
 `Divider` propose `simple` et `gradient`. Par défaut il est décoratif et masqué aux technologies d'assistance.
 
-## BrandMarkPlaceholder
+## BrandLogo
 
-Affiche temporairement `TD`. Ce n'est pas le logo final et il devra être remplacé lors de l'intégration de l'identité finale.
+Affiche le monogramme officiel ou la version horizontale.
+
+```tsx
+<BrandLogo tone="accent" variant="horizontal" />
+<BrandLogo tone="white" variant="mark" />
+```
+
+Utiliser `decorative` lorsque le nom de marque est déjà présent dans un texte accessible proche.
+
+## Project visuals
+
+Les visuels projets dédiés vivent dans `src/components/projects/`.
+
+- `TruckMapsVisual` : aperçu mobile avec carte stylisée, route, recherche et points d'intérêt.
+- `FredMusicVisual` : aperçu desktop événementiel, avec QR code évoqué discrètement.
+- `LaPinceVisual` : aperçu dashboard/backend, orienté produit métier.
+
+Ces composants sont construits en HTML/CSS/SVG léger, sans image, canvas ou WebGL.
 
 ## Backgrounds
 

@@ -52,6 +52,16 @@ Les surfaces utilisent `--surface`, `--surface-hover` et `--border`. Les composa
 
 Sprint 1.5 ajoute `Card`, `GlassPanel`, `Divider`, `Badge` et des composants de fond décoratifs. Le glassmorphism reste un accent ponctuel, pas une direction générale appliquée partout.
 
+## Identité
+
+Le composant `BrandLogo` expose le monogramme officiel et la version horizontale :
+
+- `variant`: `mark` ou `horizontal`
+- `tone`: `default`, `white`, `black`, `accent`
+- `showSignature`: réservé aux zones calmes comme le footer
+
+La navbar utilise la version horizontale sans signature. Le footer peut afficher la signature officielle avec retenue.
+
 ## Règles couleur
 
 Le bleu électrique est l'accent principal. Le cyan sert aux états ou détails utiles. Le violet reste discret. Aucun effet RGB, néon agressif ou cyberpunk ne doit être introduit.
@@ -65,3 +75,5 @@ Le focus visible est global. Les contrastes doivent rester suffisants, les liens
 `prefers-reduced-motion` est pris en charge globalement. Les animations futures devront respecter cette préférence.
 
 Les primitives Motion (`FadeIn`, `FadeUp`, `FadeLeft`, `FadeRight`, `ScaleIn`, `Stagger`, `StaggerItem`) utilisent des déplacements courts, une opacité progressive et des durées encadrées.
+
+Les micro-interactions ajoutées au Sprint 4 restent limitées à une légère élévation de carte et à des changements de bordure/couleur. Aucun mouvement permanent ou suivi de souris n'est autorisé.
