@@ -5,7 +5,7 @@ import { BRAND_NAME, BRAND_SIGNATURE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
-  variant?: "mark" | "horizontal";
+  variant?: "mark" | "horizontal" | "full";
   tone?: "default" | "white" | "black" | "accent";
   className?: string;
   imageClassName?: string;
@@ -49,14 +49,16 @@ export function BrandLogo({
             imageClassName,
           )}
           decoding="async"
-          height={variant === "mark" ? 620 : 1140}
+          height={variant === "mark" ? 620 : variant === "full" ? 1140 : 61}
           src={
             variant === "mark"
               ? "/brand/logo-official-mark.png"
-              : "/brand/logo-official-full.png"
+              : variant === "full"
+                ? "/brand/logo-official-full.png"
+                : "/brand/logo-horizontal-transparent.png"
           }
           unoptimized
-          width={variant === "mark" ? 940 : 1424}
+          width={variant === "mark" ? 940 : variant === "full" ? 1424 : 238}
         />
       </span>
     );
@@ -74,7 +76,7 @@ export function BrandLogo({
       role={decorative ? undefined : "img"}
     >
       <BrandMarkSvg gradientId={gradientId} tone={tone} />
-      {variant === "horizontal" ? (
+      {variant !== "mark" ? (
         <span className="grid gap-1 leading-none">
           <span className="text-sm font-semibold tracking-[0.28em] text-white">
             THYSSEN

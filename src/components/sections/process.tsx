@@ -44,7 +44,11 @@ export function ProcessSection() {
           />
         </FadeUp>
 
-        <Stagger className="mt-12 grid gap-4 lg:grid-cols-5">
+        <FadeUp className="mt-12 hidden lg:block">
+          <div className="h-px bg-gradient-to-r from-primary/0 via-accent-cyan/55 to-accent-violet/0" />
+        </FadeUp>
+
+        <Stagger className="mt-6 grid gap-4 lg:grid-cols-5">
           {steps.map((step) => (
             <StaggerItem key={step.number}>
               <Card className="h-full" interactive variant="outline">

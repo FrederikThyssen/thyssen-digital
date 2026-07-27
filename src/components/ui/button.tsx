@@ -4,7 +4,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex h-fit items-center justify-center gap-2 rounded-md border text-sm font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan disabled:pointer-events-none disabled:opacity-50",
+  "group relative inline-flex h-fit items-center justify-center gap-2 overflow-hidden rounded-md border text-sm font-semibold transition-colors duration-200 before:pointer-events-none before:absolute before:inset-y-0 before:left-[-45%] before:w-1/3 before:skew-x-[-18deg] before:bg-white/12 before:opacity-0 before:transition-all before:duration-500 hover:before:left-[115%] hover:before:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan disabled:pointer-events-none disabled:opacity-50 motion-reduce:before:hidden",
   {
     variants: {
       variant: {
@@ -58,9 +58,17 @@ export function Button(props: ButtonProps) {
   const classes = cn(buttonVariants({ variant, size }), className);
   const content = (
     <>
-      {leadingIcon}
-      {children}
-      {trailingIcon}
+      {leadingIcon ? (
+        <span className="relative z-10 inline-flex transition-transform duration-200 group-hover:-translate-x-0.5 motion-reduce:transform-none">
+          {leadingIcon}
+        </span>
+      ) : null}
+      <span className="relative z-10">{children}</span>
+      {trailingIcon ? (
+        <span className="relative z-10 inline-flex transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transform-none">
+          {trailingIcon}
+        </span>
+      ) : null}
     </>
   );
 

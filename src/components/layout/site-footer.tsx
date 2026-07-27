@@ -51,7 +51,7 @@ export function SiteFooter() {
                 decorative
                 imageClassName="h-36 sm:h-44"
                 tone="accent"
-                variant="horizontal"
+                variant="full"
               />
               <span className="sr-only">{BRAND_NAME}</span>
             </a>

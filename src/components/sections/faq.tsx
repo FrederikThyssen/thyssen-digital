@@ -57,10 +57,12 @@ export function FaqSection() {
                     className="size-5 shrink-0 text-accent-cyan transition-transform duration-200 ease-standard group-open:rotate-180"
                   />
                 </summary>
-                <div className="px-5 pb-5 pt-0">
-                  <p className="max-w-3xl text-sm leading-7 text-muted-foreground">
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-standard group-open:grid-rows-[1fr] motion-reduce:transition-none">
+                  <div className="overflow-hidden px-5">
+                    <p className="max-w-3xl pb-5 pt-0 text-sm leading-7 text-muted-foreground">
                     {item.answer}
-                  </p>
+                    </p>
+                  </div>
                 </div>
               </details>
             </StaggerItem>

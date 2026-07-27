@@ -80,12 +80,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
 
   return (
     <Card
-      className={[
-        "h-full transition-transform duration-200 ease-standard motion-reduce:transform-none",
-        "hover:-translate-y-1",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className="h-full"
       interactive
       variant="glass"
     >
