@@ -21,7 +21,7 @@ const socialLinks = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: "https://www.linkedin.com/in/frederik-thyssen/",
     icon: Link,
   },
   {
@@ -49,18 +49,18 @@ export function SiteFooter() {
             >
               <BrandLogo
                 decorative
-                imageClassName="h-36 sm:h-44"
+                imageClassName="h-12 sm:h-14"
                 tone="accent"
-                variant="full"
+                variant="horizontal"
               />
               <span className="sr-only">{BRAND_NAME}</span>
             </a>
+            <p className="mt-4 bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-xs font-semibold uppercase tracking-[0.28em] text-transparent">
+              {BRAND_SIGNATURE}
+            </p>
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
               Studio digital premium pour concevoir, développer et faire évoluer
               des expériences web performantes.
-            </p>
-            <p className="mt-3 text-xs font-medium tracking-[0.14em] text-subtle-foreground">
-              {BRAND_SIGNATURE}
             </p>
           </div>
 

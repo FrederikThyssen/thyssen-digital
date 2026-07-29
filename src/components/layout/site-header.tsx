@@ -20,9 +20,16 @@ const navItems = [
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState("#accueil");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const updateScrolled = () => setIsScrolled(window.scrollY > 16);
+    const updateScrolled = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+
+      setIsScrolled(window.scrollY > 16);
+      setScrollProgress(scrollable > 0 ? window.scrollY / scrollable : 0);
+    };
 
     updateScrolled();
     window.addEventListener("scroll", updateScrolled, { passive: true });
@@ -30,15 +37,51 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
 
+  useEffect(() => {
+    const sections = ["#accueil", ...navItems.map((item) => item.href)]
+      .filter((href, index, items) => items.indexOf(href) === index)
+      .map((href) => document.querySelector(href))
+      .filter((section): section is Element => section !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveHref(`#${visibleEntry.target.id}`);
+        }
+      },
+      {
+        rootMargin: "-38% 0px -52% 0px",
+        threshold: [0.1, 0.25, 0.5],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6 lg:pt-8">
       <div
         className={cn(
-          "mx-auto max-w-[82rem] rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard lg:bg-background/10",
+          "relative mx-auto max-w-[82rem] overflow-hidden rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard lg:bg-background/10",
           isScrolled &&
             "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)] lg:bg-background/44",
         )}
       >
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-px bg-white/5"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-primary via-accent-cyan to-accent-violet transition-transform duration-150 ease-standard"
+          style={{ transform: `scaleX(${scrollProgress})`, transformOrigin: "left" }}
+        />
         <nav
           aria-label="Navigation principale"
           className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-10 lg:px-0"
@@ -61,11 +104,21 @@ export function SiteHeader() {
           <div className="hidden items-center gap-6 lg:flex xl:gap-7">
             {navItems.map((item) => (
               <a
-                className="rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                className={cn(
+                  "relative rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
+                  activeHref === item.href && "text-white",
+                )}
                 href={item.href}
                 key={item.label}
               >
                 {item.label}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute -bottom-2 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
+                    activeHref === item.href && "opacity-100",
+                  )}
+                />
               </a>
             ))}
           </div>

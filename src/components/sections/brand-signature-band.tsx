@@ -6,15 +6,15 @@ export function BrandSignatureBand() {
   return (
     <section
       aria-label="Signature Thyssen Digital"
-      className="relative overflow-hidden bg-[#03060d] py-14 sm:py-18"
+      className="relative overflow-hidden bg-[#03060d] py-6 sm:py-8"
     >
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-accent-violet/30"
       />
       <div
         aria-hidden="true"
-        className="absolute inset-x-10 top-0 h-24 bg-[radial-gradient(circle_at_center,rgb(34_211_238_/_0.16),transparent_62%)] blur-2xl"
+        className="absolute inset-x-8 top-0 h-20 bg-[radial-gradient(circle_at_center,rgb(34_211_238_/_0.14),transparent_62%)] blur-2xl"
       />
       <Stagger
         className="relative mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-x-5 gap-y-3 px-6 text-center"

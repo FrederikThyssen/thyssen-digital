@@ -13,12 +13,12 @@ export function SlowZoomBackground({ image, className }: SlowZoomBackgroundProps
   return (
     <motion.div
       aria-hidden="true"
-      animate={prefersReducedMotion ? undefined : { scale: 1 }}
+      animate={prefersReducedMotion ? undefined : { scale: 1.018 }}
       className={className}
       initial={{ scale: 1 }}
       style={{ backgroundImage: `url('${image}')` }}
       transition={{
-        duration: 18,
+        duration: 24,
         ease: "easeOut",
       }}
     />

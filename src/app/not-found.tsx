@@ -12,7 +12,7 @@ export default function NotFound() {
           Page introuvable
         </h1>
         <p className="mt-4 text-base leading-7 text-muted-foreground">
-          Cette route n&apos;existe pas encore dans la fondation Thyssen Digital.
+          La page demandée est introuvable ou a été déplacée.
         </p>
         <Button className="mt-8" href="/">
           Revenir à l&apos;accueil

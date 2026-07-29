@@ -111,7 +111,77 @@ h4 {
   letter-spacing: 0;
 }
 
+@keyframes hero-chevron {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: translateY(6px);
+  }
+}
+
+.hero-word-group {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.12em);
+  animation: hero-character-reveal 520ms var(--ease-expressive) forwards;
+  will-change: opacity, transform;
+}
+
+.hero-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+.hero-gradient-line {
+  line-height: 1.08;
+  padding-bottom: 0.12em;
+  clip-path: inset(-0.12em 100% -0.28em 0);
+  animation: hero-gradient-line-reveal 980ms steps(14, end) forwards;
+}
+
+.hero-gradient-line-1 {
+  animation-delay: 1880ms;
+}
+
+.hero-gradient-line-2 {
+  animation-delay: 2740ms;
+}
+
+@keyframes hero-character-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-gradient-line-reveal {
+  to {
+    clip-path: inset(-0.12em 0 -0.28em 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-char {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .hero-gradient-line {
+    clip-path: inset(0 0 0 0);
+    animation: none;
+  }
+
   *,
   *::before,
   *::after {
