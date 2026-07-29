@@ -25,7 +25,9 @@ function AnimatedWord({
           aria-hidden="true"
           className="hero-char"
           key={`${word}-${character}-${index}`}
-          style={{ animationDelay: `${180 + (startIndex + index) * characterDelayStep}ms` }}
+          style={{
+            animationDelay: `${260 + (startIndex + index) * characterDelayStep + (index % 3 === 0 ? 18 : 0)}ms`,
+          }}
         >
           {character}
         </span>
@@ -85,7 +87,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.82),rgb(5_7_13_/_0.54)_42%,rgb(5_7_13_/_0.12)_72%,rgb(5_7_13_/_0.02))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.78),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.85),rgb(5_7_13_/_0.56)_43%,rgb(5_7_13_/_0.15)_72%,rgb(5_7_13_/_0.03))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.8),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
       />
       <div
         aria-hidden="true"
@@ -97,7 +99,7 @@ export function Hero() {
       />
 
       <div className="relative z-10 flex min-h-svh flex-col justify-center px-6 pb-12 pt-32 sm:px-10 lg:px-[5.45vw] lg:pb-10 lg:pt-36">
-        <Stagger className="max-w-xl lg:max-w-[50rem] xl:max-w-[54rem]" staggerDelay={0.07}>
+        <Stagger className="max-w-xl lg:max-w-[50rem] xl:max-w-[54rem]" staggerDelay={0.08}>
           <StaggerItem>
             <h1
               aria-label={headlineLabel}
@@ -117,9 +119,9 @@ export function Hero() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-12 lg:gap-8">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-11 lg:gap-7">
               <Button
-                className="min-h-14 rounded-2xl border-white/10 bg-[linear-gradient(135deg,#136fff,#0bbcff_47%,#7d2cff)] px-6 shadow-[0_0_48px_rgb(47_124_255_/_0.48)] lg:min-h-16 lg:px-8 lg:text-base"
+                className="min-h-14 rounded-2xl border-white/10 bg-[linear-gradient(135deg,#136fff,#0bbcff_47%,#7d2cff)] px-6 shadow-[0_0_48px_rgb(47_124_255_/_0.46),inset_0_1px_0_rgb(255_255_255_/_0.18)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_60px_rgb(80_227_255_/_0.34),0_18px_42px_rgb(47_124_255_/_0.22)] lg:min-h-16 lg:px-8 lg:text-base"
                 href="#contact"
                 size="lg"
                 trailingIcon={<ArrowRight aria-hidden="true" className="size-5" />}
@@ -127,7 +129,7 @@ export function Hero() {
                 Discutons de votre projet
               </Button>
               <Button
-                className="min-h-14 rounded-2xl border-white/12 bg-white/[0.035] px-6 text-foreground backdrop-blur-md lg:min-h-16 lg:px-8 lg:text-base"
+                className="min-h-14 rounded-2xl border-white/14 bg-white/[0.04] px-6 text-foreground shadow-[inset_0_1px_0_rgb(255_255_255_/_0.1)] backdrop-blur-md transition-[border-color,background-color,transform] duration-300 hover:-translate-y-0.5 hover:border-accent-cyan/30 hover:bg-white/[0.07] lg:min-h-16 lg:px-8 lg:text-base"
                 href="#realisations"
                 size="lg"
                 variant="secondary"
@@ -138,27 +140,30 @@ export function Hero() {
           </StaggerItem>
 
           <StaggerItem>
-            <div className="mt-12 lg:mt-14">
-              <p className="text-xs text-foreground/42">Ils m&apos;ont fait confiance</p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-7 gap-y-4 text-sm font-medium text-foreground/64 lg:gap-x-11">
-              {trustItems.map((item) => (
-                <span className="inline-flex items-center gap-2" key={item}>
-                  <span className="size-5 rounded-full border border-white/18 bg-white/[0.04]" />
-                  {item}
-                </span>
-              ))}
+            <div className="mt-10 max-w-[42rem] lg:mt-12">
+              <p className="text-xs text-foreground/40">Ils m&apos;ont fait confiance</p>
+              <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-1 rounded-2xl border border-white/10 bg-background/20 p-1 text-sm font-medium text-foreground/62 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06)] backdrop-blur-md">
+                {trustItems.map((item) => (
+                  <span
+                    className="inline-flex items-center gap-2 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/[0.045] hover:text-foreground/84"
+                    key={item}
+                  >
+                    <span className="size-4 rounded-full border border-white/18 bg-white/[0.04] shadow-[0_0_18px_rgb(80_227_255_/_0.1)]" />
+                    {item}
+                  </span>
+                ))}
               </div>
             </div>
           </StaggerItem>
         </Stagger>
 
-        <FadeUp className="absolute bottom-7 left-1/2 -translate-x-1/2 lg:bottom-8" delay={0.4}>
+        <FadeUp className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:bottom-7" delay={0.4}>
           <a
             aria-label="Faire défiler vers les services"
-            className="inline-flex size-10 animate-[hero-chevron_2.8s_ease-in-out_infinite] items-center justify-center text-white/70 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan motion-reduce:animate-none"
+            className="inline-flex size-9 animate-[hero-chevron_3.4s_ease-in-out_infinite] items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-white/58 backdrop-blur-sm transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan motion-reduce:animate-none"
             href="#services"
           >
-            <ChevronDown aria-hidden="true" className="size-7" />
+            <ChevronDown aria-hidden="true" className="size-5" />
           </a>
         </FadeUp>
       </div>

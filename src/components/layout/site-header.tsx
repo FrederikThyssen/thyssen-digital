@@ -8,13 +8,13 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Services", href: "#services" },
-  { label: "Réalisations", href: "#realisations" },
-  { label: "À propos", href: "#a-propos" },
-  { label: "Processus", href: "#a-propos" },
-  { label: "Avis", href: "#faq" },
-  { label: "FAQ", href: "#faq" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services", sectionId: "services" },
+  { label: "Réalisations", href: "/#realisations", sectionId: "realisations" },
+  { label: "À propos", href: "/#a-propos", sectionId: "a-propos" },
+  { label: "Processus", href: "/#a-propos", sectionId: "a-propos" },
+  { label: "Tarifs", href: "/tarifs", sectionId: "tarifs" },
+  { label: "FAQ", href: "/#faq", sectionId: "faq" },
+  { label: "Contact", href: "#contact", sectionId: "contact" },
 ];
 
 export function SiteHeader() {
@@ -38,10 +38,10 @@ export function SiteHeader() {
   }, []);
 
   useEffect(() => {
-    const sections = ["#accueil", ...navItems.map((item) => item.href)]
+    const sections = ["accueil", ...navItems.map((item) => item.sectionId)]
       .filter((href, index, items) => items.indexOf(href) === index)
-      .map((href) => document.querySelector(href))
-      .filter((section): section is Element => section !== null);
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -106,7 +106,7 @@ export function SiteHeader() {
               <a
                 className={cn(
                   "relative rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
-                  activeHref === item.href && "text-white",
+                  activeHref === `#${item.sectionId}` && "text-white",
                 )}
                 href={item.href}
                 key={item.label}
@@ -116,7 +116,7 @@ export function SiteHeader() {
                   aria-hidden="true"
                   className={cn(
                     "absolute -bottom-2 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
-                    activeHref === item.href && "opacity-100",
+                    activeHref === `#${item.sectionId}` && "opacity-100",
                   )}
                 />
               </a>
