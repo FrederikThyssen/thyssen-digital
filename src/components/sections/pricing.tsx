@@ -130,7 +130,7 @@ export function PricingSection() {
                   Maintenance
                 </p>
                 <h2 className="mt-5 text-[clamp(2.5rem,5.6vw,5.1rem)] font-semibold leading-[0.95] tracking-[-0.055em] text-foreground">
-                  Garder le site rapide, stable et utile.
+                  Maintenez votre site à jour, stable et performant.
                 </h2>
                 <p className="mt-6 text-base leading-8 text-foreground/68">
                   Trois niveaux pour sécuriser, surveiller et faire évoluer votre
