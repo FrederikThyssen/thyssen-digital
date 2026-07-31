@@ -82,25 +82,6 @@ export default function PricingPage() {
                     Télécharger la brochure
                   </Button>
                 </div>
-                <div className="mt-12 hidden max-w-2xl gap-3 sm:grid sm:grid-cols-3">
-                  {[
-                    ["Essentiel", "990 €"],
-                    ["Vitrine", "1 490 €"],
-                    ["Sur-Mesure", "2 490 €"],
-                  ].map(([label, price]) => (
-                    <div
-                      className="rounded-xl border border-white/10 bg-white/[0.035] px-4 py-4 backdrop-blur-sm"
-                      key={label}
-                    >
-                      <p className="text-xs font-semibold uppercase tracking-[0.22em] text-foreground/48">
-                        {label}
-                      </p>
-                      <p className="mt-2 text-xl font-semibold text-accent-cyan">
-                        Dès {price}
-                      </p>
-                    </div>
-                  ))}
-                </div>
               </div>
 
               <div className="relative hidden lg:block">
