@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { FadeUp, SlowZoomBackground, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 
-const trustItems = ["TruckMaps", "Fred Music", "La Pince"];
+const trustItems = ["TruckMaps", "Fred Music", "Maison Marcelito"];
 const headlineParts = [
   { text: "Des solutions", className: "text-foreground" },
   { text: "digitales,", className: "text-foreground" },
