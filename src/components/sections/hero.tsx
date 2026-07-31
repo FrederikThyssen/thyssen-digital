@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import { FadeUp, SlowZoomBackground, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 
-const trustItems = ["La Pince", "Fred Music", "TruckMaps"];
+const trustItems = ["TruckMaps", "Fred Music", "La Pince"];
 const headlineParts = [
   { text: "Des solutions", className: "text-foreground" },
   { text: "digitales,", className: "text-foreground" },
@@ -142,7 +142,7 @@ export function Hero() {
           <StaggerItem>
             <div className="mt-10 max-w-[42rem] lg:mt-12">
               <p className="text-xs text-foreground/40">Ils m&apos;ont fait confiance</p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-1 rounded-2xl border border-white/10 bg-background/20 p-1 text-sm font-medium text-foreground/62 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06)] backdrop-blur-md">
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-2xl border border-white/10 bg-background/20 p-1 text-sm font-medium text-foreground/62 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06)] backdrop-blur-md">
                 {trustItems.map((item) => (
                   <span
                     className="inline-flex items-center gap-2 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/[0.045] hover:text-foreground/84"
