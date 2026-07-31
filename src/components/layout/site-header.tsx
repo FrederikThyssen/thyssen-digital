@@ -88,7 +88,7 @@ export function SiteHeader() {
         >
           <a
             className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
-            href="#accueil"
+            href="/#accueil"
             onClick={() => setIsOpen(false)}
           >
             <BrandLogo
