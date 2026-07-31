@@ -10,7 +10,6 @@ import {
   positioningItems,
   websiteOffers,
 } from "@/lib/pricing";
-import { cn } from "@/lib/utils";
 
 export function PricingSection() {
   return (
@@ -44,7 +43,7 @@ export function PricingSection() {
                 <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
                   Nos prestations
                 </p>
-                <h2 className="mt-5 text-[clamp(2.6rem,6vw,5.4rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-foreground">
+                <h2 className="mt-5 text-[clamp(2.9rem,6.6vw,5.9rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-foreground">
                   Des solutions lisibles, sans perdre l&apos;exigence.
                 </h2>
               </div>
@@ -56,8 +55,8 @@ export function PricingSection() {
           </FadeUp>
 
           <div className="mt-16 grid gap-6 lg:grid-cols-[0.58fr_1.42fr]">
-            <FadeUp className="h-full">
-              <aside className="relative flex h-full flex-col justify-center overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgb(255_255_255_/_0.075),rgb(255_255_255_/_0.025)_50%,rgb(47_124_255_/_0.08))] p-7 shadow-[0_28px_110px_rgb(0_0_0_/_0.35)]">
+            <FadeUp className="self-start">
+              <aside className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgb(255_255_255_/_0.075),rgb(255_255_255_/_0.025)_50%,rgb(47_124_255_/_0.08))] p-7 shadow-[0_28px_110px_rgb(0_0_0_/_0.35)]">
                 <div className="absolute -right-20 top-10 size-56 rounded-full bg-accent-cyan/15 blur-3xl" />
                 <div className="relative">
                   <span className="inline-flex size-12 items-center justify-center rounded-md border border-accent-cyan/25 bg-primary/15 text-accent-cyan">
@@ -85,13 +84,7 @@ export function PricingSection() {
             <Stagger className="grid gap-5" staggerDelay={0.07}>
               {websiteOffers.map((offer, index) => (
                 <StaggerItem key={offer.name}>
-                  <article
-                    className={cn(
-                      "group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(145deg,rgb(255_255_255_/_0.07),rgb(255_255_255_/_0.025)_58%,rgb(47_124_255_/_0.055))] p-6 shadow-[0_24px_90px_rgb(0_0_0_/_0.28)] transition duration-300 hover:-translate-y-1 hover:border-accent-cyan/35",
-                      offer.featured &&
-                        "border-accent-cyan/40 bg-[linear-gradient(145deg,rgb(47_124_255_/_0.18),rgb(255_255_255_/_0.045)_44%,rgb(140_109_255_/_0.11))] shadow-[0_0_100px_rgb(34_211_238_/_0.16)]",
-                    )}
-                  >
+                  <article className="group relative overflow-hidden rounded-[2rem] border border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))] p-6 shadow-[0_24px_90px_rgb(0_0_0_/_0.28)] transition duration-300 hover:-translate-y-1">
                     <div className="absolute -right-16 -top-16 size-48 rounded-full bg-accent-cyan/10 blur-3xl transition group-hover:bg-accent-cyan/20" />
                     <div className="relative grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
                       <p className="text-4xl font-semibold tracking-[-0.05em] text-foreground/25">
@@ -136,7 +129,7 @@ export function PricingSection() {
                 <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
                   Maintenance
                 </p>
-                <h2 className="mt-5 text-[clamp(2.2rem,5vw,4.6rem)] font-semibold leading-[0.95] tracking-[-0.055em] text-foreground">
+                <h2 className="mt-5 text-[clamp(2.5rem,5.6vw,5.1rem)] font-semibold leading-[0.95] tracking-[-0.055em] text-foreground">
                   Garder le site rapide, stable et utile.
                 </h2>
                 <p className="mt-6 text-base leading-8 text-foreground/68">
