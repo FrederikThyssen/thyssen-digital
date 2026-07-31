@@ -5,7 +5,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ContactSection } from "@/components/sections/contact";
 import { PricingSection } from "@/components/sections/pricing";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SITE_URL } from "@/lib/constants";
 
@@ -71,9 +70,6 @@ export default function PricingPage() {
                   Des offres pensées pour lancer, renforcer ou maintenir une présence
                   digitale professionnelle, sans promesses inutiles ni complexité cachée.
                 </p>
-                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                  <Button href="#tarifs">Voir les offres</Button>
-                </div>
               </div>
 
               <div className="relative hidden lg:block">
