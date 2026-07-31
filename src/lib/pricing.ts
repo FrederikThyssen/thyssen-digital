@@ -1,10 +1,10 @@
 export const websiteOffers = [
   {
-    name: "Site One Page",
+    name: "Site Essentiel",
     price: "À partir de 990 €",
     description:
-      "Idéal pour les indépendants, artisans et petites entreprises souhaitant une présence en ligne simple et professionnelle.",
-    details: ["Page unique premium", "Responsive", "Contact clair", "Mise en ligne accompagnée"],
+      "Une présence en ligne claire et efficace pour présenter votre activité, vos services et vos coordonnées.",
+    details: ["Format compact et efficace", "Responsive", "Contact clair", "Mise en ligne accompagnée"],
   },
   {
     name: "Site Vitrine",
@@ -20,9 +20,10 @@ export const websiteOffers = [
     ],
   },
   {
-    name: "Site Premium",
+    name: "Site Sur-Mesure",
     price: "À partir de 2 490 €",
-    description: "Pour les entreprises souhaitant une solution complète, plus avancée et évolutive.",
+    description:
+      "Pour les entreprises qui veulent une solution complète, avancée et évolutive, pensée pour leurs besoins spécifiques.",
     details: [
       "Fonctionnalités avancées",
       "Espace client",
