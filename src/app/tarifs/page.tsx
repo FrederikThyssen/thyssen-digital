@@ -73,14 +73,6 @@ export default function PricingPage() {
                 </p>
                 <div className="mt-9 flex flex-col gap-3 sm:flex-row">
                   <Button href="#tarifs">Voir les offres</Button>
-                  <Button
-                    href="/documents/brochure-maintenance-thyssen-digital.pdf"
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="secondary"
-                  >
-                    Télécharger la brochure
-                  </Button>
                 </div>
               </div>
 
