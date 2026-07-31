@@ -1,8 +1,7 @@
-import { ArrowRight, Check, Gauge, ShieldCheck, Sparkles } from "lucide-react";
+import { Check, Gauge, ShieldCheck } from "lucide-react";
 
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import {
   complementaryServices,
@@ -56,28 +55,14 @@ export function PricingSection() {
 
           <div className="mt-16 grid gap-6 lg:grid-cols-[0.58fr_1.42fr]">
             <FadeUp className="self-start">
-              <aside className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(160deg,rgb(255_255_255_/_0.075),rgb(255_255_255_/_0.025)_50%,rgb(47_124_255_/_0.08))] p-7 shadow-[0_28px_110px_rgb(0_0_0_/_0.35)]">
-                <div className="absolute -right-20 top-10 size-56 rounded-full bg-accent-cyan/15 blur-3xl" />
-                <div className="relative">
-                  <span className="inline-flex size-12 items-center justify-center rounded-md border border-accent-cyan/25 bg-primary/15 text-accent-cyan">
-                    <Sparkles aria-hidden="true" className="size-5" />
-                  </span>
-                  <h3 className="mt-8 text-3xl font-semibold tracking-[-0.035em] text-foreground">
-                    Une base premium, puis du sur mesure.
-                  </h3>
-                  <p className="mt-5 text-sm leading-7 text-foreground/68">
-                    Les tarifs donnent un point de départ. Les fonctionnalités, le volume de
-                    contenu et l&apos;accompagnement définissent ensuite le devis final.
-                  </p>
-                  <div className="mt-10 flex flex-col gap-3">
-                    <Button
-                      href="#contact"
-                      trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
-                    >
-                      Demander un devis
-                    </Button>
-                  </div>
-                </div>
+              <aside className="relative rounded-2xl border border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))] p-5">
+                <h3 className="text-2xl font-semibold text-foreground">
+                  Des solutions lisibles, sans perdre l&apos;exigence.
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-foreground/64">
+                  Chaque offre donne un cadre clair. Le niveau de finition, les options et
+                  l&apos;accompagnement sont ensuite ajustés au besoin réel du projet.
+                </p>
               </aside>
             </FadeUp>
 
