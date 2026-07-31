@@ -1,4 +1,10 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { useForm, type UseFormRegisterReturn } from "react-hook-form";
+import { z } from "zod";
 
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
@@ -11,7 +17,50 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 const fieldClassName =
   "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-sm text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-0";
 
+const contactFormSchema = z.object({
+  name: z.string().trim().min(1, "Votre nom est requis."),
+  email: z.string().trim().min(1, "Votre email est requis.").email("Email invalide."),
+  company: z.string().trim().optional(),
+  budget: z.string().trim().optional(),
+  message: z.string().trim().min(1, "Un message est requis."),
+});
+
+type ContactFormValues = z.infer<typeof contactFormSchema>;
+
+type SubmitStatus = "idle" | "success" | "error";
+
 export function ContactSection() {
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  async function onSubmit(values: ContactFormValues) {
+    setStatus("idle");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+
+      if (!response.ok) {
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="contact">
       <BackgroundGrid className="opacity-[0.032]" />
@@ -54,33 +103,35 @@ export function ContactSection() {
               aria-hidden="true"
               className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
             />
-            <form
-              action={`mailto:${CONTACT_EMAIL}`}
-              aria-describedby="contact-status"
-              encType="text/plain"
-              method="post"
-            >
+            <form aria-describedby="contact-status" onSubmit={handleSubmit(onSubmit)}>
               <Stagger className="grid gap-4">
                 <StaggerItem className="grid gap-4 sm:grid-cols-2">
-                  <Field label="Nom" name="name" placeholder="Votre nom" required />
                   <Field
+                    error={errors.name?.message}
+                    label="Nom"
+                    placeholder="Votre nom"
+                    required
+                    {...register("name")}
+                  />
+                  <Field
+                    error={errors.email?.message}
                     label="Email"
-                    name="email"
                     placeholder="vous@entreprise.com"
                     required
                     type="email"
+                    {...register("email")}
                   />
                 </StaggerItem>
                 <StaggerItem className="grid gap-4 sm:grid-cols-2">
                   <Field
                     label="Entreprise (optionnel)"
-                    name="company"
                     placeholder="Nom de l'entreprise"
+                    {...register("company")}
                   />
                   <Field
                     label="Budget (optionnel)"
-                    name="budget"
                     placeholder="Budget estimé"
+                    {...register("budget")}
                   />
                 </StaggerItem>
                 <StaggerItem>
@@ -88,26 +139,30 @@ export function ContactSection() {
                     Message
                     <textarea
                       className={`${fieldClassName} min-h-36 resize-y py-3`}
-                      name="message"
                       placeholder="Votre projet, vos délais, vos priorités..."
-                      required
+                      {...register("message")}
                     />
                   </label>
+                  {errors.message ? (
+                    <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
+                  ) : null}
                 </StaggerItem>
                 <StaggerItem>
-                  <p
-                    className="text-sm leading-6 text-muted-foreground"
-                    id="contact-status"
-                  >
-                    Votre message sera envoyé directement à {CONTACT_EMAIL}.
+                  <p className="text-sm leading-6 text-muted-foreground" id="contact-status">
+                    {status === "success"
+                      ? "Votre message a bien été envoyé, merci !"
+                      : status === "error"
+                        ? "Une erreur est survenue, réessayez ou écrivez-nous directement."
+                        : `Votre message sera envoyé directement à ${CONTACT_EMAIL}.`}
                   </p>
                 </StaggerItem>
                 <StaggerItem className="flex justify-start">
                   <Button
+                    disabled={isSubmitting}
                     trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
                     type="submit"
                   >
-                    Envoyer le message
+                    {isSubmitting ? "Envoi..." : "Envoyer le message"}
                   </Button>
                 </StaggerItem>
               </Stagger>
@@ -120,28 +175,30 @@ export function ContactSection() {
 }
 
 function Field({
+  error,
   label,
-  name,
   placeholder,
   required = false,
   type = "text",
+  ...registerProps
 }: {
+  error?: string;
   label: string;
-  name: string;
   placeholder: string;
   required?: boolean;
   type?: "email" | "text";
-}) {
+} & UseFormRegisterReturn) {
   return (
     <label className="grid gap-2 text-sm font-medium text-foreground">
       {label}
       <input
         className={fieldClassName}
-        name={name}
         placeholder={placeholder}
         required={required}
         type={type}
+        {...registerProps}
       />
+      {error ? <span className="text-xs font-normal text-red-400">{error}</span> : null}
     </label>
   );
 }
