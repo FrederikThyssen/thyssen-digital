@@ -85,9 +85,9 @@ export default function PricingPage() {
                 </div>
                 <div className="mt-12 grid max-w-2xl gap-3 sm:grid-cols-3">
                   {[
-                    ["One Page", "990 €"],
+                    ["Essentiel", "990 €"],
                     ["Vitrine", "1 490 €"],
-                    ["Premium", "2 490 €"],
+                    ["Sur-Mesure", "2 490 €"],
                   ].map(([label, price]) => (
                     <div
                       className="rounded-xl border border-white/10 bg-white/[0.035] px-4 py-4 backdrop-blur-sm"
@@ -107,10 +107,7 @@ export default function PricingPage() {
               <div className="relative hidden lg:block">
                 <div className="absolute inset-8 rounded-full bg-accent-cyan/20 blur-3xl" />
                 <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.12] bg-background/55 p-7 shadow-[0_32px_120px_rgb(0_0_0_/_0.42)] backdrop-blur-md">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent-cyan">
-                    Offre principale
-                  </p>
-                  <div className="mt-20">
+                  <div>
                     <p className="text-6xl font-semibold tracking-[-0.05em] text-foreground">
                       Site Vitrine
                     </p>

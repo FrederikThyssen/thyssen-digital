@@ -106,11 +106,6 @@ export function PricingSection() {
                         <h3 className="text-3xl font-semibold tracking-[-0.04em] text-foreground">
                           {offer.name}
                         </h3>
-                        {offer.featured ? (
-                          <span className="rounded-full border border-accent-cyan/30 bg-accent-cyan/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-accent-cyan">
-                            Offre principale
-                          </span>
-                        ) : null}
                       </div>
                       <p className="mt-3 max-w-2xl text-sm leading-7 text-foreground/68">
                         {offer.description}
@@ -168,11 +163,6 @@ export function PricingSection() {
                         <h3 className="text-2xl font-semibold text-foreground">
                           {plan.name}
                         </h3>
-                        {plan.featured ? (
-                          <span className="rounded-full bg-accent-cyan px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-background">
-                            Recommandé
-                          </span>
-                        ) : null}
                       </div>
                       <p className="mt-2 text-sm leading-6 text-foreground/64">
                         {plan.description}
