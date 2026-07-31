@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   const resend = new Resend(resendApiKey);
 
   const { error } = await resend.emails.send({
-    from: "Thyssen Digital <onboarding@resend.dev>",
+    from: "Thyssen Digital <contact@thyssendigital.fr>",
     to: CONTACT_EMAIL,
     replyTo: email,
     subject: `Nouveau message de contact — ${name}`,
