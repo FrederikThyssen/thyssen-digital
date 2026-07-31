@@ -82,7 +82,7 @@ export default function PricingPage() {
                     Télécharger la brochure
                   </Button>
                 </div>
-                <div className="mt-12 grid max-w-2xl gap-3 sm:grid-cols-3">
+                <div className="mt-12 hidden max-w-2xl gap-3 sm:grid sm:grid-cols-3">
                   {[
                     ["Essentiel", "990 €"],
                     ["Vitrine", "1 490 €"],
