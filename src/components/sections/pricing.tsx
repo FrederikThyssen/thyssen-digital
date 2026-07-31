@@ -34,16 +34,16 @@ export function PricingSection() {
 
       <Container className="relative">
         <FadeUp>
-          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+          <div className="grid gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
                 Nos prestations
               </p>
-              <h2 className="mt-5 max-w-3xl text-[clamp(2.6rem,6vw,5.4rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-foreground">
+              <h2 className="mt-5 text-[clamp(2.6rem,6vw,5.4rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-foreground">
                 Des solutions lisibles, sans perdre l&apos;exigence.
               </h2>
             </div>
-            <p className="max-w-2xl text-base leading-8 text-foreground/68 lg:justify-self-end">
+            <p className="max-w-2xl text-base leading-8 text-foreground/68">
               Chaque offre donne un cadre clair. Le niveau de finition, les options et
               l&apos;accompagnement sont ensuite ajustés au besoin réel du projet.
             </p>
