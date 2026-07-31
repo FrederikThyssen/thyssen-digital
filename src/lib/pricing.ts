@@ -76,7 +76,7 @@ export const maintenancePlans = [
   },
   {
     name: "Sérénité",
-    price: "600 € / an",
+    price: "699 € / an",
     tone: "violet",
     description: "Une gestion plus complète pour déléguer aussi l'administratif technique.",
     details: [
