@@ -82,8 +82,10 @@ export function Hero() {
       id="accueil"
     >
       <SlowZoomBackground
-        className="absolute inset-0 bg-contain bg-[position:62%_center] bg-no-repeat lg:bg-center"
+        className="absolute inset-0"
         image="/images/hero-definitif.png"
+        imageClassName="object-contain object-[62%_center] lg:object-center"
+        priority
       />
       <div
         aria-hidden="true"

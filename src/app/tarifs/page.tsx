@@ -50,7 +50,6 @@ export default function PricingPage() {
             priority
             sizes="100vw"
             src="/images/hero-definitif.png"
-            unoptimized
           />
           <div
             aria-hidden="true"
