@@ -111,7 +111,77 @@ h4 {
   letter-spacing: 0;
 }
 
+@keyframes hero-chevron {
+  0%,
+  100% {
+    opacity: 0.56;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 0.95;
+    transform: translateY(6px);
+  }
+}
+
+.hero-word-group {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.hero-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.12em);
+  animation: hero-character-reveal 520ms var(--ease-expressive) forwards;
+  will-change: opacity, transform;
+}
+
+.hero-space {
+  display: inline-block;
+  width: 0.28em;
+}
+
+.hero-gradient-line {
+  line-height: 1.08;
+  padding-bottom: 0.12em;
+  clip-path: inset(-0.12em 100% -0.28em 0);
+  animation: hero-gradient-line-reveal 980ms steps(14, end) forwards;
+}
+
+.hero-gradient-line-1 {
+  animation-delay: 2040ms;
+}
+
+.hero-gradient-line-2 {
+  animation-delay: 2920ms;
+}
+
+@keyframes hero-character-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-gradient-line-reveal {
+  to {
+    clip-path: inset(-0.12em 0 -0.28em 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .hero-char {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  .hero-gradient-line {
+    clip-path: inset(0 0 0 0);
+    animation: none;
+  }
+
   *,
   *::before,
   *::after {
@@ -119,5 +189,536 @@ h4 {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+.brochure-root {
+  background: #050712;
+  color: #f7fbff;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+}
+
+.brochure-page {
+  position: relative;
+  isolation: isolate;
+  width: 210mm;
+  height: 297mm;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 17mm;
+  background: #050712;
+  page-break-after: always;
+}
+
+.brochure-background {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.72;
+}
+
+.brochure-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgb(3 5 13 / 0.9) 0%, rgb(3 5 13 / 0.58) 44%, rgb(3 5 13 / 0.32) 100%),
+    radial-gradient(circle at 78% 22%, rgb(80 227 255 / 0.16), transparent 30%),
+    radial-gradient(circle at 16% 88%, rgb(47 124 255 / 0.22), transparent 32%),
+    linear-gradient(180deg, rgb(3 5 13 / 0.18), rgb(3 5 13 / 0.78));
+}
+
+.brochure-page::after {
+  content: "";
+  position: absolute;
+  inset: 9mm;
+  z-index: -1;
+  border: 1px solid rgb(255 255 255 / 0.08);
+  pointer-events: none;
+}
+
+.brochure-cover .brochure-vignette {
+  background:
+    linear-gradient(90deg, rgb(3 5 13 / 0.92) 0%, rgb(3 5 13 / 0.56) 46%, rgb(3 5 13 / 0.18) 100%),
+    radial-gradient(circle at 22% 70%, rgb(47 124 255 / 0.28), transparent 28%),
+    linear-gradient(180deg, rgb(3 5 13 / 0.1), rgb(3 5 13 / 0.82));
+}
+
+.brochure-page-index {
+  color: #50e3ff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+}
+
+.brochure-edition {
+  margin-top: 0.6rem;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.brochure-kicker {
+  color: #50e3ff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.brochure-signature {
+  background: linear-gradient(90deg, #1350ff, #00e5ff, #a855f7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  font-size: 0.98rem;
+  font-weight: 800;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+.brochure-hero-title {
+  margin-top: 1.4rem;
+  color: #fff;
+  font-size: 3.55rem;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.93;
+  text-transform: uppercase;
+}
+
+.brochure-hero-title span {
+  display: block;
+  margin-top: 0.45rem;
+  background: linear-gradient(90deg, #2382ff, #50e3ff, #a855f7);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.brochure-cover-line {
+  width: 12rem;
+  height: 2px;
+  margin-top: 1.8rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2382ff, #50e3ff, #a855f7);
+  box-shadow: 0 0 34px rgb(80 227 255 / 0.28);
+}
+
+.brochure-title {
+  margin-top: 1.35rem;
+  color: #fff;
+  font-size: 3.85rem;
+  font-weight: 900;
+  letter-spacing: -0.052em;
+  line-height: 0.98;
+}
+
+.brochure-title-compact {
+  font-size: 3.25rem;
+}
+
+.brochure-final-title {
+  max-width: 44rem;
+  color: #fff;
+  font-size: 4.75rem;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  line-height: 0.96;
+}
+
+.brochure-lead {
+  color: rgb(255 255 255 / 0.82);
+  font-size: 1.35rem;
+  line-height: 1.72;
+}
+
+.brochure-signal {
+  display: grid;
+  gap: 0.75rem;
+  min-height: 5.9rem;
+  place-items: center;
+  padding: 1rem 0.6rem;
+  border: 1px solid rgb(80 227 255 / 0.22);
+  border-radius: 1.25rem;
+  background: rgb(3 5 13 / 0.66);
+  color: rgb(255 255 255 / 0.88);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.brochure-signal svg {
+  color: #50e3ff;
+}
+
+.brochure-focus-card {
+  min-height: 20rem;
+  padding: 2.2rem;
+  border: 1px solid rgb(80 227 255 / 0.28);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at 20% 0%, rgb(80 227 255 / 0.24), transparent 34%),
+    rgb(3 5 13 / 0.78);
+  box-shadow: 0 0 90px rgb(47 124 255 / 0.18);
+}
+
+.brochure-rhythm-row {
+  display: grid;
+  grid-template-columns: 4.5rem 10rem 1fr;
+  align-items: center;
+  gap: 1.4rem;
+  padding: 1.05rem 1.35rem;
+  border-left: 3px solid #50e3ff;
+  background: linear-gradient(90deg, rgb(5 11 27 / 0.88), rgb(5 11 27 / 0.58));
+}
+
+.brochure-rhythm-row span {
+  color: #50e3ff;
+  font-size: 1.7rem;
+  font-weight: 900;
+}
+
+.brochure-rhythm-row strong {
+  color: #fff;
+  font-size: 1.45rem;
+}
+
+.brochure-rhythm-row p {
+  color: rgb(255 255 255 / 0.76);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.brochure-orchestration {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-top: 15rem;
+}
+
+.brochure-orchestration::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 24rem;
+  height: 24rem;
+  border: 1px solid rgb(80 227 255 / 0.24);
+  border-radius: 50%;
+  background: rgb(3 5 13 / 0.62);
+  box-shadow:
+    inset 0 0 50px rgb(80 227 255 / 0.08),
+    0 0 120px rgb(47 124 255 / 0.18);
+  transform: translateX(-50%);
+}
+
+.brochure-orchestration-core {
+  position: absolute;
+  left: 50%;
+  top: 5.2rem;
+  z-index: 2;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.brochure-orchestration-core p {
+  color: #50e3ff;
+  font-weight: 800;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.brochure-orchestration-core strong {
+  display: block;
+  margin-top: 0.5rem;
+  color: #fff;
+  font-size: 5.2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.brochure-orchestration-layer {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: 1rem;
+  min-height: 11.5rem;
+  align-content: center;
+  justify-items: center;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.45rem;
+  background: rgb(3 5 13 / 0.76);
+  text-align: center;
+}
+
+.brochure-orchestration-layer span {
+  color: rgb(255 255 255 / 0.35);
+  font-weight: 900;
+}
+
+.brochure-orchestration-layer strong {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.brochure-quote-panel,
+.brochure-comparison-note {
+  margin-top: 2.2rem;
+  padding: 1.55rem;
+  border: 1px solid rgb(80 227 255 / 0.22);
+  border-radius: 1.6rem;
+  background: rgb(3 5 13 / 0.72);
+  box-shadow: 0 0 80px rgb(47 124 255 / 0.12);
+}
+
+.brochure-quote-panel p,
+.brochure-comparison-note p {
+  max-width: 42rem;
+  color: rgb(255 255 255 / 0.84);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.brochure-plan-strip {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.25rem;
+  padding: 1.55rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.55rem;
+  background: rgb(3 5 13 / 0.74);
+}
+
+.brochure-plan-strip-featured {
+  border-color: rgb(80 227 255 / 0.52);
+  background:
+    radial-gradient(circle at 90% 20%, rgb(140 109 255 / 0.22), transparent 38%),
+    rgb(6 14 34 / 0.9);
+  box-shadow: 0 0 80px rgb(80 227 255 / 0.17);
+  transform: scale(1.035);
+}
+
+.brochure-plan-strip h3,
+.brochure-website-offer h3,
+.brochure-services-cloud h3,
+.brochure-cta-panel h3 {
+  color: #fff;
+  font-size: 2.1rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.brochure-price {
+  color: #50e3ff;
+  font-size: 1.65rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.brochure-plan-strip ul {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 0.55rem;
+  color: rgb(255 255 255 / 0.78);
+  font-size: 0.98rem;
+}
+
+.brochure-plan-caption {
+  grid-column: 1 / -1;
+  margin-top: -0.35rem;
+  color: #50e3ff;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.brochure-plan-strip li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.brochure-plan-strip li svg {
+  color: #50e3ff;
+}
+
+.brochure-website-offer {
+  display: grid;
+  grid-template-columns: 4.4rem 1fr auto;
+  align-items: center;
+  gap: 1.2rem;
+  min-height: 7.7rem;
+  padding: 1.1rem 1.35rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.5rem;
+  background: rgb(3 5 13 / 0.72);
+}
+
+.brochure-website-offer-featured {
+  min-height: 8.8rem;
+  border-color: rgb(80 227 255 / 0.52);
+  background:
+    radial-gradient(circle at 35% 0%, rgb(80 227 255 / 0.22), transparent 40%),
+    rgb(6 14 34 / 0.88);
+  box-shadow: 0 0 90px rgb(80 227 255 / 0.16);
+}
+
+.brochure-website-offer > span {
+  color: rgb(255 255 255 / 0.36);
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.brochure-website-offer p:last-child {
+  grid-column: 2 / 4;
+  margin-top: -0.85rem;
+  color: rgb(255 255 255 / 0.76);
+  font-size: 0.93rem;
+  line-height: 1.5;
+}
+
+.brochure-services-cloud {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: 1.2rem;
+  margin-top: 1.25rem;
+  padding: 1.2rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.6rem;
+  background: rgb(3 5 13 / 0.72);
+}
+
+.brochure-services-cloud > div:last-child {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.brochure-services-cloud span {
+  border: 1px solid rgb(80 227 255 / 0.24);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.06);
+  color: rgb(255 255 255 / 0.82);
+  padding: 0.58rem 0.82rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.brochure-final-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+.brochure-final-grid div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid rgb(255 255 255 / 0.12);
+  border-radius: 1.1rem;
+  background: rgb(3 5 13 / 0.68);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.brochure-final-grid svg {
+  color: #50e3ff;
+}
+
+.brochure-cta-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid rgb(80 227 255 / 0.32);
+  border-radius: 1.7rem;
+  background:
+    radial-gradient(circle at 0% 0%, rgb(80 227 255 / 0.18), transparent 36%),
+    rgb(3 5 13 / 0.78);
+  box-shadow: 0 0 90px rgb(47 124 255 / 0.16);
+}
+
+.brochure-contact-email {
+  margin-top: 0.7rem;
+  color: rgb(255 255 255 / 0.76);
+  font-size: 1.15rem;
+}
+
+.brochure-cta-panel span {
+  display: block;
+  max-width: 31rem;
+  margin-top: 0.8rem;
+  color: rgb(255 255 255 / 0.58);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.brochure-cta-arrow {
+  display: grid;
+  width: 5.75rem;
+  height: 5.75rem;
+  place-items: center;
+  border: 1px solid rgb(80 227 255 / 0.38);
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.06);
+  color: #50e3ff;
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media screen {
+  .brochure-page {
+    content-visibility: auto;
+    contain-intrinsic-size: 297mm;
+  }
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    background: #050712 !important;
+  }
+
+  .brochure-root {
+    background: #050712 !important;
+  }
+
+  .brochure-page {
+    margin: 0;
+    page-break-after: always;
+    break-after: page;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .brochure-gradient-text,
+  .brochure-signature,
+  .brochure-hero-title span {
+    background: none !important;
+    color: #50e3ff !important;
+    -webkit-text-fill-color: #50e3ff !important;
+  }
+
+  .brochure-cover-line {
+    background: #50e3ff !important;
   }
 }

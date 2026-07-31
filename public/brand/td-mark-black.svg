@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 96" role="img" aria-labelledby="title">
   <title>Thyssen Digital monogram black</title>
-  <path fill="#070b14" fill-rule="evenodd" d="M6 8h32c14.2 0 24 10 24 24S52.2 56 38 56H20V23H9L6 8Zm29 34h4c7 0 12-4 12-10S46 22 39 22h-4v20Z" clip-rule="evenodd"/>
+  <path fill="#05070d" fill-rule="evenodd" d="M12 17h76l8 25H64v54H42V42H20L12 17Zm60 0h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" clip-rule="evenodd"/>
 </svg>

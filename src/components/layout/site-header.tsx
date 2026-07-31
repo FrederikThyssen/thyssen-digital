@@ -1,6 +1,6 @@
 "use client";
 
-import { Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -8,19 +8,28 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Services", href: "#services" },
-  { label: "Réalisations", href: "#realisations" },
-  { label: "À propos", href: "#a-propos" },
-  { label: "Contact", href: "#contact" },
+  { label: "Services", href: "/#services", sectionId: "services" },
+  { label: "Réalisations", href: "/#realisations", sectionId: "realisations" },
+  { label: "À propos", href: "/#a-propos", sectionId: "a-propos" },
+  { label: "Processus", href: "/#a-propos", sectionId: "a-propos" },
+  { label: "Tarifs", href: "/tarifs", sectionId: "tarifs" },
+  { label: "FAQ", href: "/#faq", sectionId: "faq" },
+  { label: "Contact", href: "#contact", sectionId: "contact" },
 ];
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [activeHref, setActiveHref] = useState("#accueil");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const updateScrolled = () => setIsScrolled(window.scrollY > 16);
+    const updateScrolled = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+
+      setIsScrolled(window.scrollY > 16);
+      setScrollProgress(scrollable > 0 ? window.scrollY / scrollable : 0);
+    };
 
     updateScrolled();
     window.addEventListener("scroll", updateScrolled, { passive: true });
@@ -28,47 +37,100 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
 
+  useEffect(() => {
+    const sections = ["accueil", ...navItems.map((item) => item.sectionId)]
+      .filter((href, index, items) => items.indexOf(href) === index)
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => section !== null);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (visibleEntry?.target.id) {
+          setActiveHref(`#${visibleEntry.target.id}`);
+        }
+      },
+      {
+        rootMargin: "-38% 0px -52% 0px",
+        threshold: [0.1, 0.25, 0.5],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5">
+    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6 lg:pt-8">
       <div
         className={cn(
-          "mx-auto max-w-6xl rounded-xl border border-border bg-surface-glass shadow-soft backdrop-blur-md transition-colors duration-200 ease-standard",
-          isScrolled && "border-border-strong bg-background-secondary/90 shadow-card",
+          "relative mx-auto max-w-[82rem] overflow-hidden rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard lg:bg-background/10",
+          isScrolled &&
+            "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)] lg:bg-background/44",
         )}
       >
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-px bg-white/5"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-primary via-accent-cyan to-accent-violet transition-transform duration-150 ease-standard"
+          style={{ transform: `scaleX(${scrollProgress})`, transformOrigin: "left" }}
+        />
         <nav
           aria-label="Navigation principale"
-          className="flex min-h-[72px] items-center justify-between gap-4 px-4 sm:px-5"
+          className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-10 lg:px-0"
         >
           <a
-            className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+            className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
             href="#accueil"
             onClick={() => setIsOpen(false)}
           >
             <BrandLogo
-              className="[&_span_span]:hidden sm:[&_span_span]:block"
+              className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs"
               decorative
+              imageClassName="h-10"
               tone="accent"
               variant="horizontal"
             />
             <span className="sr-only">THYSSEN DIGITAL</span>
           </a>
 
-          <div className="hidden items-center gap-1 lg:flex">
+          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
             {navItems.map((item) => (
               <a
-                className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                className={cn(
+                  "relative rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
+                  activeHref === `#${item.sectionId}` && "text-white",
+                )}
                 href={item.href}
-                key={item.href}
+                key={item.label}
               >
                 {item.label}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute -bottom-2 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
+                    activeHref === `#${item.sectionId}` && "opacity-100",
+                  )}
+                />
               </a>
             ))}
           </div>
 
           <div className="hidden lg:block">
-            <Button className="shadow-none" href="#contact" size="sm">
-              Parler de votre projet
+            <Button
+              className="min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(140_83_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))]"
+              href="#contact"
+              size="sm"
+              trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
+            >
+              Discutons de votre projet
             </Button>
           </div>
 
@@ -76,7 +138,7 @@ export function SiteHeader() {
             aria-controls="menu-mobile"
             aria-expanded={isOpen}
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className="inline-flex size-11 items-center justify-center rounded-md border border-border bg-surface text-foreground transition-colors duration-200 ease-standard hover:bg-surface-hover lg:hidden"
+            className="inline-flex size-11 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-foreground transition-colors duration-200 ease-standard hover:bg-white/[0.08] lg:hidden"
             onClick={() => setIsOpen((current) => !current)}
             type="button"
           >
@@ -95,7 +157,7 @@ export function SiteHeader() {
                 <a
                   className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
                   href={item.href}
-                  key={item.href}
+                  key={item.label}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
@@ -106,7 +168,7 @@ export function SiteHeader() {
                 href="#contact"
                 onClick={() => setIsOpen(false)}
               >
-                Parler de votre projet
+                Discutons de votre projet
               </Button>
             </div>
           </div>

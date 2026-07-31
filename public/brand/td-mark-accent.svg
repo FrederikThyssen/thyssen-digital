@@ -1,11 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 96" role="img" aria-labelledby="title">
   <title>Thyssen Digital monogram accent</title>
   <defs>
-    <linearGradient id="td-accent" x1="10" x2="58" y1="12" y2="54" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#2f7cff"/>
-      <stop offset=".58" stop-color="#50e3ff"/>
-      <stop offset="1" stop-color="#8c6dff"/>
+    <linearGradient id="td-base" x1="13" x2="114" y1="18" y2="88" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1350ff"/>
+      <stop offset=".38" stop-color="#00e5ff"/>
+      <stop offset=".68" stop-color="#2377ff"/>
+      <stop offset="1" stop-color="#7d2cff"/>
     </linearGradient>
+    <linearGradient id="td-top" x1="10" x2="104" y1="17" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1350ff"/>
+      <stop offset=".55" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#65f5ff"/>
+    </linearGradient>
+    <linearGradient id="td-stem" x1="42" x2="64" y1="38" y2="91" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c8dff"/>
+      <stop offset=".52" stop-color="#1350ff"/>
+      <stop offset="1" stop-color="#7d2cff"/>
+    </linearGradient>
+    <linearGradient id="td-edge" x1="78" x2="123" y1="30" y2="83" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#62f6ff"/>
+      <stop offset=".42" stop-color="#167dff"/>
+      <stop offset="1" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="td-glow" x="-20" y="-18" width="168" height="142" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="6"/>
+      <feColorMatrix values="0 0 0 0 0.04 0 0 0 0 0.44 0 0 0 0 1 0 0 0 .72 0"/>
+    </filter>
   </defs>
-  <path fill="url(#td-accent)" fill-rule="evenodd" d="M6 8h32c14.2 0 24 10 24 24S52.2 56 38 56H20V23H9L6 8Zm29 34h4c7 0 12-4 12-10S46 22 39 22h-4v20Z" clip-rule="evenodd"/>
+  <path d="M12 17h76l8 25H64v54H42V42H20L12 17Zm60 0h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" fill="#167dff" filter="url(#td-glow)" opacity=".58"/>
+  <path fill="url(#td-base)" fill-rule="evenodd" d="M12 17h76l8 25H64v54H42V42H20L12 17Zm60 0h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" clip-rule="evenodd"/>
+  <path d="M12 17h76l8 25H20L12 17Z" fill="url(#td-top)"/>
+  <path d="M42 42h22v54L42 84V42Z" fill="url(#td-stem)" opacity=".92"/>
+  <path d="M72 17h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z" fill="url(#td-edge)" opacity=".82"/>
+  <path d="M72 40h8.5c12.2 0 21 6.2 21 16 0 9.6-8.8 16-21 16H72V40Z" fill="#05070d" opacity=".78"/>
+  <path d="M78 45h2.3c8.2 0 14.1 4.3 14.1 11 0 6.5-5.9 11-14.1 11H78V45Z" fill="#66f6ff" opacity=".2"/>
 </svg>

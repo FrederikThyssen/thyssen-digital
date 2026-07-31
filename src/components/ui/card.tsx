@@ -11,7 +11,7 @@ const cardVariants = cva("rounded-lg border text-foreground", {
       outline: "border-border bg-transparent",
     },
     interactive: {
-      true: "transition-colors duration-200 ease-standard hover:border-border-strong hover:bg-surface-hover",
+      true: "transition-[border-color,background-color,box-shadow,transform] duration-200 ease-standard hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover hover:shadow-[0_18px_60px_rgb(19_80_255_/_0.08)] motion-reduce:transform-none",
       false: "",
     },
   },
