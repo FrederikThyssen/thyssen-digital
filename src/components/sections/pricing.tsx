@@ -151,11 +151,7 @@ export function PricingSection() {
               <div className="grid gap-4">
                 {maintenancePlans.map((plan) => (
                   <article
-                    className={cn(
-                      "relative grid gap-4 rounded-2xl border border-white/10 bg-white/[0.035] p-5 sm:grid-cols-[1fr_auto] sm:items-start",
-                      plan.featured &&
-                        "border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))]",
-                    )}
+                    className="relative grid gap-4 rounded-2xl border border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))] p-5 sm:grid-cols-[1fr_auto] sm:items-start"
                     key={plan.name}
                   >
                     <div>
