@@ -36,34 +36,20 @@ export function PricingSection() {
       <Container className="relative">
         <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-[linear-gradient(145deg,rgb(5_10_25_/_0.92),rgb(7_11_20_/_0.78))] p-7 shadow-[0_32px_130px_rgb(0_0_0_/_0.36)] sm:p-9 lg:p-10">
           <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/60 to-transparent" />
-          <FadeUp>
-            <div className="grid gap-6">
+          <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr]">
+            <FadeUp>
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
                   Nos prestations
                 </p>
-                <h2 className="mt-5 text-[clamp(2.9rem,6.6vw,5.9rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-foreground">
+                <h2 className="mt-5 text-[clamp(2.5rem,5.6vw,5.1rem)] font-semibold leading-[0.95] tracking-[-0.055em] text-foreground">
                   Des solutions lisibles, sans perdre l&apos;exigence.
                 </h2>
-              </div>
-              <p className="max-w-2xl text-base leading-8 text-foreground/68">
-                Chaque offre donne un cadre clair. Le niveau de finition, les options et
-                l&apos;accompagnement sont ensuite ajustés au besoin réel du projet.
-              </p>
-            </div>
-          </FadeUp>
-
-          <div className="mt-16 grid gap-6 lg:grid-cols-[0.58fr_1.42fr]">
-            <FadeUp className="self-start">
-              <aside className="relative rounded-2xl border border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))] p-5">
-                <h3 className="text-2xl font-semibold text-foreground">
-                  Des solutions lisibles, sans perdre l&apos;exigence.
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-foreground/64">
+                <p className="mt-6 text-base leading-8 text-foreground/68">
                   Chaque offre donne un cadre clair. Le niveau de finition, les options et
                   l&apos;accompagnement sont ensuite ajustés au besoin réel du projet.
                 </p>
-              </aside>
+              </div>
             </FadeUp>
 
             <Stagger className="grid gap-5" staggerDelay={0.07}>
