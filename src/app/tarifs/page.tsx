@@ -39,7 +39,7 @@ export default function PricingPage() {
         id="contenu"
       >
         <section
-          className="relative isolate min-h-[86vh] overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40"
+          className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40"
           id="accueil"
         >
           <Image
@@ -56,7 +56,7 @@ export default function PricingPage() {
             className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(5_7_18_/_0.96)_0%,rgb(5_7_18_/_0.78)_44%,rgb(5_7_18_/_0.44)_100%),linear-gradient(180deg,rgb(5_7_18_/_0.28)_0%,rgb(5_7_18_/_0.88)_100%)]"
           />
           <Container className="relative">
-            <div className="grid min-h-[calc(86vh-10rem)] items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
               <div className="max-w-3xl">
                 <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
                   Tarifs Thyssen Digital
