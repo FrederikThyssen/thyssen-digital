@@ -1,4 +1,3 @@
-import { Code2, Link, Mail } from "lucide-react";
 import NextLink from "next/link";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -13,24 +12,6 @@ const footerNav = [
   { label: "Tarifs", href: "/tarifs" },
   { label: "À propos", href: "/#a-propos" },
   { label: "Contact", href: "#contact" },
-];
-
-const socialLinks = [
-  {
-    label: "Github",
-    href: "https://github.com/FrederikThyssen",
-    icon: Code2,
-  },
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/frederik-thyssen/",
-    icon: Link,
-  },
-  {
-    label: "Email",
-    href: `mailto:${CONTACT_EMAIL}`,
-    icon: Mail,
-  },
 ];
 
 const legalLinks = [
@@ -97,32 +78,19 @@ export function SiteFooter() {
               </ul>
             </nav>
 
-            <div className="flex items-start gap-2 sm:justify-end">
-              {socialLinks.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <a
-                    aria-label={item.label}
-                    className="inline-flex size-10 items-center justify-center rounded-md border border-border bg-surface text-muted-foreground transition-colors duration-200 ease-standard hover:border-border-strong hover:bg-surface-hover hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-                    href={item.href}
-                    key={item.label}
-                    rel="noreferrer"
-                    target={item.href.startsWith("http") ? "_blank" : undefined}
-                  >
-                    <Icon aria-hidden="true" className="size-4" />
-                  </a>
-                );
-              })}
+            <div className="sm:justify-self-end">
+              <a
+                className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                href={`mailto:${CONTACT_EMAIL}`}
+              >
+                {CONTACT_EMAIL}
+              </a>
             </div>
           </div>
         </div>
 
         <p className="mt-10 text-xs text-subtle-foreground">
           © {new Date().getFullYear()} {BRAND_NAME}. Tous droits réservés.
-        </p>
-        <p className="mt-2 text-xs text-subtle-foreground">
-          Conçu et développé avec Next.js et TypeScript.
         </p>
       </Container>
     </footer>
