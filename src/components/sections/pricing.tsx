@@ -1,4 +1,4 @@
-import { ArrowRight, Check, FileDown, Gauge, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Gauge, ShieldCheck, Sparkles } from "lucide-react";
 
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
@@ -66,15 +66,6 @@ export function PricingSection() {
                   contenu et l&apos;accompagnement définissent ensuite le devis final.
                 </p>
                 <div className="mt-10 flex flex-col gap-3">
-                  <Button
-                    href="/documents/brochure-maintenance-thyssen-digital.pdf"
-                    leadingIcon={<FileDown aria-hidden="true" className="size-4" />}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="secondary"
-                  >
-                    Brochure maintenance
-                  </Button>
                   <Button
                     href="#contact"
                     trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
