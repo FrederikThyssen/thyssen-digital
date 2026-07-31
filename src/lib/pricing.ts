@@ -48,7 +48,7 @@ export const complementaryServices = [
 export const maintenancePlans = [
   {
     name: "Essentiel",
-    price: "249 € / an",
+    price: "350 € / an",
     tone: "green",
     description: "Les bases techniques pour garder un site propre, stable et surveillé.",
     details: [
@@ -62,7 +62,7 @@ export const maintenancePlans = [
   },
   {
     name: "Confort",
-    price: "349 € / an",
+    price: "499 € / an",
     tone: "blue",
     featured: true,
     description: "L'accompagnement recommandé pour rester serein toute l'année.",
@@ -76,7 +76,7 @@ export const maintenancePlans = [
   },
   {
     name: "Sérénité",
-    price: "499 € / an",
+    price: "600 € / an",
     tone: "violet",
     description: "Une gestion plus complète pour déléguer aussi l'administratif technique.",
     details: [
