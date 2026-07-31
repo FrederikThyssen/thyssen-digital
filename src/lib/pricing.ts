@@ -48,7 +48,7 @@ export const complementaryServices = [
 export const maintenancePlans = [
   {
     name: "Essentiel",
-    price: "350 € / an",
+    price: "349 € / an",
     tone: "green",
     description: "Les bases techniques pour garder un site propre, stable et surveillé.",
     details: [
