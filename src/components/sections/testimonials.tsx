@@ -26,7 +26,7 @@ export async function TestimonialsSection() {
       <Container className="relative">
         <FadeUp>
           <SectionHeading
-            description="Des avis vérifiés sur ma fiche Google, sans mise en avant sélective ni témoignage inventé."
+            description="Les avis publiés sur ma fiche Google, affichés ici tels quels."
             eyebrow="Avis Google"
             title="Ils m'ont fait confiance."
           />
