@@ -23,6 +23,7 @@ const contactFormSchema = z.object({
   company: z.string().trim().optional(),
   budget: z.string().trim().optional(),
   message: z.string().trim().min(1, "Un message est requis."),
+  website: z.string().trim().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -104,6 +105,13 @@ export function ContactSection() {
               className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
             />
             <form aria-describedby="contact-status" onSubmit={handleSubmit(onSubmit)}>
+              <input
+                aria-hidden="true"
+                className="sr-only"
+                tabIndex={-1}
+                autoComplete="off"
+                {...register("website")}
+              />
               <Stagger className="grid gap-4">
                 <StaggerItem className="grid gap-4 sm:grid-cols-2">
                   <Field

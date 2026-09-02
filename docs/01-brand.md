@@ -3,7 +3,7 @@
 ## Décisions validées
 
 - Nom de marque : THYSSEN DIGITAL.
-- Positionnement : studio digital premium.
+- Positionnement : studio digital exigeant. Le mot "premium" est évité dans les contenus publics, au profit de preuves concrètes (réalisations, méthode, finition).
 - Signature officielle : Concevoir. Développer. Performer.
 - Univers visuel : Luxe Tech.
 - Direction : sobre, élégante, technologique et intemporelle.
@@ -11,7 +11,7 @@
 - Accents : bleu et cyan, avec un violet très discret.
 - Interdits : gaming, cyberpunk, surcharge visuelle, effets RGB.
 - Le fait que le fondateur travaille seul n'est pas mis en avant.
-- Objectif polyvalent : clients premium, applications web, missions freelance et vitrine professionnelle.
+- Objectif polyvalent : clients exigeants, applications web, missions freelance et vitrine professionnelle.
 
 ## Monogramme TD
 

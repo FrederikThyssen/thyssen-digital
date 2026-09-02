@@ -3,7 +3,7 @@ import { Music2, QrCode } from "lucide-react";
 export function FredMusicVisual() {
   return (
     <div
-      aria-label="Aperçu stylisé d'un site événementiel premium pour Fred Music."
+      aria-label="Aperçu stylisé du site événementiel Fred Music."
       className="relative aspect-[16/10] overflow-hidden rounded-lg border border-border bg-background-secondary p-4"
       role="img"
     >

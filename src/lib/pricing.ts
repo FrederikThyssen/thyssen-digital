@@ -1,10 +1,10 @@
 export const websiteOffers = [
   {
-    name: "Site One Page",
+    name: "Site Essentiel",
     price: "À partir de 990 €",
     description:
-      "Idéal pour les indépendants, artisans et petites entreprises souhaitant une présence en ligne simple et professionnelle.",
-    details: ["Page unique premium", "Responsive", "Contact clair", "Mise en ligne accompagnée"],
+      "Une présence en ligne claire et efficace pour présenter votre activité, vos services et vos coordonnées.",
+    details: ["Format compact et efficace", "Responsive", "Contact clair", "Mise en ligne accompagnée"],
   },
   {
     name: "Site Vitrine",
@@ -20,9 +20,10 @@ export const websiteOffers = [
     ],
   },
   {
-    name: "Site Premium",
+    name: "Site Sur-Mesure",
     price: "À partir de 2 490 €",
-    description: "Pour les entreprises souhaitant une solution complète, plus avancée et évolutive.",
+    description:
+      "Pour les entreprises qui veulent une solution complète, avancée et évolutive, pensée pour leurs besoins spécifiques.",
     details: [
       "Fonctionnalités avancées",
       "Espace client",
@@ -47,7 +48,7 @@ export const complementaryServices = [
 export const maintenancePlans = [
   {
     name: "Essentiel",
-    price: "249 € / an",
+    price: "349 € / an",
     tone: "green",
     description: "Les bases techniques pour garder un site propre, stable et surveillé.",
     details: [
@@ -61,7 +62,7 @@ export const maintenancePlans = [
   },
   {
     name: "Confort",
-    price: "349 € / an",
+    price: "499 € / an",
     tone: "blue",
     featured: true,
     description: "L'accompagnement recommandé pour rester serein toute l'année.",
@@ -75,7 +76,7 @@ export const maintenancePlans = [
   },
   {
     name: "Sérénité",
-    price: "499 € / an",
+    price: "699 € / an",
     tone: "violet",
     description: "Une gestion plus complète pour déléguer aussi l'administratif technique.",
     details: [
@@ -90,7 +91,7 @@ export const maintenancePlans = [
 ];
 
 export const positioningItems = [
-  "Image premium",
+  "Finition soignée",
   "Tarifs accessibles",
   "Cible : artisans, indépendants, TPE et PME",
   "Pas de promesses inutiles",

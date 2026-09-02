@@ -8,6 +8,7 @@ import {
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
@@ -15,6 +16,15 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { complementaryServices, maintenancePlans, websiteOffers } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
+
+// Print-only source for the PDF brochure: not a page meant for organic search traffic.
+export const metadata: Metadata = {
+  title: "Brochure maintenance",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 const coverSignals = [
   { label: "Sécurité", icon: ShieldCheck },
@@ -49,7 +59,7 @@ const operatingLayers = [
 ];
 
 const conclusionArguments = [
-  "Image premium",
+  "Finition soignée",
   "Accompagnement humain",
   "Développement sur mesure",
   "Tarifs accessibles",

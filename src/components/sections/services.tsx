@@ -32,7 +32,7 @@ type Service = {
 const services: Service[] = [
   {
     title: "Site vitrine",
-    description: "Une présence premium, rapide et claire pour présenter votre activité.",
+    description: "Une présence rapide, claire et soignée pour présenter votre activité.",
     outcome: "Image de marque, conversion, SEO local",
     icon: Monitor,
   },

@@ -10,13 +10,50 @@ const contactSchema = z.object({
   company: z.string().trim().max(200).optional().or(z.literal("")),
   budget: z.string().trim().max(200).optional().or(z.literal("")),
   message: z.string().trim().min(1).max(5000),
+  // Honeypot: only bots fill this hidden field.
+  website: z.string().max(200).optional().or(z.literal("")),
 });
+
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+// Best-effort, per-instance rate limiting. Resets on cold start / redeploy.
+const requestLog = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (requestLog.get(ip) ?? []).filter(
+    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS,
+  );
+
+  if (timestamps.length >= RATE_LIMIT_MAX_REQUESTS) {
+    requestLog.set(ip, timestamps);
+    return true;
+  }
+
+  timestamps.push(now);
+  requestLog.set(ip, timestamps);
+  return false;
+}
+
+function getClientIp(request: Request): string {
+  const forwardedFor = request.headers.get("x-forwarded-for");
+  return forwardedFor?.split(",")[0]?.trim() || "unknown";
+}
 
 export async function POST(request: Request) {
   const resendApiKey = process.env.RESEND_API_KEY;
 
   if (!resendApiKey) {
     return NextResponse.json({ error: "Configuration serveur manquante." }, { status: 500 });
+  }
+
+  const clientIp = getClientIp(request);
+
+  if (isRateLimited(clientIp)) {
+    return NextResponse.json(
+      { error: "Trop de tentatives. Réessayez dans quelques minutes." },
+      { status: 429 },
+    );
   }
 
   const body = await request.json().catch(() => null);
@@ -26,7 +63,12 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Champs invalides." }, { status: 400 });
   }
 
-  const { name, email, company, budget, message } = parsed.data;
+  const { name, email, company, budget, message, website } = parsed.data;
+
+  if (website) {
+    // Silently report success to the bot without sending an email.
+    return NextResponse.json({ ok: true });
+  }
 
   const resend = new Resend(resendApiKey);
 

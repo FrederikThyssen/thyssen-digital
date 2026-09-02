@@ -32,7 +32,7 @@ const projects = [
     stack: ["Site vitrine", "Responsive", "SEO", "Administration"],
     highlights: ["Refonte", "Événementiel", "Organisation"],
     image: "/images/image-fredmusic.png",
-    imageAlt: "Page Fred Music présentant une offre mariage premium.",
+    imageAlt: "Page Fred Music présentant une offre mariage.",
     imagePosition: "center top",
     featured: false,
   },
