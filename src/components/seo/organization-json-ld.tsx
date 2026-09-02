@@ -24,6 +24,10 @@ const organizationJsonLd = {
     "https://github.com/FrederikThyssen",
     "https://www.linkedin.com/in/frederik-thyssen/",
   ],
+  founder: {
+    "@type": "Person",
+    name: "Frédérik Thyssen",
+  },
 };
 
 export function OrganizationJsonLd() {

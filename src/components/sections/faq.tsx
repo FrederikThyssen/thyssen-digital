@@ -8,29 +8,34 @@ import { SectionHeading } from "@/components/ui/section-heading";
 
 const questions = [
   {
-    question: "Pourquoi choisir Thyssen Digital ?",
+    question: "Combien coûte un site internet avec Thyssen Digital ?",
     answer:
-      "Pour une approche senior, sobre et orientée résultat: design, développement et performance sont pensés ensemble dès le départ.",
+      "Les tarifs démarrent à 990 € pour un site one page et évoluent selon vos besoins (vitrine, fonctionnalités avancées, développement sur mesure). Un devis précis est établi après un échange sur votre projet.",
   },
   {
-    question: "Quels délais ?",
+    question: "Qui est propriétaire du site une fois livré ?",
     answer:
-      "Les délais dépendent du périmètre. Un site vitrine peut avancer rapidement, tandis qu'une application métier demande une phase de cadrage plus approfondie.",
+      "Vous. Le code, le nom de domaine et l'hébergement restent entièrement sous votre contrôle, sans dépendance imposée envers Thyssen Digital.",
   },
   {
-    question: "Travaillez-vous avec les PME ?",
+    question: "Mon site sera-t-il bien référencé sur Google ?",
     answer:
-      "Oui. Les projets sont construits pour des entreprises qui veulent une présence digitale fiable, claire et capable d'évoluer.",
+      "Oui. Chaque site est construit avec les fondamentaux SEO dès le départ (structure, performance, balisage), avec un accompagnement SEO plus poussé possible en complément.",
   },
   {
-    question: "Assurez-vous la maintenance ?",
+    question: "Quels sont les délais de livraison ?",
     answer:
-      "Oui. La maintenance peut couvrir les corrections, l'amélioration continue, la sécurité, la performance et les évolutions fonctionnelles.",
+      "Un site one page ou vitrine peut être livré en quelques semaines. Une application métier ou un projet plus complexe demande une phase de cadrage préalable pour sécuriser les délais.",
   },
   {
-    question: "Puis-je faire évoluer mon projet plus tard ?",
+    question: "Que se passe-t-il après la mise en ligne ?",
     answer:
-      "Oui. L'architecture est pensée pour rester maintenable afin d'ajouter progressivement de nouvelles pages, fonctionnalités ou intégrations.",
+      "Un contrat de maintenance (mises à jour, sauvegardes, sécurité, assistance) prend le relais pour garder votre site fiable et à jour, sans que vous ayez à vous en soucier.",
+  },
+  {
+    question: "Puis-je faire évoluer mon site plus tard ?",
+    answer:
+      "Oui. Chaque projet est pensé pour rester évolutif : nouvelles pages, fonctionnalités ou intégrations s'ajoutent progressivement, sans tout reconstruire.",
   },
 ];
 

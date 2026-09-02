@@ -37,7 +37,10 @@ export default function PricingPage() {
         className="relative overflow-hidden bg-[#050712]"
         id="contenu"
       >
-        <section className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40" id="accueil">
+        <section
+          className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40"
+          id="accueil"
+        >
           <Image
             alt=""
             aria-hidden="true"
@@ -46,7 +49,6 @@ export default function PricingPage() {
             priority
             sizes="100vw"
             src="/images/hero-definitif.png"
-            unoptimized
           />
           <div
             aria-hidden="true"

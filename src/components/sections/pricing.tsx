@@ -1,7 +1,7 @@
 import { Check, Gauge, ShieldCheck } from "lucide-react";
 
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
-import { FadeUp } from "@/components/motion";
+import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
 import { Container } from "@/components/ui/container";
 import {
   complementaryServices,
@@ -52,9 +52,9 @@ export function PricingSection() {
               </div>
             </FadeUp>
 
-            <div className="grid gap-4">
-              {websiteOffers.map((offer, index) => (
-                <FadeUp delay={index * 0.07} key={offer.name}>
+            <Stagger className="grid gap-4" staggerDelay={0.07}>
+              {websiteOffers.map((offer) => (
+                <StaggerItem key={offer.name}>
                   <article className="relative grid gap-4 rounded-2xl border border-accent-cyan/35 bg-[linear-gradient(135deg,rgb(34_211_238_/_0.13),rgb(255_255_255_/_0.035),rgb(140_109_255_/_0.08))] p-5 sm:grid-cols-[1fr_auto] sm:items-start">
                     <div>
                       <div className="flex flex-wrap items-center gap-3">
@@ -84,9 +84,9 @@ export function PricingSection() {
                       ))}
                     </div>
                   </article>
-                </FadeUp>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </div>
 
