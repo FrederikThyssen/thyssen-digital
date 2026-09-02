@@ -12,6 +12,17 @@ const nextConfig: NextConfig = {
   turbopack: {
     root,
   },
+  async redirects() {
+    return [
+      // Enforce a single canonical host (www) to avoid duplicate-content SEO issues.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "thyssendigital.fr" }],
+        destination: "https://www.thyssendigital.fr/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -11,6 +11,7 @@ const footerNav = [
   { label: "Services", href: "/#services" },
   { label: "Réalisations", href: "/#realisations" },
   { label: "Tarifs", href: "/tarifs" },
+  { label: "Avis", href: "/#avis" },
   { label: "À propos", href: "/#a-propos" },
   { label: "Contact", href: "#contact" },
 ];

@@ -67,13 +67,7 @@ Utiliser `decorative` lorsque le nom de marque est déjà présent dans un texte
 
 ## Project visuals
 
-Les visuels projets dédiés vivent dans `src/components/projects/`.
-
-- `TruckMapsVisual` : aperçu mobile avec carte stylisée, route, recherche et points d'intérêt.
-- `FredMusicVisual` : aperçu desktop événementiel, avec QR code évoqué discrètement.
-- `LaPinceVisual` : aperçu dashboard/backend, orienté produit métier.
-
-Ces composants sont construits en HTML/CSS/SVG léger, sans image, canvas ou WebGL.
+Les réalisations utilisent des captures réelles (`next/image`) dans `src/components/sections/projects.tsx`, pas de composants d'aperçu stylisés dédiés.
 
 ## Backgrounds
 
