@@ -20,6 +20,7 @@ type PlacesApiReview = {
   relativePublishTimeDescription?: string;
   rating?: number;
   text?: { text?: string };
+  originalText?: { text?: string };
   authorAttribution?: { displayName?: string; photoUri?: string };
 };
 
@@ -64,7 +65,8 @@ export async function getGooglePlaceSummary(): Promise<GooglePlaceSummary | null
         authorName: review.authorAttribution!.displayName!,
         authorPhotoUrl: review.authorAttribution?.photoUri ?? null,
         rating: review.rating ?? 0,
-        text: review.text!.text!,
+        // Prefer the author's original wording over Google's auto-translation.
+        text: review.originalText?.text ?? review.text!.text!,
         relativeTime: review.relativePublishTimeDescription ?? "",
       }));
 
