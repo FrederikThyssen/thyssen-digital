@@ -8,6 +8,7 @@ import { ProcessSection } from "@/components/sections/process";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ServicesSection } from "@/components/sections/services";
 import { StandardsSection } from "@/components/sections/standards";
+import { TestimonialsSection } from "@/components/sections/testimonials";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <ProjectsSection />
         <StandardsSection />
         <ProcessSection />
+        <TestimonialsSection />
         <FaqSection />
         <ContactSection />
       </main>

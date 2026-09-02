@@ -18,14 +18,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Tarifs des prestations | Thyssen Digital",
     description:
-      "Offres site one page, site vitrine, site premium et contrats de maintenance Thyssen Digital.",
+      "Offres site essentiel, site vitrine, site sur-mesure et contrats de maintenance Thyssen Digital.",
     url: `${SITE_URL}/tarifs`,
   },
   twitter: {
     card: "summary_large_image",
     title: "Tarifs des prestations | Thyssen Digital",
     description:
-      "Offres site one page, site vitrine, site premium et contrats de maintenance Thyssen Digital.",
+      "Offres site essentiel, site vitrine, site sur-mesure et contrats de maintenance Thyssen Digital.",
   },
 };
 
@@ -63,7 +63,7 @@ export default function PricingPage() {
                 <h1 className="mt-6 text-[clamp(3rem,7vw,6.8rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-foreground">
                   Tarifs clairs.
                   <span className="block bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-transparent">
-                    Finition premium.
+                    Sans surprise.
                   </span>
                 </h1>
                 <p className="mt-7 max-w-2xl text-base leading-8 text-foreground/76 sm:text-lg">

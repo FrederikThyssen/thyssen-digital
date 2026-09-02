@@ -1,8 +1,19 @@
+import type { Metadata } from "next";
+
 import { SiteHeader } from "@/components/layout/site-header";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: "Politique de confidentialité",
+  description:
+    "Collecte, utilisation et conservation des données personnelles transmises via le site Thyssen Digital.",
+  alternates: {
+    canonical: `${SITE_URL}/politique-confidentialite`,
+  },
+};
 
 export default function PrivacyPolicyPage() {
   return (

@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
@@ -86,7 +87,7 @@ export function SiteHeader() {
           aria-label="Navigation principale"
           className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-10 lg:px-0"
         >
-          <a
+          <Link
             className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
             href="/#accueil"
             onClick={() => setIsOpen(false)}
@@ -99,7 +100,7 @@ export function SiteHeader() {
               variant="horizontal"
             />
             <span className="sr-only">THYSSEN DIGITAL</span>
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-6 lg:flex xl:gap-7">
             {navItems.map((item) => (

@@ -16,10 +16,14 @@ import { SectionHeading } from "@/components/ui/section-heading";
 const projects = [
   {
     name: "TruckMaps",
-    description:
-      "Application GPS communautaire pensée pour les chauffeurs poids lourds, avec itinéraires adaptés, signalements et points d'intérêt utiles sur la route.",
+    context:
+      "Les chauffeurs poids lourds manquent d'outils GPS pensés pour leurs contraintes de gabarit et d'itinéraire.",
+    mission: "Concevoir une application mobile complète, de l'API à l'interface embarquée.",
+    solution:
+      "Itinéraires adaptés, signalements communautaires et points d'intérêt, sur une base React Native et Node.js.",
+    result:
+      "Une application fonctionnelle qui aide les chauffeurs à mieux préparer et suivre leur route.",
     stack: ["React Native", "Node.js", "Express", "TypeScript", "PostgreSQL"],
-    highlights: ["GPS poids lourds", "Communauté", "Signalements"],
     image: "/images/image-truckmaps.png",
     imageAlt: "Interface TruckMaps affichée sur un écran GPS de camion.",
     imagePosition: "center",
@@ -27,21 +31,24 @@ const projects = [
   },
   {
     name: "Fred Music",
-    description:
-      "Refonte complète d'un site événementiel et ajout de solutions techniques pour faciliter l'organisation des événements.",
+    context:
+      "Un site événementiel vieillissant, difficile à faire évoluer pour présenter les offres mariage.",
+    mission: "Reprendre entièrement le site : identité numérique, structure des pages et back-office.",
+    solution: "Refonte responsive, administration de contenu et bases techniques pour le SEO.",
+    result: "Un site remis en production, plus simple à tenir à jour au quotidien.",
     stack: ["Site vitrine", "Responsive", "SEO", "Administration"],
-    highlights: ["Refonte", "Événementiel", "Organisation"],
     image: "/images/image-fredmusic.png",
-    imageAlt: "Page Fred Music présentant une offre mariage premium.",
+    imageAlt: "Page Fred Music présentant une offre mariage.",
     imagePosition: "center top",
     featured: false,
   },
   {
     name: "La Pince",
-    description:
-      "Projet de gestion de budget personnel avec analyses et différentes statistiques pour un suivi clair des revenus et des dépenses.",
+    context: "Suivre ses revenus et dépenses sans dépendre d'un tableur complexe.",
+    mission: "Développer un outil de gestion de budget personnel, du backend à l'interface.",
+    solution: "Analyses et statistiques sur une base React, Node.js/Express, Prisma et PostgreSQL.",
+    result: "Un dashboard clair pour un suivi budgétaire simple, déployé avec Docker.",
     stack: ["React", "TypeScript", "Node.js", "Express", "Prisma", "PostgreSQL", "Docker"],
-    highlights: ["Budget", "Analyses", "Statistiques"],
     image: "/images/la-pince-image.png",
     imageAlt: "Landing page et dashboard financier du projet La Pince.",
     imagePosition: "center top",
@@ -75,7 +82,7 @@ export function ProjectsSection() {
       <Container className="relative">
         <FadeUp>
           <SectionHeading
-            description="Des interfaces réelles, des contextes concrets et des choix techniques pensés pour servir des usages précis."
+            description="Le contexte, la mission et le résultat de chaque projet : les technologies restent secondaires."
             eyebrow="Réalisations"
             title="Des projets concrets."
           />
@@ -136,31 +143,37 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
               {project.name}
             </CardTitle>
             <CardDescription className={project.featured ? "max-w-lg" : undefined}>
-              {project.description}
+              {project.context}
             </CardDescription>
           </CardHeader>
           <CardContent className={project.featured ? "lg:px-8" : undefined}>
-            <div className="flex flex-wrap gap-2">
+            <div className="grid gap-2">
+              <CaseStudyRow label="Mission" text={project.mission} />
+              <CaseStudyRow label="Solution" text={project.solution} />
+              <CaseStudyRow label="Résultat" text={project.result} />
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
               {project.stack.map((item) => (
-                <Badge key={item} variant={project.featured ? "accent" : "neutral"}>
+                <Badge key={item} variant="neutral">
                   {item}
                 </Badge>
-              ))}
-            </div>
-            <div className="mt-6 grid gap-2 sm:grid-cols-3">
-              {project.highlights.map((item) => (
-                <div
-                  className="rounded-md border border-white/10 bg-background/35 px-3 py-2 text-xs font-medium text-foreground/72 transition-colors duration-200 group-hover:border-accent-cyan/25 group-hover:text-foreground"
-                  key={item}
-                >
-                  {item}
-                </div>
               ))}
             </div>
           </CardContent>
         </div>
       </div>
     </Card>
+  );
+}
+
+function CaseStudyRow({ label, text }: { label: string; text: string }) {
+  return (
+    <div className="rounded-md border border-white/10 bg-background/35 px-3 py-2 transition-colors duration-200 group-hover:border-accent-cyan/25">
+      <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-accent-cyan">
+        {label}
+      </p>
+      <p className="mt-1 text-xs leading-5 text-foreground/78">{text}</p>
+    </div>
   );
 }
 

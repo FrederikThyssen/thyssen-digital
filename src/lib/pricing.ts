@@ -91,7 +91,7 @@ export const maintenancePlans = [
 ];
 
 export const positioningItems = [
-  "Image premium",
+  "Finition soignée",
   "Tarifs accessibles",
   "Cible : artisans, indépendants, TPE et PME",
   "Pas de promesses inutiles",

@@ -102,8 +102,8 @@ export function PricingSection() {
                   Maintenez votre site à jour et performant.
                 </h2>
                 <p className="mt-6 text-base leading-8 text-foreground/68">
-                  Trois niveaux pour sécuriser, surveiller et faire évoluer votre
-                  présence digitale dans le temps.
+                  Trois niveaux pour sécuriser, surveiller et faire évoluer votre présence
+                  digitale dans le temps.
                 </p>
               </div>
 

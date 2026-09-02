@@ -10,6 +10,7 @@ const footerNav = [
   { label: "Services", href: "/#services" },
   { label: "Réalisations", href: "/#realisations" },
   { label: "Tarifs", href: "/tarifs" },
+  { label: "Avis", href: "/#avis" },
   { label: "À propos", href: "/#a-propos" },
   { label: "Contact", href: "#contact" },
 ];
@@ -42,8 +43,8 @@ export function SiteFooter() {
               {BRAND_SIGNATURE}
             </p>
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
-              Studio digital premium pour concevoir, développer et faire évoluer
-              des expériences web performantes.
+              Sites, applications et outils métier sur mesure, conçus pour durer
+              et pensés pour convertir.
             </p>
           </div>
 
