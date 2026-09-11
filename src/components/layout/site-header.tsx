@@ -2,7 +2,7 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
@@ -21,16 +21,35 @@ const navItems = [
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#accueil");
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
-    const updateScrolled = () => setIsScrolled(window.scrollY > 16);
+    lastScrollY.current = window.scrollY;
 
-    updateScrolled();
-    window.addEventListener("scroll", updateScrolled, { passive: true });
+    const onScroll = () => {
+      const current = window.scrollY;
+      const previous = lastScrollY.current;
 
-    return () => window.removeEventListener("scroll", updateScrolled);
+      setIsScrolled(current > 16);
+
+      // En dessous de 6px le mouvement est du bruit (rebond tactile, ancrage) :
+      // on ne bascule qu'au-delà, sinon l'en-tête clignote.
+      if (Math.abs(current - previous) <= 6) {
+        return;
+      }
+
+      // On ne masque qu'une fois le hero dépassé, jamais en remontant.
+      setIsHidden(current > previous && current > 96);
+      lastScrollY.current = current;
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -63,11 +82,15 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-40 border-b transition-colors duration-200 ease-standard",
+        "fixed inset-x-0 top-0 z-40 border-b transition-[transform,background-color,border-color] duration-300 ease-standard",
         isScrolled || isOpen
           ? "border-border bg-background/95 backdrop-blur-sm"
           : "border-transparent bg-transparent",
+        isHidden && !isOpen ? "-translate-y-full" : "translate-y-0",
       )}
+      // Un lien atteint au clavier dans un en-tête masqué serait invisible :
+      // le focus le fait revenir.
+      onFocusCapture={() => setIsHidden(false)}
     >
       <Container>
         <nav
