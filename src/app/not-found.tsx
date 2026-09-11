@@ -5,9 +5,7 @@ export default function NotFound() {
   return (
     <main className="flex min-h-screen items-center py-16">
       <Container className="max-w-3xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-accent-cyan">
-          Erreur 404
-        </p>
+        <p className="text-sm font-medium text-muted-foreground">Erreur 404</p>
         <h1 className="mt-4 text-4xl font-semibold text-foreground">
           Page introuvable
         </h1>

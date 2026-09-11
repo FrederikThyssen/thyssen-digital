@@ -24,11 +24,11 @@ export function SiteFooter() {
   return (
     <footer className="pb-10 pt-16">
       <Container>
-        <Divider className="mb-10" variant="gradient" />
+        <Divider className="mb-12" />
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
           <div>
             <NextLink
-              className="inline-flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+              className="inline-flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent"
               href="/#accueil"
             >
               <BrandLogo
@@ -39,10 +39,8 @@ export function SiteFooter() {
               />
               <span className="sr-only">{BRAND_NAME}</span>
             </NextLink>
-            <p className="mt-4 bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-xs font-semibold uppercase tracking-[0.28em] text-transparent">
-              {BRAND_SIGNATURE}
-            </p>
-            <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
+            <p className="mt-5 text-sm text-muted-foreground">{BRAND_SIGNATURE}</p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-subtle-foreground">
               Sites, applications et outils métier sur mesure, conçus pour durer
               et pensés pour convertir.
             </p>
@@ -54,7 +52,7 @@ export function SiteFooter() {
                 {footerNav.map((item) => (
                   <li key={item.href}>
                     <NextLink
-                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent"
                       href={item.href}
                     >
                       {item.label}
@@ -69,7 +67,7 @@ export function SiteFooter() {
                 {legalLinks.map((item) => (
                   <li key={item.href}>
                     <NextLink
-                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent"
                       href={item.href}
                     >
                       {item.label}
@@ -81,7 +79,7 @@ export function SiteFooter() {
 
             <div className="sm:justify-self-end">
               <a
-                className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-accent"
                 href={`mailto:${CONTACT_EMAIL}`}
               >
                 {CONTACT_EMAIL}

@@ -33,70 +33,52 @@ export default function PricingPage() {
   return (
     <>
       <SiteHeader />
-      <main
-        className="relative overflow-hidden bg-[#050712]"
-        id="contenu"
-      >
+      <main className="bg-background" id="contenu">
         <section
-          className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40"
+          className="relative isolate overflow-hidden border-b border-border pb-20 pt-36 lg:pt-44"
           id="accueil"
         >
           <Image
             alt=""
             aria-hidden="true"
-            className="absolute inset-0 -z-20 size-full object-cover opacity-55"
+            className="absolute inset-0 -z-20 size-full object-cover opacity-[0.14] grayscale"
             fill
             priority
             sizes="100vw"
             src="/images/hero-definitif.png"
           />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(5_7_18_/_0.96)_0%,rgb(5_7_18_/_0.78)_44%,rgb(5_7_18_/_0.44)_100%),linear-gradient(180deg,rgb(5_7_18_/_0.28)_0%,rgb(5_7_18_/_0.88)_100%)]"
-          />
-          <Container className="relative">
-            <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-              <div className="max-w-3xl">
-                <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-background/70" />
+          <Container>
+            <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">
                   Tarifs Thyssen Digital
                 </p>
-                <h1 className="mt-6 text-[clamp(3rem,7vw,6.8rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-foreground">
-                  Tarifs clairs.
-                  <span className="block bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-transparent">
-                    Sans surprise.
-                  </span>
+                <h1 className="mt-5 text-[clamp(2.5rem,6.5vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.025em] text-foreground">
+                  Tarifs clairs.{" "}
+                  <span className="text-muted-foreground">Sans surprise.</span>
                 </h1>
-                <p className="mt-7 max-w-2xl text-base leading-8 text-foreground/76 sm:text-lg">
+                <p className="mt-7 max-w-2xl text-base leading-8 text-muted-foreground">
                   Des offres pensées pour lancer, renforcer ou maintenir une présence
                   digitale professionnelle, sans promesses inutiles ni complexité cachée.
                 </p>
               </div>
 
-              <div className="relative hidden lg:block">
-                <div className="absolute inset-8 rounded-full bg-accent-cyan/20 blur-3xl" />
-                <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.12] bg-background/55 p-7 shadow-[0_32px_120px_rgb(0_0_0_/_0.42)] backdrop-blur-md">
-                  <div>
-                    <p className="text-6xl font-semibold tracking-[-0.05em] text-foreground">
-                      Site Vitrine
-                    </p>
-                    <p className="mt-4 bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-4xl font-semibold text-transparent">
-                      À partir de 1 490 €
-                    </p>
-                    <p className="mt-6 max-w-md text-lg leading-8 text-foreground/68">
-                      Design sur mesure, responsive, SEO de base et jusqu&apos;à 10 pages.
-                    </p>
-                  </div>
-                  <div className="mt-24 grid grid-cols-3 gap-3 text-center">
-                    {["Web", "Mobile", "SEO"].map((item) => (
-                      <span
-                        className="rounded-md border border-white/10 bg-white/[0.04] px-4 py-3 text-sm font-semibold text-foreground/78"
-                        key={item}
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="rounded-md border border-border p-6 lg:p-8">
+                <p className="text-2xl font-semibold text-foreground">Site Vitrine</p>
+                <p className="mt-2 text-base font-medium text-accent">
+                  À partir de 1 490 €
+                </p>
+                <p className="mt-5 text-sm leading-7 text-muted-foreground">
+                  Design sur mesure, responsive, SEO de base et jusqu&apos;à 10 pages.
+                </p>
+                <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 border-t border-border pt-5">
+                  {["Web", "Mobile", "SEO"].map((item) => (
+                    <li className="text-sm text-muted-foreground" key={item}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </Container>

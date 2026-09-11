@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
             eyebrow="Confidentialité"
             title="Politique de confidentialité"
           />
-          <Divider className="my-10" variant="gradient" />
+          <Divider className="my-10" />
           <div className="max-w-3xl space-y-8 text-sm leading-7 text-muted-foreground">
             <section className="space-y-3">
               <h2 className="text-lg font-semibold text-foreground">Données collectées</h2>
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
                 Vous pouvez demander l&apos;accès, la rectification ou la suppression de vos
                 données personnelles en écrivant à{" "}
               <a
-                className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
+                className="text-foreground underline decoration-border underline-offset-4 transition-colors duration-200 hover:text-accent"
                 href={`mailto:${CONTACT_EMAIL}`}
               >
                 {CONTACT_EMAIL}

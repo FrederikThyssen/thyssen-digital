@@ -145,7 +145,7 @@ function WhyPage() {
 
         <div className="brochure-focus-card">
           <p className="text-[5.8rem] font-black leading-none text-white">99,9%</p>
-          <p className="mt-3 text-xl font-semibold text-accent-cyan">
+          <p className="mt-3 text-xl font-semibold text-[#50e3ff]">
             disponibilité visée
           </p>
           <p className="mt-8 text-lg leading-8 text-white/76">
@@ -191,7 +191,7 @@ function MaintenanceValuePage() {
           return (
             <div className="brochure-orchestration-layer" key={layer.label}>
               <span>0{index + 1}</span>
-              <Icon className="size-8 text-accent-cyan" />
+              <Icon className="size-8 text-[#50e3ff]" />
               <strong>{layer.label}</strong>
             </div>
           );
@@ -248,7 +248,7 @@ function PlanStrip({ plan }: { plan: (typeof maintenancePlans)[number] }) {
       )}
     >
       <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-accent-cyan">
+        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#50e3ff]">
           {plan.featured ? "Recommandé" : plan.tone}
         </p>
         <h3>{plan.name}</h3>
@@ -396,7 +396,7 @@ function BrochureHeader({ page }: { page: string }) {
   return (
     <header className="flex items-center justify-between">
       <BrandLogo decorative imageClassName="h-12" tone="accent" variant="horizontal" />
-      <div className="mx-8 h-px flex-1 bg-gradient-to-r from-accent-cyan/55 to-accent-violet/20" />
+      <div className="mx-8 h-px flex-1 bg-gradient-to-r from-[#50e3ff]/55 to-[#8c6dff]/20" />
       <p className="brochure-page-index">{page}</p>
     </header>
   );

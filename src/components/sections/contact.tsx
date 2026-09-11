@@ -6,16 +6,14 @@ import { useState } from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { z } from "zod";
 
-import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { GlassPanel } from "@/components/ui/glass-panel";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 const fieldClassName =
-  "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-sm text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-0";
+  "min-h-12 w-full rounded-md border border-border bg-transparent px-4 text-sm text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent focus:outline-none focus:ring-0";
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Votre nom est requis."),
@@ -63,21 +61,8 @@ export function ContactSection() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="contact">
-      <BackgroundGrid className="opacity-[0.032]" />
-      <NoiseOverlay />
-      <BackgroundGlow
-        className="hidden lg:block"
-        intensity="medium"
-        position="bottom-right"
-        size="lg"
-        tone="blue"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-64 bg-[linear-gradient(180deg,transparent,rgb(19_80_255_/_0.045))]"
-      />
-      <Container className="relative grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
+    <section className="border-b border-border py-20 sm:py-24 lg:py-28" id="contact">
+      <Container className="grid gap-12 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
         <FadeUp>
           <div>
             <SectionHeading
@@ -85,25 +70,16 @@ export function ContactSection() {
               eyebrow="Contact"
               title="Parlons de votre projet."
             />
-            <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
+            <ul className="mt-10 grid gap-4 border-t border-border pt-6 text-sm text-muted-foreground">
               {["Premier retour clair", "Cadrage sans engagement", "Approche design + technique"].map((item) => (
-                <div
-                  className="rounded-md border border-white/10 bg-white/[0.035] px-4 py-3"
-                  key={item}
-                >
-                  {item}
-                </div>
+                <li key={item}>{item}</li>
               ))}
-            </div>
+            </ul>
           </div>
         </FadeUp>
 
         <FadeUp delay={0.08}>
-          <GlassPanel className="relative overflow-hidden border-white/12 p-5 shadow-[0_28px_100px_rgb(0_0_0_/_0.32)] sm:p-6">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
-            />
+          <div className="rounded-md border border-border p-6 sm:p-8">
             <form aria-describedby="contact-status" onSubmit={handleSubmit(onSubmit)}>
               <input
                 aria-hidden="true"
@@ -175,7 +151,7 @@ export function ContactSection() {
                 </StaggerItem>
               </Stagger>
             </form>
-          </GlassPanel>
+          </div>
         </FadeUp>
       </Container>
     </section>

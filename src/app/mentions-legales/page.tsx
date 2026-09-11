@@ -26,7 +26,7 @@ export default function LegalNoticePage() {
             eyebrow="Informations légales"
             title="Mentions légales"
           />
-          <Divider className="my-10" variant="gradient" />
+          <Divider className="my-10" />
           <div className="max-w-3xl space-y-8 text-sm leading-7 text-muted-foreground">
             <section className="space-y-3">
               <h2 className="text-lg font-semibold text-foreground">Éditeur du site</h2>
@@ -38,7 +38,7 @@ export default function LegalNoticePage() {
               <p>
                 Contact :{" "}
                 <a
-                  className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
+                  className="text-foreground underline decoration-border underline-offset-4 transition-colors duration-200 hover:text-accent"
                   href={`mailto:${CONTACT_EMAIL}`}
                 >
                   {CONTACT_EMAIL}
@@ -79,7 +79,7 @@ export default function LegalNoticePage() {
               <p>
                 Pour toute demande relative au site ou à son contenu, écrivez à{" "}
               <a
-                className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
+                className="text-foreground underline decoration-border underline-offset-4 transition-colors duration-200 hover:text-accent"
                 href={`mailto:${CONTACT_EMAIL}`}
               >
                 {CONTACT_EMAIL}
