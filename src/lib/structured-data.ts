@@ -1,5 +1,5 @@
 import type { JsonLdObject } from "@/components/seo/json-ld";
-import { business, faq, footer } from "@/content/site";
+import { business, faq, footer, type LocalPage } from "@/content/site";
 import { SITE_URL } from "@/lib/constants";
 import { SITE_DESCRIPTION } from "@/lib/metadata";
 
@@ -68,5 +68,22 @@ export function breadcrumbJsonLd(items: { name: string; path: string }[]): JsonL
       name: item.name,
       item: item.path === "/" ? SITE_URL : `${SITE_URL}${item.path}`,
     })),
+  };
+}
+
+/** Service offered in a given city, linked to the business entity of the homepage. */
+export function localServiceJsonLd(page: LocalPage): JsonLdObject {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: plain(page.title),
+    serviceType: "Création de site internet",
+    description: plain(page.metaDescription),
+    url: `${SITE_URL}/${page.slug}`,
+    provider: { "@id": BUSINESS_ID, "@type": "ProfessionalService", name: business.name },
+    areaServed: [
+      { "@type": "City", name: page.city },
+      ...page.nearby.map((name) => ({ "@type": "Place", name: plain(name) })),
+    ],
   };
 }

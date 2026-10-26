@@ -5,7 +5,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { Container } from "@/components/ui/container";
 import { NoBreakPlaces } from "@/components/ui/no-break-places";
-import { business, footer, navItems } from "@/content/site";
+import { business, footer, localPages, localPagesSection, navItems } from "@/content/site";
 import { BRAND_NAME } from "@/lib/constants";
 
 const legalLinks = [
@@ -89,7 +89,17 @@ export function SiteFooter() {
               </address>
             </div>
 
-            <nav aria-label="Liens légaux">
+            <nav aria-label="Liens légaux et pages locales">
+              <p className={columnTitleClassName}>{localPagesSection.footerTitle}</p>
+              <ul className="mb-6 grid">
+                {localPages.map((page) => (
+                  <li key={page.slug}>
+                    <NextLink className={linkClassName} href={`/${page.slug}`}>
+                      Site internet à {page.city}
+                    </NextLink>
+                  </li>
+                ))}
+              </ul>
               <p className={columnTitleClassName}>Informations</p>
               <ul className="grid">
                 {legalLinks.map((item) => (

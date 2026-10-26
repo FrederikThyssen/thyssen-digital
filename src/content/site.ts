@@ -91,6 +91,25 @@ export type ReassuranceItem = {
   title: string;
 };
 
+export type LocalPage = {
+  /** URL path segment, e.g. "creation-site-internet-arras". */
+  slug: string;
+  city: string;
+  department: string;
+  metaTitle: string;
+  metaDescription: string;
+  title: string;
+  titleHighlight: string;
+  intro: string;
+  audienceTitle: string;
+  audience: string[];
+  localTitle: string;
+  localText: string;
+  nearbyTitle: string;
+  nearby: string[];
+  faq: FaqItem[];
+};
+
 export type SelectOption = {
   value: string;
   label: string;
@@ -254,6 +273,8 @@ const rawHome = {
     description: "Les avis publiés sur ma fiche Google.",
     cta: "Voir tous les avis sur Google",
     leaveReviewCta: "Laisser un avis Google",
+    emptyText:
+      "Retrouvez les avis de mes clients directement sur ma fiche Google, et partagez le vôtre si je vous ai accompagné.",
   },
   reassurance: {
     eyebrow: "Pourquoi moi",
@@ -619,6 +640,136 @@ const rawFooter = {
 };
 
 // ---------------------------------------------------------------------------
+// Pages locales (une page par ville, contenu propre à chacune)
+// ---------------------------------------------------------------------------
+
+const rawLocalPages: LocalPage[] = [
+  {
+    slug: "creation-site-internet-arras",
+    city: "Arras",
+    department: "Pas-de-Calais",
+    metaTitle: "Création site internet Arras dès 990 € | Thyssen Digital",
+    metaDescription:
+      "Création et refonte de site internet à Arras pour artisans, commerçants et TPE : site vitrine rapide sur mobile et visible sur Google. Dès 990 €, devis gratuit.",
+    title: "Création de site internet à Arras",
+    titleHighlight: "à Arras",
+    intro:
+      "Vous êtes artisan, commerçant ou dirigeant d'une TPE à Arras ? Je crée des sites internet clairs et rapides, pensés pour être trouvés sur Google par vos clients de l'Arrageois et vous apporter des demandes de devis.",
+    audienceTitle: "Pour les professionnels d'Arras",
+    audience: [
+      "Commerces et restaurants du centre-ville qui veulent être trouvés par les habitants et les visiteurs",
+      "Artisans du bâtiment qui veulent présenter leurs chantiers et recevoir des demandes de devis",
+      "Indépendants et professions libérales qui ont besoin d'un site sérieux et facile à mettre à jour",
+    ],
+    localTitle: "Un développeur web du Pas-de-Calais, pas une plateforme",
+    localText:
+      "Je suis basé à Sailly-Saillisel, à la frontière de la Somme, du Pas-de-Calais et du Nord. Pour un projet à Arras, le premier échange peut se faire par téléphone ou sur place. Vous avez un seul interlocuteur, du devis à la mise en ligne, et votre site reste à votre nom.",
+    nearbyTitle: "J'interviens aussi autour d'Arras",
+    nearby: ["Saint-Laurent-Blangy", "Achicourt", "Beaurains", "Dainville", "Arras et l'Arrageois"],
+    faq: [
+      {
+        question: "Faut-il être à Arras pour travailler ensemble ?",
+        answer:
+          "Non. Le premier échange peut se faire par téléphone ou sur place, puis tout le suivi se fait à distance : je vous montre le site en cours de création et vous validez chaque étape.",
+      },
+      {
+        question: "Mon site sera-t-il visible quand on cherche une entreprise à Arras ?",
+        answer:
+          "Chaque site est préparé pour le référencement local : pages rapides, textes qui citent votre ville et vos services, conseils pour votre fiche Google. La visibilité se construit ensuite avec le temps et les avis de vos clients.",
+      },
+      {
+        question: "Combien coûte un site internet pour une entreprise d'Arras ?",
+        answer: `Les mêmes tarifs partout : dès ${euro(PRICES.essentiel)} pour un site d'une page, ${euro(PRICES.vitrine)} pour un site vitrine de 5 pages. Devis gratuit et détaillé avant de commencer.`,
+      },
+    ],
+  },
+  {
+    slug: "creation-site-internet-amiens",
+    city: "Amiens",
+    department: "Somme",
+    metaTitle: "Création site internet Amiens dès 990 € | Thyssen Digital",
+    metaDescription:
+      "Création et refonte de site internet à Amiens pour artisans, commerçants et indépendants : un site rapide et visible sur Google. Dès 990 €, devis gratuit.",
+    title: "Création de site internet à Amiens",
+    titleHighlight: "à Amiens",
+    intro:
+      "Artisan, commerçant ou indépendant à Amiens, vous voulez un site qui donne confiance et vous apporte des clients ? Je crée des sites vitrines et je modernise les sites existants pour les entreprises amiénoises et de la Somme.",
+    audienceTitle: "Pour les entreprises d'Amiens",
+    audience: [
+      "Commerçants et restaurateurs qui veulent se démarquer face aux grandes enseignes",
+      "Artisans qui veulent un site à leur image, avec leurs réalisations et un formulaire de devis",
+      "Indépendants, coachs et professions libérales qui veulent une présence en ligne professionnelle",
+    ],
+    localTitle: "Un développeur web de la Somme",
+    localText:
+      "Je travaille depuis Sailly-Saillisel, dans la Somme. Pour une entreprise d'Amiens, je m'adapte : échange par téléphone ou rendez-vous sur place pour comprendre votre activité, puis un suivi simple, avec des délais tenus et un seul interlocuteur.",
+    nearbyTitle: "J'interviens aussi autour d'Amiens",
+    nearby: ["Longueau", "Camon", "Rivery", "Salouël", "Amiens Métropole"],
+    faq: [
+      {
+        question: "Pourquoi choisir un freelance plutôt qu'une agence à Amiens ?",
+        answer:
+          "Vous parlez directement à la personne qui crée votre site, sans intermédiaire. Les prix sont annoncés avant de commencer, et vous restez propriétaire de votre site, de votre nom de domaine et de votre hébergement.",
+      },
+      {
+        question: "Pouvez-vous refaire mon site actuel ?",
+        answer: `Oui. Je reprends votre site existant, je garde ce qui fonctionne et je le modernise. La refonte suit les mêmes tarifs que la création, dès ${euro(PRICES.essentiel)}.`,
+      },
+      {
+        question: "En combien de temps mon site peut-il être en ligne ?",
+        answer:
+          "2 à 4 semaines selon l'offre, à partir du moment où j'ai reçu vos contenus (textes, photos, logo).",
+      },
+    ],
+  },
+  {
+    slug: "creation-site-internet-cambrai",
+    city: "Cambrai",
+    department: "Nord",
+    metaTitle: "Création site internet Cambrai dès 990 € | Thyssen Digital",
+    metaDescription:
+      "Création de site internet à Cambrai et dans le Cambrésis pour artisans, commerçants et TPE : site vitrine rapide, visible sur Google, à votre nom. Dès 990 €.",
+    title: "Création de site internet à Cambrai",
+    titleHighlight: "à Cambrai",
+    intro:
+      "Vous dirigez une entreprise à Cambrai ou dans le Cambrésis ? Je crée des sites internet simples à utiliser, rapides sur mobile et préparés pour Google, pour que vos clients vous trouvent et vous contactent.",
+    audienceTitle: "Pour les professionnels du Cambrésis",
+    audience: [
+      "Artisans qui veulent être trouvés par les particuliers du Cambrésis",
+      "Commerces de proximité qui veulent afficher leurs horaires, leurs services et leurs nouveautés",
+      "TPE qui veulent remplacer un site daté par un site moderne et rassurant",
+    ],
+    localTitle: "Un développeur web proche du Cambrésis",
+    localText:
+      "Basé entre Péronne, Bapaume et Cambrai, je connais le tissu économique local. Le premier échange est gratuit, par téléphone ou sur place. Vous savez dès le départ ce que vous payez et quand votre site sera en ligne.",
+    nearbyTitle: "J'interviens aussi autour de Cambrai",
+    nearby: ["Caudry", "Proville", "Escaudœuvres", "Le Cateau-Cambrésis", "Tout le Cambrésis"],
+    faq: [
+      {
+        question: "Proposez-vous la maintenance du site après la mise en ligne ?",
+        answer: `Oui, avec des formules annuelles dès ${perYear(PRICES.maintenance.essentiel)} : mises à jour, sauvegardes et sécurité. Vous ne vous occupez de rien.`,
+      },
+      {
+        question: "Qui s'occupe du nom de domaine et de l'hébergement ?",
+        answer:
+          "Ils sont à votre nom et à votre charge (environ 50 à 150 € par an selon l'hébergeur). Je m'occupe de toute la configuration.",
+      },
+      {
+        question: "Je n'ai pas de textes ni de photos, est-ce un problème ?",
+        answer:
+          "Non. Je vous conseille sur ce qu'il faut montrer et je mets en forme vos contenus. Si vous préférez, je peux rédiger les textes pour vous, en option sur devis.",
+      },
+    ],
+  },
+];
+
+const rawLocalPagesSection = {
+  servicesTitle: "Ce que je propose",
+  footerTitle: "Création de site par ville",
+  faqTitle: "Questions fréquentes",
+};
+
+// ---------------------------------------------------------------------------
 // Informations légales (mentions légales et politique de confidentialité)
 // Les valeurs entre crochets sont à compléter : ne pas les inventer.
 // ---------------------------------------------------------------------------
@@ -659,3 +810,5 @@ export const maintenancePlans = withFrenchTypography(rawMaintenancePlans);
 export const complementaryServices = withFrenchTypography(rawComplementaryServices);
 export const footer = withFrenchTypography(rawFooter);
 export const legal = withFrenchTypography(rawLegal);
+export const localPages = withFrenchTypography(rawLocalPages);
+export const localPagesSection = withFrenchTypography(rawLocalPagesSection);
