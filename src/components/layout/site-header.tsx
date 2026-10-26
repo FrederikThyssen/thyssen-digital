@@ -1,22 +1,17 @@
 "use client";
 
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, Phone, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
+import { business, navItems } from "@/content/site";
+import { BRAND_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const navItems = [
-  { label: "Services", href: "/#services", sectionId: "services" },
-  { label: "Réalisations", href: "/#realisations", sectionId: "realisations" },
-  { label: "À propos", href: "/#a-propos", sectionId: "a-propos" },
-  { label: "Processus", href: "/#a-propos", sectionId: "a-propos" },
-  { label: "Tarifs", href: "/tarifs", sectionId: "tarifs" },
-  { label: "FAQ", href: "/#faq", sectionId: "faq" },
-  { label: "Contact", href: "#contact", sectionId: "contact" },
-];
+const QUOTE_HREF = "/#contact";
+const QUOTE_LABEL = "Devis gratuit";
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,6 +32,22 @@ export function SiteHeader() {
 
     return () => window.removeEventListener("scroll", updateScrolled);
   }, []);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [isOpen]);
 
   useEffect(() => {
     const sections = ["accueil", ...navItems.map((item) => item.sectionId)]
@@ -85,24 +96,24 @@ export function SiteHeader() {
         />
         <nav
           aria-label="Navigation principale"
-          className="flex min-h-[70px] items-center justify-between gap-4 px-5 sm:px-8 lg:min-h-10 lg:px-0"
+          className="flex min-h-[70px] items-center justify-between gap-2 px-3 min-[400px]:px-5 sm:gap-4 sm:px-8 lg:min-h-10 lg:px-0"
         >
           <Link
-            className="flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
+            className="flex shrink-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
             href="/#accueil"
             onClick={() => setIsOpen(false)}
           >
             <BrandLogo
               className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs"
               decorative
-              imageClassName="h-10"
+              imageClassName="h-8 min-[400px]:h-10"
               tone="accent"
               variant="horizontal"
             />
-            <span className="sr-only">THYSSEN DIGITAL</span>
+            <span className="sr-only">{BRAND_NAME}, retour à l&apos;accueil</span>
           </Link>
 
-          <div className="hidden items-center gap-6 lg:flex xl:gap-7">
+          <div className="hidden items-center gap-5 lg:flex xl:gap-7">
             {navItems.map((item) => (
               <a
                 className={cn(
@@ -124,14 +135,24 @@ export function SiteHeader() {
             ))}
           </div>
 
-          <div className="hidden lg:block">
+          <div className="ml-auto flex items-center gap-2 lg:ml-0 lg:gap-3">
+            <a
+              aria-label={`Appeler le ${business.phoneDisplay}`}
+              className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/12 bg-white/[0.04] px-3 text-xs font-semibold text-foreground transition-colors duration-200 ease-standard hover:border-accent-cyan/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:min-h-10"
+              href={business.phoneHref}
+            >
+              <Phone aria-hidden="true" className="size-4 shrink-0 text-accent-cyan" />
+              <span aria-hidden="true" className="hidden min-[370px]:inline lg:hidden xl:inline">
+                {business.phoneDisplay}
+              </span>
+            </a>
             <Button
-              className="min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(140_83_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))]"
-              href="#contact"
+              className="hidden min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(140_83_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))] lg:inline-flex"
+              href={QUOTE_HREF}
               size="sm"
               trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
             >
-              Discutons de votre projet
+              {QUOTE_LABEL}
             </Button>
           </div>
 
@@ -139,7 +160,7 @@ export function SiteHeader() {
             aria-controls="menu-mobile"
             aria-expanded={isOpen}
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className="inline-flex size-11 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-foreground transition-colors duration-200 ease-standard hover:bg-white/[0.08] lg:hidden"
+            className="inline-flex size-11 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-foreground transition-colors duration-200 ease-standard hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:hidden"
             onClick={() => setIsOpen((current) => !current)}
             type="button"
           >
@@ -166,10 +187,10 @@ export function SiteHeader() {
               ))}
               <Button
                 className="mt-3 w-full"
-                href="#contact"
+                href={QUOTE_HREF}
                 onClick={() => setIsOpen(false)}
               >
-                Discutons de votre projet
+                {QUOTE_LABEL}
               </Button>
             </div>
           </div>
