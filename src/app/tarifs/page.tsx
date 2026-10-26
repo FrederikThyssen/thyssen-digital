@@ -7,32 +7,26 @@ import { ContactSection } from "@/components/sections/contact";
 import { PricingSection } from "@/components/sections/pricing";
 import { Container } from "@/components/ui/container";
 import { pricingPage } from "@/content/site";
-import { SITE_URL } from "@/lib/constants";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
+import { breadcrumbJsonLd } from "@/lib/structured-data";
 
-export const metadata: Metadata = {
-  title: "Tarifs des prestations",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Tarifs création site internet dès 990 € | Thyssen Digital",
   description:
-    "Tarifs Thyssen Digital pour la création de sites internet, les prestations complémentaires et les contrats de maintenance.",
-  alternates: {
-    canonical: `${SITE_URL}/tarifs`,
-  },
-  openGraph: {
-    title: "Tarifs des prestations | Thyssen Digital",
-    description:
-      "Offres site essentiel, site vitrine, site sur-mesure et contrats de maintenance Thyssen Digital.",
-    url: `${SITE_URL}/tarifs`,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Tarifs des prestations | Thyssen Digital",
-    description:
-      "Offres site essentiel, site vitrine, site sur-mesure et contrats de maintenance Thyssen Digital.",
-  },
-};
+    "Tarifs clairs pour votre site internet : site Essentiel dès 990 €, site vitrine 5 pages dès 1 490 €, sur-mesure dès 2 490 € et maintenance dès 349 €/an.",
+  path: "/tarifs",
+});
 
 export default function PricingPage() {
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Accueil", path: "/" },
+          { name: "Tarifs", path: "/tarifs" },
+        ])}
+      />
       <SiteHeader />
       <main
         className="relative overflow-hidden bg-[#050712]"

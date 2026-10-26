@@ -3,16 +3,15 @@ import Link from "next/link";
 
 import { LegalPage, LegalSection, legalLinkClassName } from "@/components/layout/legal-page";
 import { business, legal } from "@/content/site";
-import { SITE_URL } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Mentions légales",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Mentions légales | Thyssen Digital, création de sites web",
   description:
-    "Mentions légales du site Thyssen Digital : éditeur, statut, SIRET, directeur de la publication, hébergeur et propriété intellectuelle.",
-  alternates: {
-    canonical: `${SITE_URL}/mentions-legales`,
-  },
-};
+    "Mentions légales du site Thyssen Digital, création de sites internet dans les Hauts-de-France : éditeur, statut, SIRET, hébergeur et propriété intellectuelle.",
+  path: "/mentions-legales",
+  useRootShareImage: true,
+});
 
 export default function LegalNoticePage() {
   return (

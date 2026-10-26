@@ -2,16 +2,15 @@ import type { Metadata } from "next";
 
 import { LegalPage, LegalSection, legalLinkClassName } from "@/components/layout/legal-page";
 import { business, legal } from "@/content/site";
-import { SITE_URL } from "@/lib/constants";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Politique de confidentialité",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Politique de confidentialité | Thyssen Digital, sites web",
   description:
-    "Données collectées par le formulaire de contact Thyssen Digital : finalité, base légale, durée de conservation, prestataires et vos droits.",
-  alternates: {
-    canonical: `${SITE_URL}/politique-confidentialite`,
-  },
-};
+    "Données collectées par le formulaire de contact Thyssen Digital : finalité, base légale, durée de conservation, prestataires techniques et vos droits RGPD.",
+  path: "/politique-confidentialite",
+  useRootShareImage: true,
+});
 
 export default function PrivacyPolicyPage() {
   return (
