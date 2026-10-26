@@ -218,7 +218,7 @@ const rawHome = {
     items: [
       {
         id: "vitrine",
-        title: "Site vitrine",
+        title: "Site internet",
         description:
           "Présentez votre activité, soyez trouvé sur Google et recevez des demandes.",
         priceLabel: `Dès ${euro(PRICES.essentiel)}`,
