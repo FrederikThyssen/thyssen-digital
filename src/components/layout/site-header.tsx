@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { business, navItems } from "@/content/site";
 import { BRAND_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -13,19 +14,16 @@ import { cn } from "@/lib/utils";
 const QUOTE_HREF = "/#contact";
 const QUOTE_LABEL = "Devis gratuit";
 
+const focusRing =
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [activeHref, setActiveHref] = useState("#accueil");
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const updateScrolled = () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-
-      setIsScrolled(window.scrollY > 16);
-      setScrollProgress(scrollable > 0 ? window.scrollY / scrollable : 0);
-    };
+    const updateScrolled = () => setIsScrolled(window.scrollY > 8);
 
     updateScrolled();
     window.addEventListener("scroll", updateScrolled, { passive: true });
@@ -77,126 +75,128 @@ export function SiteHeader() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-3 pt-5 sm:px-6 lg:pt-8">
-      <div
-        className={cn(
-          "relative mx-auto max-w-[82rem] overflow-hidden rounded-2xl border border-white/10 bg-background/62 shadow-[0_18px_80px_rgb(0_0_0_/_0.34)] backdrop-blur-xl transition-all duration-200 ease-standard lg:bg-background/10",
-          isScrolled &&
-            "border-white/15 bg-background/78 shadow-[0_22px_90px_rgb(0_0_0_/_0.42)] lg:bg-background/44",
-        )}
-      >
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-px bg-white/5"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-primary via-accent-cyan to-accent-violet transition-transform duration-150 ease-standard"
-          style={{ transform: `scaleX(${scrollProgress})`, transformOrigin: "left" }}
-        />
+    <header
+      className={cn(
+        "sticky top-0 z-40 border-b bg-white/90 backdrop-blur-lg transition-[border-color,box-shadow] duration-200 ease-standard",
+        isScrolled || isOpen
+          ? "border-border shadow-[0_8px_24px_-18px_rgb(16_24_40_/_0.3)]"
+          : "border-transparent",
+      )}
+    >
+      <Container>
         <nav
           aria-label="Navigation principale"
-          className="flex min-h-[70px] items-center justify-between gap-2 px-3 min-[400px]:px-5 sm:gap-4 sm:px-8 lg:min-h-10 lg:px-0"
+          className="flex h-16 items-center justify-between gap-3 lg:h-[4.5rem]"
         >
           <Link
-            className="flex min-h-11 shrink-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
-            href="/#accueil"
+            className={cn("flex min-h-11 shrink-0 items-center rounded-md", focusRing)}
+            href="/"
             onClick={() => setIsOpen(false)}
           >
             <BrandLogo
-              className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs"
+              className="[&_svg]:h-8 [&_svg]:w-auto"
               decorative
-              imageClassName="h-8 min-[400px]:h-10"
-              loading="eager"
-              tone="accent"
+              tone="light"
               variant="horizontal"
             />
             <span className="sr-only">{BRAND_NAME}, retour à l&apos;accueil</span>
           </Link>
 
-          <div className="hidden items-center gap-5 lg:flex xl:gap-7">
-            {navItems.map((item) => (
-              <a
-                className={cn(
-                  "relative rounded-md py-3 text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
-                  activeHref === `#${item.sectionId}` && "text-white",
-                )}
-                href={item.href}
-                key={item.label}
-              >
-                {item.label}
-                <span
-                  aria-hidden="true"
-                  className={cn(
-                    "absolute bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
-                    activeHref === `#${item.sectionId}` && "opacity-100",
-                  )}
-                />
-              </a>
-            ))}
-          </div>
+          <ul className="hidden items-center gap-1 lg:flex">
+            {navItems.map((item) => {
+              const isActive = activeHref === `#${item.sectionId}`;
 
-          <div className="ml-auto flex items-center gap-2 lg:ml-0 lg:gap-3">
+              return (
+                <li key={item.label}>
+                  <a
+                    aria-current={isActive ? "true" : undefined}
+                    className={cn(
+                      "inline-flex min-h-10 items-center rounded-lg px-3 text-sm font-medium transition-colors duration-200 ease-standard hover:bg-surface-subtle hover:text-ink",
+                      isActive ? "text-primary" : "text-muted-foreground",
+                      focusRing,
+                    )}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <a
               aria-label={`Appeler le ${business.phoneDisplay}`}
-              className="inline-flex min-h-11 min-w-11 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/12 bg-white/[0.04] px-3 text-xs font-semibold text-foreground transition-colors duration-200 ease-standard hover:border-accent-cyan/40 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:min-h-10"
+              className={cn(
+                "inline-flex min-h-11 min-w-11 items-center justify-center gap-2 whitespace-nowrap rounded-xl border border-border-strong bg-white px-3 text-sm font-semibold text-ink transition-colors duration-200 ease-standard hover:border-primary/40 hover:text-primary lg:min-h-10",
+                focusRing,
+              )}
               href={business.phoneHref}
             >
-              <Phone aria-hidden="true" className="size-4 shrink-0 text-accent-cyan" />
-              <span aria-hidden="true" className="hidden min-[370px]:inline lg:hidden xl:inline">
+              <Phone aria-hidden="true" className="size-4 shrink-0 text-primary" />
+              <span aria-hidden="true" className="hidden min-[400px]:inline lg:hidden xl:inline">
                 {business.phoneDisplay}
               </span>
             </a>
             <Button
-              className="hidden min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(91_44_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))] lg:inline-flex"
+              className="hidden lg:inline-flex"
               href={QUOTE_HREF}
               size="sm"
               trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
             >
               {QUOTE_LABEL}
             </Button>
+            <button
+              aria-controls="menu-mobile"
+              aria-expanded={isOpen}
+              aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              className={cn(
+                "inline-flex size-11 shrink-0 items-center justify-center rounded-xl border border-border-strong bg-white text-ink transition-colors duration-200 ease-standard hover:bg-surface-subtle lg:hidden",
+                focusRing,
+              )}
+              onClick={() => setIsOpen((current) => !current)}
+              type="button"
+            >
+              {isOpen ? (
+                <X aria-hidden="true" className="size-5" />
+              ) : (
+                <Menu aria-hidden="true" className="size-5" />
+              )}
+            </button>
           </div>
-
-          <button
-            aria-controls="menu-mobile"
-            aria-expanded={isOpen}
-            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className="inline-flex size-11 shrink-0 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-foreground transition-colors duration-200 ease-standard hover:bg-white/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:hidden"
-            onClick={() => setIsOpen((current) => !current)}
-            type="button"
-          >
-            {isOpen ? (
-              <X aria-hidden="true" className="size-5" />
-            ) : (
-              <Menu aria-hidden="true" className="size-5" />
-            )}
-          </button>
         </nav>
+      </Container>
 
-        {isOpen ? (
-          <div className="lg:hidden" id="menu-mobile">
-            <div className="border-t border-border px-4 pb-4 pt-2">
+      {isOpen ? (
+        <div className="border-t border-border bg-white lg:hidden" id="menu-mobile">
+          <Container className="pb-5 pt-2">
+            <ul className="grid">
               {navItems.map((item) => (
-                <a
-                  className="block rounded-md px-3 py-3 text-sm font-medium text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-                  href={item.href}
-                  key={item.label}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </a>
+                <li key={item.label}>
+                  <a
+                    className={cn(
+                      "flex min-h-12 items-center rounded-lg px-2 text-base font-medium text-ink transition-colors duration-200 hover:bg-surface-subtle",
+                      focusRing,
+                    )}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
               ))}
-              <Button
-                className="mt-3 w-full"
-                href={QUOTE_HREF}
-                onClick={() => setIsOpen(false)}
-              >
-                {QUOTE_LABEL}
-              </Button>
-            </div>
-          </div>
-        ) : null}
-      </div>
+            </ul>
+            <Button
+              className="mt-3 w-full"
+              href={QUOTE_HREF}
+              onClick={() => setIsOpen(false)}
+              size="lg"
+            >
+              {QUOTE_LABEL}
+            </Button>
+          </Container>
+        </div>
+      ) : null}
     </header>
   );
 }
