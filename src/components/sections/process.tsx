@@ -4,43 +4,13 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { home } from "@/content/site";
 
-const steps = [
-  {
-    number: "01",
-    title: "Découverte",
-    description: "Comprendre vos objectifs, votre contexte et les contraintes réelles.",
-    deliverable: "Cadrage clair",
-  },
-  {
-    number: "02",
-    title: "Conception",
-    description: "Structurer l'expérience, les parcours et les fondations techniques.",
-    deliverable: "Architecture + UX",
-  },
-  {
-    number: "03",
-    title: "Développement",
-    description: "Construire proprement avec des bases maintenables et performantes.",
-    deliverable: "Produit fonctionnel",
-  },
-  {
-    number: "04",
-    title: "Livraison",
-    description: "Valider, optimiser et préparer une mise en production sereine.",
-    deliverable: "Mise en ligne",
-  },
-  {
-    number: "05",
-    title: "Accompagnement",
-    description: "Faire évoluer le produit avec méthode après le lancement.",
-    deliverable: "Suivi durable",
-  },
-];
+const processContent = home.process;
 
 export function ProcessSection() {
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="a-propos">
+    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="processus">
       <BackgroundGlow
         className="hidden lg:block"
         intensity="low"
@@ -55,9 +25,9 @@ export function ProcessSection() {
       <Container className="relative">
         <FadeUp>
           <SectionHeading
-            description="Une approche claire pour transformer une ambition digitale en produit fiable, élégant et durable."
-            eyebrow="Processus"
-            title="Un accompagnement structuré."
+            description={processContent.description}
+            eyebrow={processContent.eyebrow}
+            title={processContent.title}
           />
         </FadeUp>
 
@@ -67,8 +37,8 @@ export function ProcessSection() {
           </div>
         </FadeUp>
 
-        <Stagger className="mt-6 grid gap-4 lg:grid-cols-5">
-          {steps.map((step) => (
+        <Stagger className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {processContent.steps.map((step) => (
             <StaggerItem key={step.number}>
               <Card
                 className="h-full border-white/10 bg-[linear-gradient(180deg,rgb(255_255_255_/_0.045),rgb(255_255_255_/_0.018))] shadow-[0_18px_70px_rgb(0_0_0_/_0.22)] backdrop-blur-md"
@@ -76,17 +46,14 @@ export function ProcessSection() {
                 variant="outline"
               >
                 <CardContent className="p-5">
-                  <Badge className="border-accent-cyan/30 bg-primary/10 text-accent-cyan" variant="outline">
+                  <Badge aria-hidden="true" className="border-accent-cyan/30 bg-primary/10 text-accent-cyan" variant="outline">
                     {step.number}
                   </Badge>
                   <h3 className="mt-5 text-lg font-semibold text-foreground">
                     {step.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                  <p className="mt-3 text-sm leading-6 text-foreground/78">
                     {step.description}
-                  </p>
-                  <p className="mt-6 rounded-md border border-white/10 bg-background/35 px-3 py-2 text-xs font-medium text-accent-cyan">
-                    {step.deliverable}
                   </p>
                 </CardContent>
               </Card>
