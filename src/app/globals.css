@@ -1,39 +1,46 @@
 @import "tailwindcss";
 
+/*
+ * Thème clair. Seules les couleurs du logo sont reprises :
+ * bleu #1350ff (couleur d'action), cyan #00e5ff et violet #7d2cff (accents décoratifs).
+ */
 :root {
-  --background: #070b14;
-  --background-secondary: #0b1220;
-  --foreground: #f7f9fc;
-  --muted: #0b1220;
-  --muted-foreground: #9aa8bd;
-  --subtle-foreground: #6f7d91;
-  --inverse-foreground: #070b14;
-  --surface: rgb(255 255 255 / 0.06);
-  --surface-subtle: rgb(255 255 255 / 0.035);
-  --surface-elevated: rgb(255 255 255 / 0.085);
-  --surface-hover: rgb(255 255 255 / 0.1);
-  --surface-glass: rgb(255 255 255 / 0.07);
-  --border: rgb(255 255 255 / 0.12);
-  --border-strong: rgb(255 255 255 / 0.2);
-  --primary: #2f7cff;
+  --background: #ffffff;
+  --background-secondary: #f5f7fc;
+  --foreground: #0b1220;
+  --muted: #f5f7fc;
+  --muted-foreground: #475369;
+  --subtle-foreground: #667085;
+  --inverse-foreground: #ffffff;
+  --surface: #ffffff;
+  --surface-subtle: #f5f7fc;
+  --surface-elevated: #ffffff;
+  --surface-hover: #f3f6ff;
+  --surface-glass: rgb(255 255 255 / 0.86);
+  --border: #e4e8f0;
+  --border-strong: #cdd5e3;
+  --primary: #1350ff;
+  --primary-hover: #0b3ee0;
+  --primary-soft: #eef3ff;
   --primary-foreground: #ffffff;
-  --accent-cyan: #50e3ff;
-  --accent-violet: #8c6dff;
-  --gradient-primary: linear-gradient(135deg, #2f7cff 0%, #50e3ff 100%);
-  --gradient-halo: radial-gradient(circle, rgb(47 124 255 / 0.18), transparent 68%);
+  --accent-cyan: #00e5ff;
+  --accent-violet: #7d2cff;
+  --ink: #0b1220;
+  --gradient-brand: linear-gradient(120deg, #1350ff 0%, #2377ff 45%, #7d2cff 100%);
   --radius-sm: 0.375rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --shadow-soft: 0 18px 60px rgb(0 0 0 / 0.32);
-  --shadow-card: 0 20px 70px rgb(0 0 0 / 0.28);
-  --shadow-glow: 0 0 34px rgb(47 124 255 / 0.22);
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -14px rgb(16 24 40 / 0.14);
+  --shadow-card: 0 1px 2px rgb(16 24 40 / 0.05), 0 18px 40px -24px rgb(16 24 40 / 0.22);
+  --shadow-lift: 0 24px 48px -24px rgb(19 80 255 / 0.28);
+  --shadow-glow: 0 10px 28px -10px rgb(19 80 255 / 0.55);
   --duration-fast: 140ms;
   --duration-standard: 220ms;
   --duration-slow: 420ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-expressive: cubic-bezier(0.16, 1, 0.3, 1);
-  --font-heading-family: var(--font-body);
+  --font-heading-family: var(--font-display);
 }
 
 @theme inline {
@@ -52,134 +59,293 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
   --color-primary-foreground: var(--primary-foreground);
   --color-accent-cyan: var(--accent-cyan);
   --color-accent-violet: var(--accent-violet);
+  --color-ink: var(--ink);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
   --radius-xl: var(--radius-xl);
   --shadow-soft: var(--shadow-soft);
   --shadow-card: var(--shadow-card);
+  --shadow-lift: var(--shadow-lift);
   --shadow-glow: var(--shadow-glow);
   --ease-standard: var(--ease-standard);
   --ease-expressive: var(--ease-expressive);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading-family);
+  --font-display: var(--font-heading-family);
 }
 
-* {
-  box-sizing: border-box;
+/* Element defaults live in the base layer so Tailwind utilities always win. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  section[id] {
+    scroll-margin-top: 5.5rem;
+  }
+
+  html {
+    min-height: 100%;
+    scroll-behavior: smooth;
+    background: var(--background);
+  }
+
+  body {
+    min-height: 100%;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body), Arial, Helvetica, sans-serif;
+    text-rendering: optimizelegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.22em;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading), var(--font-body), Arial, Helvetica, sans-serif;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-html {
-  min-height: 100%;
-  scroll-behavior: smooth;
-  background: var(--background);
+/* Brand gradient text (blue → violet), AA contrast on white. */
+.text-gradient-brand {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-body {
-  min-height: 100%;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
-  text-rendering: geometricprecision;
-  overflow-x: hidden;
+/* Subtle dotted texture used behind the hero and section bands. */
+.bg-dots {
+  background-image: radial-gradient(rgb(19 80 255 / 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
 }
 
-::selection {
-  background: var(--primary);
-  color: var(--primary-foreground);
+/* ------------------------------------------------------------------------
+ * Effets visuels (CSS uniquement, désactivés si prefers-reduced-motion)
+ * --------------------------------------------------------------------- */
+
+/* Italic serif accent with an animated brand gradient. */
+.accent-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, #1350ff 0%, #2377ff 30%, #7d2cff 60%, #1350ff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+  animation: gradient-pan 9s ease-in-out infinite alternate;
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent-cyan);
-  outline-offset: 4px;
+/* Lighter gradient for dark backgrounds (AA contrast on ink). */
+.accent-serif-on-dark {
+  background-image: linear-gradient(100deg, #6ee7ff 0%, #8fb0ff 35%, #c3a3ff 65%, #6ee7ff 100%);
 }
 
-a {
-  color: inherit;
-  text-decoration-thickness: 0.08em;
-  text-underline-offset: 0.2em;
+@keyframes gradient-pan {
+  to {
+    background-position: 100% 0;
+  }
 }
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-heading), var(--font-body), Arial, Helvetica, sans-serif;
-  letter-spacing: 0;
+/* Soft "aurora" blobs in the logo colours. */
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
 }
 
-@keyframes hero-chevron {
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -4%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-4%, 5%, 0) scale(0.96);
+  }
+}
+
+/* Gentle floating for decorative cards. */
+.float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+
+.float-slower {
+  animation: float 9s ease-in-out -3s infinite;
+}
+
+@keyframes float {
   0%,
   100% {
-    opacity: 0.56;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
-
   50% {
-    opacity: 0.95;
-    transform: translateY(6px);
+    transform: translate3d(0, -10px, 0);
   }
 }
 
-.hero-word-group {
-  display: inline-block;
-  white-space: nowrap;
+/* 3D tilted mockup that straightens on hover (desktop only). */
+@media (min-width: 1024px) {
+  .tilt-3d {
+    transform: perspective(1800px) rotateY(-9deg) rotateX(5deg) rotateZ(0.5deg);
+    transition: transform 700ms var(--ease-expressive);
+  }
+
+  .tilt-3d:hover {
+    transform: perspective(1800px) rotateY(-3deg) rotateX(2deg);
+  }
 }
 
-.hero-char {
-  display: inline-block;
+/* Infinite marquee (content duplicated twice in the markup). */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Gradient border that lights up on hover. */
+.card-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #1350ff, #00e5ff 50%, #7d2cff);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
   opacity: 0;
-  transform: translateY(0.12em);
-  animation: hero-character-reveal 520ms var(--ease-expressive) forwards;
-  will-change: opacity, transform;
+  transition: opacity 300ms var(--ease-standard);
 }
 
-.hero-space {
-  display: inline-block;
-  width: 0.28em;
+.card-glow:hover::before,
+.card-glow:focus-within::before {
+  opacity: 1;
 }
 
-.hero-gradient-line {
-  line-height: 1.08;
-  padding-bottom: 0.12em;
-  clip-path: inset(-0.12em 100% -0.28em 0);
-  animation: hero-gradient-line-reveal 980ms steps(14, end) forwards;
+/* Scroll-driven reveal: progressive enhancement, content stays visible without support. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+
+  .reveal-scale {
+    animation: reveal-scale linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+
+  .progress-fill {
+    transform-origin: left center;
+    animation: progress-fill linear both;
+    animation-timeline: view();
+    animation-range: entry 40% cover 55%;
+  }
 }
 
-.hero-gradient-line-1 {
-  animation-delay: 2040ms;
-}
-
-.hero-gradient-line-2 {
-  animation-delay: 2920ms;
-}
-
-@keyframes hero-character-reveal {
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes hero-gradient-line-reveal {
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
   to {
-    clip-path: inset(-0.12em 0 -0.28em 0);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-char {
-    opacity: 1;
-    transform: none;
-    animation: none;
+  .accent-serif,
+  .aurora,
+  .float-slow,
+  .float-slower,
+  .marquee-track,
+  .reveal,
+  .reveal-scale,
+  .progress-fill {
+    animation: none !important;
   }
 
-  .hero-gradient-line {
-    clip-path: inset(0 0 0 0);
-    animation: none;
+  .tilt-3d,
+  .tilt-3d:hover {
+    transform: none !important;
   }
 
   *,

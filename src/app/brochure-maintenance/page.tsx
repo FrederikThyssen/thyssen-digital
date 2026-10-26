@@ -14,7 +14,7 @@ import type { ReactNode } from "react";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { complementaryServices, maintenancePlans, websiteOffers } from "@/lib/pricing";
+import { complementaryServices, maintenancePlans, websiteOffers } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 // Print-only source for the PDF brochure: not a page meant for organic search traffic.
@@ -381,7 +381,7 @@ function BrochurePage({
         aria-hidden="true"
         className="brochure-background"
         fill
-        priority={variant === "cover"}
+        loading={variant === "cover" ? "eager" : undefined}
         sizes="210mm"
         src={image}
         unoptimized

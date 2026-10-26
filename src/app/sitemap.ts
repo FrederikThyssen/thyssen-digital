@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { localPages } from "@/content/site";
 import { SITE_URL } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -16,6 +17,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...localPages.map((page) => ({
+      url: `${SITE_URL}/${page.slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     {
       url: `${SITE_URL}/mentions-legales`,
       lastModified: new Date(),

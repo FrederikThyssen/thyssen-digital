@@ -1,174 +1,219 @@
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, Check, Mail, MapPin, Phone, Star } from "lucide-react";
+import Image from "next/image";
 
-import { FadeUp, SlowZoomBackground, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
+import { business, home } from "@/content/site";
+import { formatRating, getGooglePlaceSummary } from "@/lib/google-reviews";
 
-const trustItems = ["TruckMaps", "Fred Music", "Maison Marcelito"];
-const headlineParts = [
-  { text: "Des solutions", className: "text-foreground" },
-  { text: "digitales,", className: "text-foreground" },
-];
-const headlineLabel = "Des solutions digitales, conçues pour performer.";
-const characterDelayStep = 68;
+const { hero } = home;
 
-function AnimatedWord({
-  startIndex,
-  word,
-}: {
-  startIndex: number;
-  word: string;
-}) {
-  return (
-    <span className="hero-word-group">
-      {word.split("").map((character, index) => (
-        <span
-          aria-hidden="true"
-          className="hero-char"
-          key={`${word}-${character}-${index}`}
-          style={{
-            animationDelay: `${260 + (startIndex + index) * characterDelayStep + (index % 3 === 0 ? 18 : 0)}ms`,
-          }}
-        >
-          {character}
-        </span>
-      ))}
-    </span>
-  );
-}
+function HeroTitle() {
+  const [before, after] = hero.title.split(hero.titleHighlight);
 
-function AnimatedHeadlineText() {
+  if (after === undefined) {
+    return <NoBreakPlaces text={hero.title} />;
+  }
+
   return (
     <>
-      {headlineParts.map((part, partIndex) => {
-        const previousCharacters = headlineParts
-          .slice(0, partIndex)
-          .reduce((total, currentPart) => total + currentPart.text.length, 0);
-
-        return (
-          <span className={`block ${part.className}`} key={part.text}>
-            {part.text.split(" ").map((word, wordIndex, words) => {
-              const previousWordsLength = words
-                .slice(0, wordIndex)
-                .reduce((total, currentWord) => total + currentWord.length, 0);
-              const startIndex = previousCharacters + previousWordsLength + wordIndex;
-
-              return (
-                <span key={`${part.text}-${word}`}>
-                  <AnimatedWord startIndex={startIndex} word={word} />
-                  {wordIndex < words.length - 1 ? <span className="hero-space" /> : null}
-                </span>
-              );
-            })}
-          </span>
-        );
-      })}
-      <span aria-hidden="true" className="block">
-        <span className="hero-gradient-line hero-gradient-line-1 inline-block bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text pr-[0.2em] text-transparent drop-shadow-[0_0_18px_rgb(34_211_238_/_0.14)]">
-          conçues pour
-        </span>
-        <span className="hero-gradient-line hero-gradient-line-2 inline-block bg-gradient-to-r from-accent-cyan via-accent-violet to-accent-violet bg-clip-text text-transparent drop-shadow-[0_0_18px_rgb(34_211_238_/_0.14)]">
-          performer.
-        </span>
-      </span>
+      <NoBreakPlaces text={before} />
+      <span className="accent-serif text-[1.08em] leading-none">{hero.titleHighlight}</span>
+      <NoBreakPlaces text={after} />
     </>
   );
 }
 
-export function Hero() {
+function BrowserFrame() {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_50px_100px_-40px_rgb(16_24_40_/_0.45),0_0_0_1px_rgb(16_24_40_/_0.02)]">
+      <div className="flex h-9 items-center gap-2 border-b border-border bg-surface-subtle px-4">
+        <span aria-hidden="true" className="size-2.5 rounded-full bg-[#ff5f57]" />
+        <span aria-hidden="true" className="size-2.5 rounded-full bg-[#febc2e]" />
+        <span aria-hidden="true" className="size-2.5 rounded-full bg-[#28c840]" />
+        <span className="ml-3 min-w-0 flex-1 truncate rounded-md bg-white px-3 py-0.5 text-center text-xs text-subtle-foreground">
+          {hero.visual.browserUrl}
+        </span>
+      </div>
+      <div className="relative aspect-[16/10]">
+        <Image
+          alt={hero.visual.imageAlt}
+          className="object-cover object-top"
+          fetchPriority="high"
+          fill
+          loading="eager"
+          sizes="(min-width: 1024px) 600px, (min-width: 640px) 576px, 100vw"
+          src="/images/image-fredmusic.png"
+        />
+      </div>
+    </div>
+  );
+}
+
+function PhoneFrame() {
+  return (
+    <div className="w-[8.5rem] rounded-[1.75rem] border-[5px] border-ink bg-ink p-0.5 shadow-[0_30px_60px_-20px_rgb(16_24_40_/_0.55)] sm:w-[9.5rem]">
+      <div className="relative aspect-[9/19] overflow-hidden rounded-[1.35rem] bg-white">
+        <span
+          aria-hidden="true"
+          className="absolute left-1/2 top-1.5 z-10 h-3.5 w-12 -translate-x-1/2 rounded-full bg-ink"
+        />
+        <Image
+          alt=""
+          aria-hidden="true"
+          className="object-cover object-[80%_30%]"
+          fill
+          sizes="160px"
+          src="/images/image-fredmusic.png"
+        />
+      </div>
+    </div>
+  );
+}
+
+function HeroVisual({ ratingLabel }: { ratingLabel: string }) {
+  return (
+    <div className="relative mx-auto w-full max-w-xl pb-10 pt-4 sm:pt-14 lg:max-w-none lg:pb-0">
+      <div className="tilt-3d relative">
+        <BrowserFrame />
+
+        <div className="float-slower absolute -bottom-10 -right-2 sm:-right-6 lg:-bottom-12">
+          <PhoneFrame />
+        </div>
+
+        <div className="float-slow absolute -left-3 bottom-10 hidden max-w-[17rem] items-center gap-3 rounded-2xl border border-white/60 bg-white/85 p-3.5 shadow-card backdrop-blur-md sm:flex sm:-left-8">
+          <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#1350ff,#7d2cff)] text-white">
+            <Mail aria-hidden="true" className="size-5" />
+          </span>
+          <span className="grid">
+            <span className="text-sm font-semibold text-ink">{hero.visual.requestTitle}</span>
+            <span className="text-xs leading-5 text-muted-foreground">{hero.visual.requestText}</span>
+          </span>
+        </div>
+
+        <div className="float-slower absolute -top-12 left-4 hidden items-center gap-2 rounded-full border border-white/60 bg-white/90 px-3.5 py-2 shadow-card backdrop-blur-md sm:flex">
+          <span aria-hidden="true" className="flex gap-0.5 text-[#f5a400]">
+            {Array.from({ length: 5 }, (_, index) => (
+              <Star className="size-3.5" fill="currentColor" key={index} />
+            ))}
+          </span>
+          <span className="text-xs font-semibold text-ink">{ratingLabel}</span>
+        </div>
+
+        <div className="float-slow absolute -top-14 right-4 hidden items-center gap-2 rounded-2xl border border-white/60 bg-white/90 px-3.5 py-2.5 shadow-card backdrop-blur-md md:flex">
+          <span className="inline-flex size-6 items-center justify-center rounded-full bg-emerald-500 text-white">
+            <Check aria-hidden="true" className="size-3.5" strokeWidth={3} />
+          </span>
+          <span className="grid">
+            <span className="text-xs font-semibold text-ink">{hero.visual.mobileTitle}</span>
+            <span className="text-[0.7rem] text-muted-foreground">{hero.visual.mobileText}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export async function Hero() {
+  // Live rating from the Google Places API (cached 6 h); static label as fallback.
+  const summary = await getGooglePlaceSummary();
+  const ratingLabel =
+    summary && summary.userRatingCount > 0
+      ? `${formatRating(summary.rating)} sur Google (${summary.userRatingCount} avis)`
+      : business.googleRatingLabel;
+
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate min-h-svh overflow-hidden bg-background"
+      className="relative isolate overflow-hidden bg-white"
       id="accueil"
     >
-      <SlowZoomBackground
-        className="absolute inset-0"
-        image="/images/hero-definitif.png"
-        imageClassName="object-contain object-[62%_center] lg:object-center"
-        priority
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.85),rgb(5_7_13_/_0.56)_43%,rgb(5_7_13_/_0.15)_72%,rgb(5_7_13_/_0.03))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.8),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute left-0 top-1/4 h-[32rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(47_124_255_/_0.2),transparent_64%)] blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-[18%] h-40 w-[42rem] rounded-full bg-[radial-gradient(ellipse,rgb(34_211_238_/_0.16),transparent_68%)] blur-3xl"
-      />
-
-      <div className="relative z-10 flex min-h-svh flex-col justify-center px-6 pb-12 pt-32 sm:px-10 lg:px-[5.45vw] lg:pb-10 lg:pt-36">
-        <Stagger className="max-w-xl lg:max-w-[50rem] xl:max-w-[54rem]" staggerDelay={0.08}>
-          <StaggerItem>
-            <h1
-              aria-label={headlineLabel}
-              className="text-[clamp(2.76rem,12.88vw,4.69rem)] font-semibold leading-[0.98] tracking-normal text-foreground lg:text-[clamp(3.68rem,5.05vw,5.32rem)]"
-              id="hero-title"
-            >
-              <AnimatedHeadlineText />
-            </h1>
-          </StaggerItem>
-
-          <StaggerItem>
-            <p className="mt-6 max-w-[34rem] text-base leading-8 text-foreground/76 lg:max-w-[37rem] lg:text-[1.12rem] lg:leading-8 xl:max-w-[39rem] xl:text-[1.18rem] xl:leading-9">
-              Développement web, applications sur mesure, automatisations et interfaces
-              élégantes. Je transforme vos idées en produits digitaux fiables, rapides et
-              évolutifs.
-            </p>
-          </StaggerItem>
-
-          <StaggerItem>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-11 lg:gap-7">
-              <Button
-                className="min-h-14 rounded-2xl border-white/10 bg-[linear-gradient(135deg,#136fff,#0bbcff_47%,#7d2cff)] px-6 shadow-[0_0_48px_rgb(47_124_255_/_0.46),inset_0_1px_0_rgb(255_255_255_/_0.18)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_60px_rgb(80_227_255_/_0.34),0_18px_42px_rgb(47_124_255_/_0.22)] lg:min-h-16 lg:px-8 lg:text-base"
-                href="#contact"
-                size="lg"
-                trailingIcon={<ArrowRight aria-hidden="true" className="size-5" />}
-              >
-                Discutons de votre projet
-              </Button>
-              <Button
-                className="min-h-14 rounded-2xl border-white/14 bg-white/[0.04] px-6 text-foreground shadow-[inset_0_1px_0_rgb(255_255_255_/_0.1)] backdrop-blur-md transition-[border-color,background-color,transform] duration-300 hover:-translate-y-0.5 hover:border-accent-cyan/30 hover:bg-white/[0.07] lg:min-h-16 lg:px-8 lg:text-base"
-                href="#realisations"
-                size="lg"
-                variant="secondary"
-              >
-                Voir mes réalisations
-              </Button>
-            </div>
-          </StaggerItem>
-
-          <StaggerItem>
-            <div className="mt-10 max-w-[42rem] lg:mt-12">
-              <p className="text-xs text-foreground/40">Ils m&apos;ont fait confiance</p>
-              <div className="mt-4 flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-2xl border border-white/10 bg-background/20 p-1 text-sm font-medium text-foreground/62 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06)] backdrop-blur-md">
-                {trustItems.map((item) => (
-                  <span
-                    className="inline-flex items-center gap-2 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/[0.045] hover:text-foreground/84"
-                    key={item}
-                  >
-                    <span className="size-4 rounded-full border border-white/18 bg-white/[0.04] shadow-[0_0_18px_rgb(80_227_255_/_0.1)]" />
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </StaggerItem>
-        </Stagger>
-
-        <FadeUp className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:bottom-7" delay={0.4}>
-          <a
-            aria-label="Faire défiler vers les services"
-            className="inline-flex size-9 animate-[hero-chevron_3.4s_ease-in-out_infinite] items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-white/58 backdrop-blur-sm transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan motion-reduce:animate-none"
-            href="#services"
-          >
-            <ChevronDown aria-hidden="true" className="size-5" />
-          </a>
-        </FadeUp>
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_85%,transparent)]">
+        <span className="aurora -right-[10%] -top-[20%] h-[38rem] w-[38rem] bg-[#1350ff]/35" />
+        <span className="aurora right-[18%] top-[30%] h-[26rem] w-[26rem] bg-[#00e5ff]/30 [animation-delay:-6s]" />
+        <span className="aurora -left-[12%] bottom-[-25%] h-[30rem] w-[30rem] bg-[#7d2cff]/25 [animation-delay:-11s]" />
+        <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_30%,black,transparent_70%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white" />
       </div>
+
+      <Container className="grid grid-cols-1 items-center gap-16 pb-24 pt-10 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:pb-32 lg:pt-20 xl:gap-20">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/80 px-3 py-1 text-sm font-medium text-muted-foreground shadow-soft backdrop-blur sm:rounded-full">
+            <span aria-hidden="true" className="relative flex size-2 shrink-0">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary/60 motion-reduce:hidden" />
+              <span className="relative inline-flex size-2 rounded-full bg-primary" />
+            </span>
+            <span>
+              <NoBreakPlaces text={hero.eyebrow} />
+            </span>
+          </p>
+          <h1
+            className="mt-7 font-display text-[2.45rem] font-semibold leading-[1.04] tracking-[-0.035em] text-ink sm:text-[3.4rem] lg:text-[3.6rem] xl:text-[4.1rem]"
+            id="hero-title"
+          >
+            <HeroTitle />
+          </h1>
+          <p className="mt-7 max-w-xl text-lg leading-8 text-muted-foreground sm:text-xl sm:leading-9">
+            {hero.subtitle}
+          </p>
+          <p className="mt-4 flex max-w-xl gap-2 text-[0.95rem] leading-7 text-muted-foreground">
+            <MapPin aria-hidden="true" className="mt-1 size-4 shrink-0 text-primary" />
+            <span>
+              <NoBreakPlaces text={hero.localLine} />
+            </span>
+          </p>
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Button
+              className="bg-[linear-gradient(120deg,#1350ff,#3b5bff_50%,#6a2cff)] hover:bg-[linear-gradient(120deg,#0b3ee0,#2f4ef0_50%,#5a1fe8)]"
+              href="#contact"
+              size="lg"
+              trailingIcon={<ArrowRight aria-hidden="true" className="size-5" />}
+            >
+              {hero.primaryCta}
+            </Button>
+            <Button
+              href={business.phoneHref}
+              leadingIcon={<Phone aria-hidden="true" className="size-5 text-primary" />}
+              size="lg"
+              variant="secondary"
+            >
+              {hero.secondaryCta}
+            </Button>
+          </div>
+
+          <a
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            href={business.googleProfileUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span aria-hidden="true" className="flex gap-0.5 text-[#f5a400]">
+              {Array.from({ length: 5 }, (_, index) => (
+                <Star className="size-4" fill="currentColor" key={index} />
+              ))}
+            </span>
+            <span>
+              {ratingLabel}
+              <span className="sr-only"> (ouvre ma fiche Google dans un nouvel onglet)</span>
+            </span>
+          </a>
+
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border pt-6">
+            <p className="text-sm text-subtle-foreground">{hero.trustLabel}</p>
+            <ul className="flex flex-wrap items-center gap-x-6 gap-y-1">
+              {hero.trustItems.map((item) => (
+                <li className="font-display text-lg font-semibold tracking-tight text-ink/80" key={item}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <HeroVisual ratingLabel={ratingLabel} />
+      </Container>
     </section>
   );
 }

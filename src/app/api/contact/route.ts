@@ -7,7 +7,9 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(200),
   email: z.string().trim().email().max(320),
+  phone: z.string().trim().max(30).optional().or(z.literal("")),
   company: z.string().trim().max(200).optional().or(z.literal("")),
+  projectType: z.string().trim().max(100).optional().or(z.literal("")),
   budget: z.string().trim().max(200).optional().or(z.literal("")),
   message: z.string().trim().min(1).max(5000),
   // Honeypot: only bots fill this hidden field.
@@ -63,7 +65,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Champs invalides." }, { status: 400 });
   }
 
-  const { name, email, company, budget, message, website } = parsed.data;
+  const { name, email, phone, company, projectType, budget, message, website } = parsed.data;
 
   if (website) {
     // Silently report success to the bot without sending an email.
@@ -80,7 +82,9 @@ export async function POST(request: Request) {
     text: [
       `Nom: ${name}`,
       `Email: ${email}`,
+      phone ? `Téléphone: ${phone}` : null,
       company ? `Entreprise: ${company}` : null,
+      projectType ? `Type de projet: ${projectType}` : null,
       budget ? `Budget: ${budget}` : null,
       "",
       message,

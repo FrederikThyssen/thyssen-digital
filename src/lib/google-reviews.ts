@@ -40,7 +40,7 @@ export async function getGooglePlaceSummary(): Promise<GooglePlaceSummary | null
   }
 
   try {
-    const response = await fetch(`https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}`, {
+    const response = await fetch(`https://places.googleapis.com/v1/places/${GOOGLE_PLACE_ID}?languageCode=fr`, {
       headers: {
         "X-Goog-Api-Key": apiKey,
         "X-Goog-FieldMask": "rating,userRatingCount,reviews",
@@ -78,4 +78,9 @@ export async function getGooglePlaceSummary(): Promise<GooglePlaceSummary | null
   } catch {
     return null;
   }
+}
+
+/** French rating label, e.g. 5 → "5/5", 4.8 → "4,8/5". */
+export function formatRating(rating: number): string {
+  return `${Number.isInteger(rating) ? rating : rating.toFixed(1).replace(".", ",")}/5`;
 }

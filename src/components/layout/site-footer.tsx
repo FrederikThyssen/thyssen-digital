@@ -1,62 +1,55 @@
+import { ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import NextLink from "next/link";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { Container } from "@/components/ui/container";
-import { Divider } from "@/components/ui/divider";
-import { BRAND_NAME, BRAND_SIGNATURE, CONTACT_EMAIL } from "@/lib/constants";
-
-const footerNav = [
-  { label: "Accueil", href: "/#accueil" },
-  { label: "Services", href: "/#services" },
-  { label: "Réalisations", href: "/#realisations" },
-  { label: "Tarifs", href: "/tarifs" },
-  { label: "Avis", href: "/#avis" },
-  { label: "À propos", href: "/#a-propos" },
-  { label: "Contact", href: "#contact" },
-];
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
+import { business, footer, localPages, localPagesSection, navItems } from "@/content/site";
+import { BRAND_NAME } from "@/lib/constants";
 
 const legalLinks = [
   { label: "Mentions légales", href: "/mentions-legales" },
   { label: "Politique de confidentialité", href: "/politique-confidentialite" },
 ];
 
+const linkClassName =
+  "inline-flex min-h-11 items-center gap-2 rounded-md text-sm text-white/72 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white lg:min-h-9";
+
+const columnTitleClassName = "mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/50";
+
 export function SiteFooter() {
   return (
-    <footer className="pb-10 pt-16">
+    <footer className="bg-ink pb-28 pt-16 text-white lg:pb-10">
       <Container>
-        <Divider className="mb-10" variant="gradient" />
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_2fr]">
           <div>
             <NextLink
-              className="inline-flex items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-              href="/#accueil"
+              className="inline-flex items-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              href="/"
             >
-              <BrandLogo
-                decorative
-                imageClassName="h-12 sm:h-14"
-                tone="accent"
-                variant="horizontal"
-              />
-              <span className="sr-only">{BRAND_NAME}</span>
+              <BrandLogo decorative imageClassName="h-12" tone="accent" variant="horizontal" />
+              <span className="sr-only">{BRAND_NAME}, retour à l&apos;accueil</span>
             </NextLink>
-            <p className="mt-4 bg-gradient-to-r from-primary via-accent-cyan to-accent-violet bg-clip-text text-xs font-semibold uppercase tracking-[0.28em] text-transparent">
-              {BRAND_SIGNATURE}
+            <p className="mt-5 max-w-sm text-base leading-7 text-white/80">
+              <NoBreakPlaces text={footer.tagline} />
             </p>
-            <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
-              Sites, applications et outils métier sur mesure, conçus pour durer
-              et pensés pour convertir.
+            <p className="mt-5 flex max-w-sm gap-2 text-sm leading-6 text-white/64">
+              <MapPin aria-hidden="true" className="mt-1 size-4 shrink-0 text-white/50" />
+              <span>
+                <span className="font-semibold text-white/88">{footer.zonesLabel}&nbsp;: </span>
+                <NoBreakPlaces text={footer.zones} />
+              </span>
             </p>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-3">
+          <div className="grid gap-10 sm:grid-cols-3">
             <nav aria-label="Navigation du pied de page">
-              <ul className="grid gap-2">
-                {footerNav.map((item) => (
+              <p className={columnTitleClassName}>Navigation</p>
+              <ul className="grid">
+                {navItems.map((item) => (
                   <li key={item.href}>
-                    <NextLink
-                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-                      href={item.href}
-                    >
+                    <NextLink className={linkClassName} href={item.href}>
                       {item.label}
                     </NextLink>
                   </li>
@@ -64,36 +57,68 @@ export function SiteFooter() {
               </ul>
             </nav>
 
-            <nav aria-label="Liens légaux">
-              <ul className="grid gap-2">
+            <div>
+              <p className={columnTitleClassName}>Contact</p>
+              <address className="not-italic">
+                <ul className="grid">
+                  <li>
+                    <a className={`${linkClassName} font-semibold text-white`} href={business.phoneHref}>
+                      <Phone aria-hidden="true" className="size-4" />
+                      {business.phoneDisplay}
+                    </a>
+                  </li>
+                  <li>
+                    <a className={`${linkClassName} break-all`} href={business.emailHref}>
+                      <Mail aria-hidden="true" className="size-4 shrink-0" />
+                      {business.email}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      className={linkClassName}
+                      href={business.googleProfileUrl}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <ExternalLink aria-hidden="true" className="size-4" />
+                      {footer.googleLinkLabel}
+                      <span className="sr-only"> (nouvel onglet)</span>
+                    </a>
+                  </li>
+                </ul>
+              </address>
+            </div>
+
+            <nav aria-label="Liens légaux et pages locales">
+              <p className={columnTitleClassName}>{localPagesSection.footerTitle}</p>
+              <ul className="mb-6 grid">
+                {localPages.map((page) => (
+                  <li key={page.slug}>
+                    <NextLink className={linkClassName} href={`/${page.slug}`}>
+                      Site internet à {page.city}
+                    </NextLink>
+                  </li>
+                ))}
+              </ul>
+              <p className={columnTitleClassName}>Informations</p>
+              <ul className="grid">
                 {legalLinks.map((item) => (
                   <li key={item.href}>
-                    <NextLink
-                      className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-                      href={item.href}
-                    >
+                    <NextLink className={linkClassName} href={item.href}>
                       {item.label}
                     </NextLink>
                   </li>
                 ))}
               </ul>
             </nav>
-
-            <div className="sm:justify-self-end">
-              <a
-                className="rounded-md text-sm text-muted-foreground transition-colors duration-200 ease-standard hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-                href={`mailto:${CONTACT_EMAIL}`}
-              >
-                {CONTACT_EMAIL}
-              </a>
-            </div>
           </div>
         </div>
 
-        <p className="mt-10 text-xs text-subtle-foreground">
+        <div className="mt-14 border-t border-white/10 pt-6 text-sm text-white/56">
           © {new Date().getFullYear()} {BRAND_NAME}. Tous droits réservés.
-        </p>
+        </div>
       </Container>
+      <MobileCtaBar />
     </footer>
   );
 }

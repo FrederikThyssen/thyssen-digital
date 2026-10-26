@@ -1,95 +1,96 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
-import { SiteHeader } from "@/components/layout/site-header";
-import { Container } from "@/components/ui/container";
-import { Divider } from "@/components/ui/divider";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+import { LegalPage, LegalSection, legalLinkClassName } from "@/components/layout/legal-page";
+import { business, legal } from "@/content/site";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Mentions légales",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Mentions légales | Thyssen Digital, création de sites web",
   description:
-    "Informations relatives à l'éditeur, à l'hébergement et à la propriété intellectuelle du site Thyssen Digital.",
-  alternates: {
-    canonical: `${SITE_URL}/mentions-legales`,
-  },
-};
+    "Mentions légales du site Thyssen Digital, création de sites internet dans les Hauts-de-France : éditeur, statut, SIRET, hébergeur et propriété intellectuelle.",
+  path: "/mentions-legales",
+  useRootShareImage: true,
+});
 
 export default function LegalNoticePage() {
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen pt-32" id="contenu">
-        <Container className="py-16">
-          <SectionHeading
-            description="Informations relatives à l'édition, l'hébergement et l'utilisation du site Thyssen Digital."
-            eyebrow="Informations légales"
-            title="Mentions légales"
-          />
-          <Divider className="my-10" variant="gradient" />
-          <div className="max-w-3xl space-y-8 text-sm leading-7 text-muted-foreground">
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Éditeur du site</h2>
-              <p>
-                Le site Thyssen Digital est édité par Frédérik Thyssen, développeur
-                fullstack freelance, responsable de la publication et du contenu
-                présenté sur ce site.
-              </p>
-              <p>
-                Contact :{" "}
-                <a
-                  className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
-                  href={`mailto:${CONTACT_EMAIL}`}
-                >
-                  {CONTACT_EMAIL}
-                </a>
-              </p>
-            </section>
+    <LegalPage
+      description="Informations sur l'éditeur et l'hébergeur du site Thyssen Digital."
+      eyebrow="Informations légales"
+      title="Mentions légales"
+    >
+      <LegalSection title="Éditeur du site">
+        <ul className="space-y-1">
+          <li>
+            {business.owner}, nom commercial {business.name}
+          </li>
+          <li>Statut : {legal.status}</li>
+          <li>SIRET : {legal.siret}</li>
+          <li>Adresse : {legal.address}</li>
+          <li>
+            Email :{" "}
+            <a className={legalLinkClassName} href={business.emailHref}>
+              {business.email}
+            </a>
+          </li>
+          <li>
+            Téléphone :{" "}
+            <a className={legalLinkClassName} href={business.phoneHref}>
+              {business.phoneDisplay}
+            </a>
+          </li>
+          <li>{legal.vat}</li>
+        </ul>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Hébergement</h2>
-              <p>
-                Le site est hébergé par Vercel Inc., plateforme d&apos;hébergement web et
-                de déploiement d&apos;applications, dont le siège est situé à San Francisco,
-                États-Unis.
-              </p>
-            </section>
+      <LegalSection title="Directeur de la publication">
+        <p>{legal.publicationDirector}</p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Propriété intellectuelle</h2>
-              <p>
-                Les textes, visuels, interfaces, logos et éléments graphiques présents
-                sur ce site sont protégés. Toute reproduction ou réutilisation sans
-                autorisation écrite préalable est interdite.
-              </p>
-            </section>
+      <LegalSection title="Hébergement">
+        <ul className="space-y-1">
+          <li>{legal.host.name}</li>
+          <li>{legal.host.address}</li>
+          <li>
+            Site :{" "}
+            <a
+              className={legalLinkClassName}
+              href={legal.host.website}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {legal.host.website.replace("https://", "")}
+              <span className="sr-only"> (nouvel onglet)</span>
+            </a>
+          </li>
+        </ul>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Responsabilité</h2>
-              <p>
-                Thyssen Digital met en oeuvre les moyens nécessaires pour assurer
-                l&apos;exactitude des informations publiées. Le contenu peut toutefois
-                évoluer afin de refléter les services, projets et informations
-                professionnelles les plus récents.
-              </p>
-            </section>
+      <LegalSection title="Propriété intellectuelle">
+        <p>
+          Les textes, visuels, logos et éléments graphiques de ce site sont protégés. Toute
+          reproduction ou réutilisation sans autorisation écrite préalable est interdite.
+        </p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Contact</h2>
-              <p>
-                Pour toute demande relative au site ou à son contenu, écrivez à{" "}
-              <a
-                className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
-                href={`mailto:${CONTACT_EMAIL}`}
-              >
-                {CONTACT_EMAIL}
-              </a>
-                .
-              </p>
-            </section>
-          </div>
-        </Container>
-      </main>
-    </>
+      <LegalSection title="Responsabilité">
+        <p>
+          Je mets en œuvre les moyens nécessaires pour que les informations publiées soient
+          exactes et à jour. Elles peuvent évoluer à tout moment, notamment les tarifs, qui sont
+          confirmés dans chaque devis.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Données personnelles">
+        <p>
+          Le traitement des données envoyées via le formulaire de contact est décrit dans la{" "}
+          <Link className={legalLinkClassName} href="/politique-confidentialite">
+            politique de confidentialité
+          </Link>
+          .
+        </p>
+      </LegalSection>
+    </LegalPage>
   );
 }

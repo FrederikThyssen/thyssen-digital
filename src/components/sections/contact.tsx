@@ -1,26 +1,37 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { useState, type ReactNode } from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { z } from "zod";
 
-import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
-import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { GlassPanel } from "@/components/ui/glass-panel";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { business, home, type SelectOption } from "@/content/site";
+
+const { contact } = home;
+
+// Skip Zod's runtime code generation (new Function), which the Content-Security-Policy forbids.
+z.config({ jitless: true });
 
 const fieldClassName =
-  "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-sm text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-0";
+  "min-h-12 w-full rounded-xl border border-border-strong bg-white px-4 text-base text-ink shadow-[inset_0_1px_2px_rgb(16_24_40_/_0.04)] transition-[border-color,box-shadow] duration-200 ease-standard placeholder:text-subtle-foreground hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/15 aria-[invalid=true]:border-red-600 sm:text-[0.95rem]";
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Votre nom est requis."),
   email: z.string().trim().min(1, "Votre email est requis.").email("Email invalide."),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[0-9+().\s-]{0,30}$/, "Numéro de téléphone invalide.")
+    .optional(),
   company: z.string().trim().optional(),
+  projectType: z.string().trim().optional(),
   budget: z.string().trim().optional(),
   message: z.string().trim().min(1, "Un message est requis."),
   website: z.string().trim().optional(),
@@ -63,150 +74,268 @@ export function ContactSection() {
   }
 
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="contact">
-      <BackgroundGrid className="opacity-[0.032]" />
-      <NoiseOverlay />
-      <BackgroundGlow
-        className="hidden lg:block"
-        intensity="medium"
-        position="bottom-right"
-        size="lg"
-        tone="blue"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-64 bg-[linear-gradient(180deg,transparent,rgb(19_80_255_/_0.045))]"
-      />
-      <Container className="relative grid gap-10 lg:grid-cols-[0.86fr_1.14fr] lg:items-start">
-        <FadeUp>
-          <div>
-            <SectionHeading
-              description="Décrivez votre besoin, votre contexte et vos premiers objectifs. Je vous réponds avec une première lecture claire des enjeux et des prochaines étapes possibles."
-              eyebrow="Contact"
-              title="Parlons de votre projet."
-            />
-            <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
-              {["Premier retour clair", "Cadrage sans engagement", "Approche design + technique"].map((item) => (
-                <div
-                  className="rounded-md border border-white/10 bg-white/[0.035] px-4 py-3"
-                  key={item}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeUp>
+    <Section id="contact">
+      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div>
+          <SectionHeading
+            description={contact.description}
+            eyebrow={contact.eyebrow}
+            highlight={contact.titleHighlight}
+            title={contact.title}
+          />
+          <ul className="mt-8 grid gap-3 text-sm">
+            <ContactInfo icon={<Phone aria-hidden="true" className="size-5" />} label={contact.phoneLabel}>
+              <a
+                className="inline-flex min-h-11 items-center rounded-md text-lg font-semibold text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                href={business.phoneHref}
+              >
+                {business.phoneDisplay}
+              </a>
+            </ContactInfo>
+            <ContactInfo icon={<Mail aria-hidden="true" className="size-5" />} label={contact.emailLabel}>
+              <a
+                className="inline-flex min-h-11 items-center break-all rounded-md font-semibold text-ink underline-offset-4 hover:text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                href={business.emailHref}
+              >
+                {business.email}
+              </a>
+            </ContactInfo>
+            <ContactInfo icon={<MapPin aria-hidden="true" className="size-5" />} label={contact.zoneLabel}>
+              <span className="font-semibold text-ink">
+                <NoBreakPlaces text={business.regionLabel} />
+              </span>
+            </ContactInfo>
+          </ul>
+          <p className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink">
+            <span aria-hidden="true" className="size-2 rounded-full bg-emerald-500" />
+            {business.responseTime}
+          </p>
+        </div>
 
-        <FadeUp delay={0.08}>
-          <GlassPanel className="relative overflow-hidden border-white/12 p-5 shadow-[0_28px_100px_rgb(0_0_0_/_0.32)] sm:p-6">
-            <div
+        <div className="relative rounded-3xl border border-border bg-white p-6 shadow-card sm:p-8">
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-[linear-gradient(90deg,#1350ff,#00e5ff,#7d2cff)]"
+          />
+          <form noValidate onSubmit={handleSubmit(onSubmit)}>
+            <input
               aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
+              autoComplete="off"
+              className="sr-only"
+              tabIndex={-1}
+              {...register("website")}
             />
-            <form aria-describedby="contact-status" onSubmit={handleSubmit(onSubmit)}>
-              <input
-                aria-hidden="true"
-                className="sr-only"
-                tabIndex={-1}
-                autoComplete="off"
-                {...register("website")}
-              />
-              <Stagger className="grid gap-4">
-                <StaggerItem className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    error={errors.name?.message}
-                    label="Nom"
-                    placeholder="Votre nom"
-                    required
-                    {...register("name")}
-                  />
-                  <Field
-                    error={errors.email?.message}
-                    label="Email"
-                    placeholder="vous@entreprise.com"
-                    required
-                    type="email"
-                    {...register("email")}
-                  />
-                </StaggerItem>
-                <StaggerItem className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    label="Entreprise (optionnel)"
-                    placeholder="Nom de l'entreprise"
-                    {...register("company")}
-                  />
-                  <Field
-                    label="Budget (optionnel)"
-                    placeholder="Budget estimé"
-                    {...register("budget")}
-                  />
-                </StaggerItem>
-                <StaggerItem>
-                  <label className="grid gap-2 text-sm font-medium text-foreground">
-                    Message
-                    <textarea
-                      className={`${fieldClassName} min-h-36 resize-y py-3`}
-                      placeholder="Votre projet, vos délais, vos priorités..."
-                      {...register("message")}
-                    />
-                  </label>
-                  {errors.message ? (
-                    <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
-                  ) : null}
-                </StaggerItem>
-                <StaggerItem>
-                  <p className="text-sm leading-6 text-muted-foreground" id="contact-status">
-                    {status === "success"
-                      ? "Votre message a bien été envoyé, merci !"
-                      : status === "error"
-                        ? "Une erreur est survenue, réessayez ou écrivez-nous directement."
-                        : `Votre message sera envoyé directement à ${CONTACT_EMAIL}.`}
+            <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <Field
+                  autoComplete="name"
+                  error={errors.name?.message}
+                  id="contact-name"
+                  label="Nom"
+                  placeholder="Votre nom"
+                  required
+                  {...register("name")}
+                />
+                <Field
+                  autoComplete="email"
+                  error={errors.email?.message}
+                  id="contact-email"
+                  inputMode="email"
+                  label="Email"
+                  placeholder="vous@exemple.fr"
+                  required
+                  type="email"
+                  {...register("email")}
+                />
+              </div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <Field
+                  autoComplete="tel"
+                  error={errors.phone?.message}
+                  id="contact-phone"
+                  inputMode="tel"
+                  label="Téléphone (optionnel)"
+                  placeholder="06 00 00 00 00"
+                  type="tel"
+                  {...register("phone")}
+                />
+                <Field
+                  autoComplete="organization"
+                  id="contact-company"
+                  label="Entreprise (optionnel)"
+                  placeholder="Nom de votre entreprise"
+                  {...register("company")}
+                />
+              </div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <SelectField
+                  id="contact-project-type"
+                  label="Type de projet (optionnel)"
+                  options={contact.projectTypeOptions}
+                  {...register("projectType")}
+                />
+                <SelectField
+                  id="contact-budget"
+                  label="Budget (optionnel)"
+                  options={contact.budgetOptions}
+                  {...register("budget")}
+                />
+              </div>
+              <div className="grid min-w-0 gap-2">
+                <label className="text-sm font-semibold text-ink" htmlFor="contact-message">
+                  Message <span aria-hidden="true">*</span>
+                </label>
+                <textarea
+                  aria-describedby={errors.message ? "contact-message-error" : undefined}
+                  aria-invalid={errors.message ? true : undefined}
+                  aria-required="true"
+                  className={`${fieldClassName} min-h-36 resize-y py-3`}
+                  id="contact-message"
+                  placeholder="Votre activité, ce dont vous avez besoin, vos délais..."
+                  {...register("message")}
+                />
+                {errors.message ? (
+                  <p className="text-sm font-medium text-red-700" id="contact-message-error">
+                    {errors.message.message}
                   </p>
-                </StaggerItem>
-                <StaggerItem className="flex justify-start">
-                  <Button
-                    disabled={isSubmitting}
-                    trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
-                    type="submit"
+                ) : null}
+              </div>
+              <p
+                aria-live="polite"
+                className={
+                  status === "success"
+                    ? "rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium leading-6 text-emerald-800"
+                    : status === "error"
+                      ? "rounded-xl bg-red-50 px-4 py-3 text-sm font-medium leading-6 text-red-800"
+                      : "sr-only"
+                }
+                role="status"
+              >
+                {status === "success" ? contact.success : status === "error" ? contact.error : ""}
+              </p>
+              <div>
+                <Button
+                  aria-busy={isSubmitting || undefined}
+                  className="w-full sm:w-auto"
+                  disabled={isSubmitting}
+                  size="lg"
+                  trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
+                  type="submit"
+                >
+                  {isSubmitting ? contact.submitting : contact.submit}
+                </Button>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                  {contact.privacyNotice}{" "}
+                  <Link
+                    className="rounded-sm font-medium text-primary underline underline-offset-4 hover:text-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    href="/politique-confidentialite"
                   >
-                    {isSubmitting ? "Envoi..." : "Envoyer le message"}
-                  </Button>
-                </StaggerItem>
-              </Stagger>
-            </form>
-          </GlassPanel>
-        </FadeUp>
+                    {contact.privacyLinkLabel}
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
       </Container>
-    </section>
+    </Section>
+  );
+}
+
+function ContactInfo({
+  children,
+  icon,
+  label,
+}: {
+  children: ReactNode;
+  icon: ReactNode;
+  label: string;
+}) {
+  return (
+    <li className="flex items-center gap-4 rounded-2xl border border-border bg-surface-subtle px-4 py-3">
+      <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl bg-white text-primary shadow-soft">
+        {icon}
+      </span>
+      <span className="grid min-w-0">
+        <span className="text-xs font-medium uppercase tracking-[0.12em] text-subtle-foreground">{label}</span>
+        {children}
+      </span>
+    </li>
   );
 }
 
 function Field({
+  autoComplete,
   error,
+  id,
+  inputMode,
   label,
   placeholder,
   required = false,
   type = "text",
   ...registerProps
 }: {
+  autoComplete?: string;
   error?: string;
+  id: string;
+  inputMode?: "email" | "tel" | "text";
   label: string;
   placeholder: string;
   required?: boolean;
-  type?: "email" | "text";
+  type?: "email" | "tel" | "text";
 } & UseFormRegisterReturn) {
+  const errorId = `${id}-error`;
+
   return (
-    <label className="grid gap-2 text-sm font-medium text-foreground">
-      {label}
+    <div className="grid min-w-0 gap-2">
+      <label className="text-sm font-semibold text-ink" htmlFor={id}>
+        {label}
+        {required ? <span aria-hidden="true"> *</span> : null}
+      </label>
       <input
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={error ? true : undefined}
+        aria-required={required || undefined}
+        autoComplete={autoComplete}
         className={fieldClassName}
+        id={id}
+        inputMode={inputMode}
         placeholder={placeholder}
-        required={required}
         type={type}
         {...registerProps}
       />
-      {error ? <span className="text-xs font-normal text-red-400">{error}</span> : null}
-    </label>
+      {error ? (
+        <p className="text-sm font-medium text-red-700" id={errorId}>
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function SelectField({
+  id,
+  label,
+  options,
+  ...registerProps
+}: {
+  id: string;
+  label: string;
+  options: SelectOption[];
+} & UseFormRegisterReturn) {
+  return (
+    <div className="grid min-w-0 gap-2">
+      <label className="text-sm font-semibold text-ink" htmlFor={id}>
+        {label}
+      </label>
+      <select className={`${fieldClassName} appearance-auto [&>option]:bg-white [&>option]:text-ink`} defaultValue="" id={id} {...registerProps}>
+        <option value="">Choisir...</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
