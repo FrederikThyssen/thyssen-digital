@@ -7,7 +7,7 @@ import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { business, fallbackReviews, home } from "@/content/site";
 import { GOOGLE_WRITE_REVIEW_URL } from "@/lib/google";
-import { getGooglePlaceSummary } from "@/lib/google-reviews";
+import { formatRating, getGooglePlaceSummary } from "@/lib/google-reviews";
 
 type DisplayedReview = {
   id: string;
@@ -44,14 +44,17 @@ export async function TestimonialsSection() {
     relativeTime: review.relativeTime,
   }));
   // Live Google reviews when available, otherwise the reviews written in src/content/site.ts.
+  // Reviews still holding a placeholder ("[TEXTE AVIS 1]"...) are never displayed.
   const reviews: DisplayedReview[] =
     googleReviews.length > 0
       ? googleReviews
-      : fallbackReviews.map((review) => ({
-          ...review,
-          authorPhotoUrl: null,
-          relativeTime: "",
-        }));
+      : fallbackReviews
+          .filter((review) => !review.text.startsWith("[") && !review.author.startsWith("["))
+          .map((review) => ({
+            ...review,
+            authorPhotoUrl: null,
+            relativeTime: "",
+          }));
 
   return (
     <Section id="avis" tone="soft">
@@ -67,12 +70,17 @@ export async function TestimonialsSection() {
             <div className="flex items-center gap-3 rounded-2xl border border-border bg-white px-5 py-4 shadow-soft">
               <Stars className="size-5" rating={Math.round(summary.rating)} />
               <p className="text-sm font-semibold text-ink">
-                {summary.rating.toFixed(1).replace(".", ",")}/5 sur {summary.userRatingCount} avis
-                Google
+                {formatRating(summary.rating)} sur {summary.userRatingCount} avis Google
               </p>
             </div>
           ) : null}
         </div>
+
+        {reviews.length === 0 ? (
+          <p className="mt-10 max-w-2xl rounded-2xl border border-border bg-white px-6 py-5 text-base leading-7 text-muted-foreground shadow-soft">
+            {home.reviews.emptyText}
+          </p>
+        ) : null}
 
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {reviews.map((review) => (
@@ -90,6 +98,7 @@ export async function TestimonialsSection() {
                       aria-hidden="true"
                       className="rounded-full"
                       height={36}
+                      referrerPolicy="no-referrer"
                       src={review.authorPhotoUrl}
                       unoptimized
                       width={36}

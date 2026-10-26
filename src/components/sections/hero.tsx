@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { business, home } from "@/content/site";
+import { formatRating, getGooglePlaceSummary } from "@/lib/google-reviews";
 
 const { hero } = home;
 
@@ -71,7 +72,7 @@ function PhoneFrame() {
   );
 }
 
-function HeroVisual() {
+function HeroVisual({ ratingLabel }: { ratingLabel: string }) {
   return (
     <div className="relative mx-auto w-full max-w-xl pb-10 pt-4 sm:pt-14 lg:max-w-none lg:pb-0">
       <div className="tilt-3d relative">
@@ -97,7 +98,7 @@ function HeroVisual() {
               <Star className="size-3.5" fill="currentColor" key={index} />
             ))}
           </span>
-          <span className="text-xs font-semibold text-ink">{business.googleRatingLabel}</span>
+          <span className="text-xs font-semibold text-ink">{ratingLabel}</span>
         </div>
 
         <div className="float-slow absolute -top-14 right-4 hidden items-center gap-2 rounded-2xl border border-white/60 bg-white/90 px-3.5 py-2.5 shadow-card backdrop-blur-md md:flex">
@@ -114,7 +115,14 @@ function HeroVisual() {
   );
 }
 
-export function Hero() {
+export async function Hero() {
+  // Live rating from the Google Places API (cached 6 h); static label as fallback.
+  const summary = await getGooglePlaceSummary();
+  const ratingLabel =
+    summary && summary.userRatingCount > 0
+      ? `${formatRating(summary.rating)} sur Google (${summary.userRatingCount} avis)`
+      : business.googleRatingLabel;
+
   return (
     <section
       aria-labelledby="hero-title"
@@ -187,7 +195,7 @@ export function Hero() {
               ))}
             </span>
             <span>
-              {business.googleRatingLabel}
+              {ratingLabel}
               <span className="sr-only"> (ouvre ma fiche Google dans un nouvel onglet)</span>
             </span>
           </a>
@@ -204,7 +212,7 @@ export function Hero() {
           </div>
         </div>
 
-        <HeroVisual />
+        <HeroVisual ratingLabel={ratingLabel} />
       </Container>
     </section>
   );
