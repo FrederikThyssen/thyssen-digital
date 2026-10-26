@@ -5,6 +5,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { business, footer, navItems } from "@/content/site";
 import { BRAND_NAME } from "@/lib/constants";
 
@@ -35,10 +36,12 @@ export function SiteFooter() {
               />
               <span className="sr-only">{BRAND_NAME}, retour à l&apos;accueil</span>
             </NextLink>
-            <p className="mt-4 max-w-md text-sm leading-6 text-foreground/84">{footer.tagline}</p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-foreground/84">
+              <NoBreakPlaces text={footer.tagline} />
+            </p>
             <p className="mt-4 max-w-md text-sm leading-6 text-muted-foreground">
-              <span className="font-semibold text-foreground">{footer.zonesLabel} : </span>
-              {footer.zones}
+              <span className="font-semibold text-foreground">{footer.zonesLabel} : </span>
+              <NoBreakPlaces text={footer.zones} />
             </p>
           </div>
 

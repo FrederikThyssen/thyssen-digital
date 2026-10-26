@@ -589,7 +589,7 @@ const rawLegal = {
     name: "Resend",
     website: "https://resend.com",
   },
-  retention: "[DURÉE_CONSERVATION, ex. 3 ans après notre dernier échange]",
+  retention: "[DURÉE_CONSERVATION, ex. 3 ans après le dernier échange]",
   transferSafeguards:
     "[GARANTIES_TRANSFERT_HORS_UE, ex. Data Privacy Framework ou clauses contractuelles types]",
 };

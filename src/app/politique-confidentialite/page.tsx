@@ -21,7 +21,7 @@ export default function PrivacyPolicyPage() {
     >
       <LegalSection title="Responsable du traitement">
         <p>
-          {business.owner} ({business.name}), {legal.address}. Contact :{" "}
+          {business.owner} ({business.name}), {legal.address}. Contact :{" "}
           <a className={legalLinkClassName} href={business.emailHref}>
             {business.email}
           </a>
@@ -51,10 +51,10 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="Destinataires et prestataires">
         <p>
-          Je suis le seul destinataire de vos messages. Deux prestataires techniques interviennent :{" "}
+          Je suis le seul destinataire de vos messages. Deux prestataires techniques interviennent :{" "}
           {legal.host.name} pour l&apos;hébergement du site et {legal.emailProvider.name} pour
           l&apos;acheminement des emails du formulaire. Ils peuvent traiter les données hors de
-          l&apos;Union européenne : {legal.transferSafeguards}
+          l&apos;Union européenne : {legal.transferSafeguards}
         </p>
       </LegalSection>
 
@@ -77,7 +77,7 @@ export default function PrivacyPolicyPage() {
         </p>
         <p>
           Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une
-          réclamation à la CNIL :{" "}
+          réclamation à la CNIL :{" "}
           <a
             className={legalLinkClassName}
             href="https://www.cnil.fr/fr/plaintes"

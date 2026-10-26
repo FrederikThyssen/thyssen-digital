@@ -11,6 +11,8 @@ type BrandLogoProps = {
   imageClassName?: string;
   showSignature?: boolean;
   decorative?: boolean;
+  /** Set to "eager" when the logo is visible on arrival (header). */
+  loading?: "eager" | "lazy";
 };
 
 const toneClassName = {
@@ -27,6 +29,7 @@ export function BrandLogo({
   imageClassName,
   showSignature = false,
   decorative = false,
+  loading,
 }: BrandLogoProps) {
   const gradientId = useId();
   const label = showSignature ? `${BRAND_NAME} - ${BRAND_SIGNATURE}` : BRAND_NAME;
@@ -49,6 +52,7 @@ export function BrandLogo({
             imageClassName,
           )}
           decoding="async"
+          loading={loading}
           height={variant === "mark" ? 620 : variant === "full" ? 1140 : 61}
           src={
             variant === "mark"

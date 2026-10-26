@@ -41,6 +41,11 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   poweredByHeader: false,
+  experimental: {
+    // Tailwind CSS is small: inlining it removes the render-blocking stylesheet request,
+    // which helps first-time visitors on mobile (the main audience).
+    inlineCss: true,
+  },
   images: {
     qualities: [75, 100],
   },

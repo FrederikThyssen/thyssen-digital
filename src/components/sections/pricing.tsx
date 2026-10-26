@@ -244,7 +244,6 @@ export function PricingSection() {
             <p className="mt-3 text-base leading-7 text-foreground/84">{pricingPage.finalCta.text}</p>
             <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
               <Button
-                className="bg-[#1350ff] hover:bg-[#2563ff] hover:text-white"
                 href={business.phoneHref}
                 leadingIcon={<Phone aria-hidden="true" className="size-4" />}
                 size="lg"

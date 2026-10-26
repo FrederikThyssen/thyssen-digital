@@ -12,10 +12,14 @@ import { FadeUp } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { GlassPanel } from "@/components/ui/glass-panel";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { business, home, type SelectOption } from "@/content/site";
 
 const { contact } = home;
+
+// Skip Zod's runtime code generation (new Function), which the Content-Security-Policy forbids.
+z.config({ jitless: true });
 
 const fieldClassName =
   "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-base text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/60 aria-[invalid=true]:border-red-400 sm:text-sm";
@@ -112,7 +116,9 @@ export function ContactSection() {
                 </a>
               </ContactInfo>
               <ContactInfo icon={<MapPin aria-hidden="true" className="size-5" />} label={contact.zoneLabel}>
-                <span className="font-semibold text-foreground">{business.regionLabel}</span>
+                <span className="font-semibold text-foreground">
+                  <NoBreakPlaces text={business.regionLabel} />
+                </span>
               </ContactInfo>
             </ul>
             <p className="mt-5 text-sm font-medium text-accent-cyan">{business.responseTime}</p>
@@ -224,7 +230,7 @@ export function ContactSection() {
                 <div>
                   <Button
                     aria-busy={isSubmitting || undefined}
-                    className="w-full bg-[#1350ff] hover:bg-[#2563ff] hover:text-white sm:w-auto"
+                    className="w-full sm:w-auto"
                     disabled={isSubmitting}
                     size="lg"
                     trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}

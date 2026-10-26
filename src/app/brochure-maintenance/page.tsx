@@ -381,7 +381,7 @@ function BrochurePage({
         aria-hidden="true"
         className="brochure-background"
         fill
-        priority={variant === "cover"}
+        loading={variant === "cover" ? "eager" : undefined}
         sizes="210mm"
         src={image}
         unoptimized

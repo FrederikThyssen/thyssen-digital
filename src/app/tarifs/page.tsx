@@ -41,7 +41,6 @@ export default function PricingPage() {
             aria-hidden="true"
             className="absolute inset-0 -z-20 size-full object-cover opacity-55"
             fill
-            priority
             sizes="100vw"
             src="/images/hero-definitif.png"
           />

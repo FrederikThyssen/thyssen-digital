@@ -2,6 +2,7 @@ import { ArrowRight, ChevronDown, Phone, Star } from "lucide-react";
 
 import { FadeUp, SlowZoomBackground } from "@/components/motion";
 import { Button } from "@/components/ui/button";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { business, home } from "@/content/site";
 
 const { hero } = home;
@@ -21,7 +22,7 @@ export function Hero() {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.85),rgb(5_7_13_/_0.56)_43%,rgb(5_7_13_/_0.15)_72%,rgb(5_7_13_/_0.03))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.8),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
+        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.92),rgb(5_7_13_/_0.78)_43%,rgb(5_7_13_/_0.5)_72%,rgb(5_7_13_/_0.35))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.8),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
       />
       <div
         aria-hidden="true"
@@ -40,7 +41,7 @@ export function Hero() {
               className="text-[clamp(2rem,8.4vw,3.1rem)] font-semibold leading-[1.08] tracking-normal text-foreground lg:text-[clamp(3rem,4vw,4.1rem)]"
               id="hero-title"
             >
-              {hero.title}
+              <NoBreakPlaces text={hero.title} />
             </h1>
           </div>
 
@@ -49,7 +50,7 @@ export function Hero() {
               {hero.subtitle}
             </p>
             <p className="mt-4 max-w-[36rem] text-sm leading-6 text-foreground/72 lg:max-w-[40rem] lg:text-base">
-              {hero.localLine}
+              <NoBreakPlaces text={hero.localLine} />
             </p>
           </div>
 

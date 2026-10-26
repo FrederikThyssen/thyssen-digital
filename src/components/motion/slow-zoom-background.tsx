@@ -7,6 +7,7 @@ type SlowZoomBackgroundProps = {
   image: string;
   className?: string;
   imageClassName?: string;
+  /** Above-the-fold LCP image: loads eagerly with high fetch priority. */
   priority?: boolean;
 };
 
@@ -29,7 +30,15 @@ export function SlowZoomBackground({
         ease: "easeOut",
       }}
     >
-      <Image alt="" className={imageClassName} fill priority={priority} sizes="100vw" src={image} />
+      <Image
+        alt=""
+        className={imageClassName}
+        fetchPriority={priority ? "high" : undefined}
+        fill
+        loading={priority ? "eager" : undefined}
+        sizes="100vw"
+        src={image}
+      />
     </motion.div>
   );
 }

@@ -25,17 +25,17 @@ export default function LegalNoticePage() {
           <li>
             {business.owner}, nom commercial {business.name}
           </li>
-          <li>Statut : {legal.status}</li>
-          <li>SIRET : {legal.siret}</li>
-          <li>Adresse : {legal.address}</li>
+          <li>Statut : {legal.status}</li>
+          <li>SIRET : {legal.siret}</li>
+          <li>Adresse : {legal.address}</li>
           <li>
-            Email :{" "}
+            Email :{" "}
             <a className={legalLinkClassName} href={business.emailHref}>
               {business.email}
             </a>
           </li>
           <li>
-            Téléphone :{" "}
+            Téléphone :{" "}
             <a className={legalLinkClassName} href={business.phoneHref}>
               {business.phoneDisplay}
             </a>
@@ -53,7 +53,7 @@ export default function LegalNoticePage() {
           <li>{legal.host.name}</li>
           <li>{legal.host.address}</li>
           <li>
-            Site :{" "}
+            Site :{" "}
             <a
               className={legalLinkClassName}
               href={legal.host.website}

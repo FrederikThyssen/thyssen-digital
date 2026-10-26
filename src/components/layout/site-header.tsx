@@ -99,7 +99,7 @@ export function SiteHeader() {
           className="flex min-h-[70px] items-center justify-between gap-2 px-3 min-[400px]:px-5 sm:gap-4 sm:px-8 lg:min-h-10 lg:px-0"
         >
           <Link
-            className="flex shrink-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
+            className="flex min-h-11 shrink-0 items-center gap-3 rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan lg:h-12 lg:w-44"
             href="/#accueil"
             onClick={() => setIsOpen(false)}
           >
@@ -107,6 +107,7 @@ export function SiteHeader() {
               className="[&_svg]:size-9 [&_span_span]:hidden sm:[&_span_span]:block sm:[&_span_span]:text-xs"
               decorative
               imageClassName="h-8 min-[400px]:h-10"
+              loading="eager"
               tone="accent"
               variant="horizontal"
             />
@@ -117,7 +118,7 @@ export function SiteHeader() {
             {navItems.map((item) => (
               <a
                 className={cn(
-                  "relative rounded-md text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
+                  "relative rounded-md py-3 text-xs font-medium text-foreground/88 transition-colors duration-200 ease-standard hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan",
                   activeHref === `#${item.sectionId}` && "text-white",
                 )}
                 href={item.href}
@@ -127,7 +128,7 @@ export function SiteHeader() {
                 <span
                   aria-hidden="true"
                   className={cn(
-                    "absolute -bottom-2 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
+                    "absolute bottom-1 left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-cyan opacity-0 shadow-[0_0_16px_rgb(34_211_238_/_0.85)] transition-opacity duration-200",
                     activeHref === `#${item.sectionId}` && "opacity-100",
                   )}
                 />
@@ -147,7 +148,7 @@ export function SiteHeader() {
               </span>
             </a>
             <Button
-              className="hidden min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(140_83_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))] lg:inline-flex"
+              className="hidden min-h-10 rounded-full border-white/15 bg-[linear-gradient(135deg,rgb(19_80_255),rgb(91_44_255))] px-4 text-xs shadow-[0_0_28px_rgb(47_124_255_/_0.28)] hover:bg-[linear-gradient(135deg,rgb(34_132_255),rgb(124_58_237))] lg:inline-flex"
               href={QUOTE_HREF}
               size="sm"
               trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
