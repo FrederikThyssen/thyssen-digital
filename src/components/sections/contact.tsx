@@ -1,26 +1,35 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { useState, type ReactNode } from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { z } from "zod";
 
 import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
-import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
+import { FadeUp } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { GlassPanel } from "@/components/ui/glass-panel";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { CONTACT_EMAIL } from "@/lib/constants";
+import { business, home, type SelectOption } from "@/content/site";
+
+const { contact } = home;
 
 const fieldClassName =
-  "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-sm text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-0";
+  "min-h-12 w-full rounded-md border border-border bg-surface px-4 text-base text-foreground transition-colors duration-200 ease-standard placeholder:text-subtle-foreground hover:border-border-strong focus:border-accent-cyan focus:outline-none focus:ring-2 focus:ring-accent-cyan/60 aria-[invalid=true]:border-red-400 sm:text-sm";
 
 const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Votre nom est requis."),
   email: z.string().trim().min(1, "Votre email est requis.").email("Email invalide."),
+  phone: z
+    .string()
+    .trim()
+    .regex(/^[0-9+().\s-]{0,30}$/, "Numéro de téléphone invalide.")
+    .optional(),
   company: z.string().trim().optional(),
+  projectType: z.string().trim().optional(),
   budget: z.string().trim().optional(),
   message: z.string().trim().min(1, "Un message est requis."),
   website: z.string().trim().optional(),
@@ -81,20 +90,32 @@ export function ContactSection() {
         <FadeUp>
           <div>
             <SectionHeading
-              description="Décrivez votre besoin, votre contexte et vos premiers objectifs. Je vous réponds avec une première lecture claire des enjeux et des prochaines étapes possibles."
-              eyebrow="Contact"
-              title="Parlons de votre projet."
+              description={contact.description}
+              eyebrow={contact.eyebrow}
+              title={contact.title}
             />
-            <div className="mt-8 grid gap-3 text-sm text-muted-foreground">
-              {["Premier retour clair", "Cadrage sans engagement", "Approche design + technique"].map((item) => (
-                <div
-                  className="rounded-md border border-white/10 bg-white/[0.035] px-4 py-3"
-                  key={item}
+            <ul className="mt-8 grid gap-3 text-sm">
+              <ContactInfo icon={<Phone aria-hidden="true" className="size-5" />} label={contact.phoneLabel}>
+                <a
+                  className="inline-flex min-h-11 items-center rounded-md text-lg font-semibold text-foreground underline-offset-4 hover:text-accent-cyan hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                  href={business.phoneHref}
                 >
-                  {item}
-                </div>
-              ))}
-            </div>
+                  {business.phoneDisplay}
+                </a>
+              </ContactInfo>
+              <ContactInfo icon={<Mail aria-hidden="true" className="size-5" />} label={contact.emailLabel}>
+                <a
+                  className="inline-flex min-h-11 items-center break-all rounded-md font-semibold text-foreground underline-offset-4 hover:text-accent-cyan hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                  href={business.emailHref}
+                >
+                  {business.email}
+                </a>
+              </ContactInfo>
+              <ContactInfo icon={<MapPin aria-hidden="true" className="size-5" />} label={contact.zoneLabel}>
+                <span className="font-semibold text-foreground">{business.regionLabel}</span>
+              </ContactInfo>
+            </ul>
+            <p className="mt-5 text-sm font-medium text-accent-cyan">{business.responseTime}</p>
           </div>
         </FadeUp>
 
@@ -104,76 +125,124 @@ export function ContactSection() {
               aria-hidden="true"
               className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
             />
-            <form aria-describedby="contact-status" onSubmit={handleSubmit(onSubmit)}>
+            <form noValidate onSubmit={handleSubmit(onSubmit)}>
               <input
                 aria-hidden="true"
+                autoComplete="off"
                 className="sr-only"
                 tabIndex={-1}
-                autoComplete="off"
                 {...register("website")}
               />
-              <Stagger className="grid gap-4">
-                <StaggerItem className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4">
+                <div className="grid gap-4 sm:grid-cols-2">
                   <Field
+                    autoComplete="name"
                     error={errors.name?.message}
+                    id="contact-name"
                     label="Nom"
                     placeholder="Votre nom"
                     required
                     {...register("name")}
                   />
                   <Field
+                    autoComplete="email"
                     error={errors.email?.message}
+                    id="contact-email"
+                    inputMode="email"
                     label="Email"
-                    placeholder="vous@entreprise.com"
+                    placeholder="vous@exemple.fr"
                     required
                     type="email"
                     {...register("email")}
                   />
-                </StaggerItem>
-                <StaggerItem className="grid gap-4 sm:grid-cols-2">
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
                   <Field
+                    autoComplete="tel"
+                    error={errors.phone?.message}
+                    id="contact-phone"
+                    inputMode="tel"
+                    label="Téléphone (optionnel)"
+                    placeholder="06 00 00 00 00"
+                    type="tel"
+                    {...register("phone")}
+                  />
+                  <Field
+                    autoComplete="organization"
+                    id="contact-company"
                     label="Entreprise (optionnel)"
-                    placeholder="Nom de l'entreprise"
+                    placeholder="Nom de votre entreprise"
                     {...register("company")}
                   />
-                  <Field
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <SelectField
+                    id="contact-project-type"
+                    label="Type de projet (optionnel)"
+                    options={contact.projectTypeOptions}
+                    {...register("projectType")}
+                  />
+                  <SelectField
+                    id="contact-budget"
                     label="Budget (optionnel)"
-                    placeholder="Budget estimé"
+                    options={contact.budgetOptions}
                     {...register("budget")}
                   />
-                </StaggerItem>
-                <StaggerItem>
-                  <label className="grid gap-2 text-sm font-medium text-foreground">
-                    Message
-                    <textarea
-                      className={`${fieldClassName} min-h-36 resize-y py-3`}
-                      placeholder="Votre projet, vos délais, vos priorités..."
-                      {...register("message")}
-                    />
+                </div>
+                <div className="grid gap-2">
+                  <label className="text-sm font-medium text-foreground" htmlFor="contact-message">
+                    Message <span aria-hidden="true">*</span>
                   </label>
+                  <textarea
+                    aria-describedby={errors.message ? "contact-message-error" : undefined}
+                    aria-invalid={errors.message ? true : undefined}
+                    aria-required="true"
+                    className={`${fieldClassName} min-h-36 resize-y py-3`}
+                    id="contact-message"
+                    placeholder="Votre activité, ce dont vous avez besoin, vos délais..."
+                    {...register("message")}
+                  />
                   {errors.message ? (
-                    <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>
+                    <p className="text-sm text-red-300" id="contact-message-error">
+                      {errors.message.message}
+                    </p>
                   ) : null}
-                </StaggerItem>
-                <StaggerItem>
-                  <p className="text-sm leading-6 text-muted-foreground" id="contact-status">
-                    {status === "success"
-                      ? "Votre message a bien été envoyé, merci !"
+                </div>
+                <p
+                  aria-live="polite"
+                  className={
+                    status === "success"
+                      ? "text-sm font-medium leading-6 text-emerald-300"
                       : status === "error"
-                        ? "Une erreur est survenue, réessayez ou écrivez-nous directement."
-                        : `Votre message sera envoyé directement à ${CONTACT_EMAIL}.`}
-                  </p>
-                </StaggerItem>
-                <StaggerItem className="flex justify-start">
+                        ? "text-sm font-medium leading-6 text-red-300"
+                        : "sr-only"
+                  }
+                  role="status"
+                >
+                  {status === "success" ? contact.success : status === "error" ? contact.error : ""}
+                </p>
+                <div>
                   <Button
+                    aria-busy={isSubmitting || undefined}
+                    className="w-full bg-[#1350ff] hover:bg-[#2563ff] hover:text-white sm:w-auto"
                     disabled={isSubmitting}
+                    size="lg"
                     trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}
                     type="submit"
                   >
-                    {isSubmitting ? "Envoi..." : "Envoyer le message"}
+                    {isSubmitting ? contact.submitting : contact.submit}
                   </Button>
-                </StaggerItem>
-              </Stagger>
+                  <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                    {contact.privacyNotice}{" "}
+                    <Link
+                      className="rounded-sm text-foreground underline underline-offset-4 hover:text-accent-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-cyan"
+                      href="/politique-confidentialite"
+                    >
+                      {contact.privacyLinkLabel}
+                    </Link>
+                  </p>
+                </div>
+              </div>
             </form>
           </GlassPanel>
         </FadeUp>
@@ -182,31 +251,100 @@ export function ContactSection() {
   );
 }
 
+function ContactInfo({
+  children,
+  icon,
+  label,
+}: {
+  children: ReactNode;
+  icon: ReactNode;
+  label: string;
+}) {
+  return (
+    <li className="flex items-center gap-4 rounded-md border border-white/10 bg-white/[0.035] px-4 py-3">
+      <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-md border border-accent-cyan/20 bg-primary/10 text-accent-cyan">
+        {icon}
+      </span>
+      <span className="grid min-w-0">
+        <span className="text-xs uppercase tracking-[0.14em] text-muted-foreground">{label}</span>
+        {children}
+      </span>
+    </li>
+  );
+}
+
 function Field({
+  autoComplete,
   error,
+  id,
+  inputMode,
   label,
   placeholder,
   required = false,
   type = "text",
   ...registerProps
 }: {
+  autoComplete?: string;
   error?: string;
+  id: string;
+  inputMode?: "email" | "tel" | "text";
   label: string;
   placeholder: string;
   required?: boolean;
-  type?: "email" | "text";
+  type?: "email" | "tel" | "text";
 } & UseFormRegisterReturn) {
+  const errorId = `${id}-error`;
+
   return (
-    <label className="grid gap-2 text-sm font-medium text-foreground">
-      {label}
+    <div className="grid gap-2">
+      <label className="text-sm font-medium text-foreground" htmlFor={id}>
+        {label}
+        {required ? <span aria-hidden="true"> *</span> : null}
+      </label>
       <input
+        aria-describedby={error ? errorId : undefined}
+        aria-invalid={error ? true : undefined}
+        aria-required={required || undefined}
+        autoComplete={autoComplete}
         className={fieldClassName}
+        id={id}
+        inputMode={inputMode}
         placeholder={placeholder}
-        required={required}
         type={type}
         {...registerProps}
       />
-      {error ? <span className="text-xs font-normal text-red-400">{error}</span> : null}
-    </label>
+      {error ? (
+        <p className="text-sm text-red-300" id={errorId}>
+          {error}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
+function SelectField({
+  id,
+  label,
+  options,
+  ...registerProps
+}: {
+  id: string;
+  label: string;
+  options: SelectOption[];
+} & UseFormRegisterReturn) {
+  return (
+    <div className="grid gap-2">
+      <label className="text-sm font-medium text-foreground" htmlFor={id}>
+        {label}
+      </label>
+      <select className={`${fieldClassName} appearance-auto [&>option]:bg-background [&>option]:text-foreground`} defaultValue="" id={id} {...registerProps}>
+        <option value="">Choisir...</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
