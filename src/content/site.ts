@@ -61,6 +61,8 @@ export type FaqItem = {
 export type Project = {
   id: "fred-music" | "maison-marcelito" | "truckmaps";
   name: string;
+  /** Short label shown above the name on the featured (first) project. */
+  kicker?: string;
   description: string;
   url?: string;
   linkLabel?: string;
@@ -162,7 +164,7 @@ const rawNavItems: NavItem[] = [
 const rawHome = {
   hero: {
     eyebrow: "Développeur web freelance · Hauts-de-France",
-    // Part of the title displayed with the brand gradient (must appear in `title`).
+    // Part of the title displayed in the serif italic accent (must appear in `title`).
     titleHighlight: "artisans, commerçants et TPE",
     title:
       "Création de sites web pour les artisans, commerçants et TPE des Hauts-de-France",
@@ -182,9 +184,34 @@ const rawHome = {
       mobileText: "Rapide et lisible sur téléphone",
     },
   },
+  marquee: [
+    "Visible sur Google",
+    "Rapide sur mobile",
+    "Un seul interlocuteur",
+    "Site à votre nom",
+    `Dès ${euro(PRICES.essentiel)}`,
+    "Livré en 2 à 4 semaines",
+    "Devis gratuit",
+    "Somme · Pas-de-Calais · Nord · Aisne",
+  ],
+  keyFacts: [
+    { value: euro(PRICES.essentiel), label: "pour un site professionnel" },
+    { value: "2 à 4", label: "semaines de délai" },
+    { value: "5/5", label: "sur Google" },
+    { value: "1", label: "seul interlocuteur, joignable" },
+  ],
+  finalCta: {
+    eyebrow: "Votre projet",
+    title: "Prêt à être trouvé sur Google ?",
+    titleHighlight: "trouvé sur Google",
+    text: "Un premier échange gratuit de 15 minutes, par téléphone ou sur place, pour faire le point sur votre besoin.",
+    primaryCta: "Demander un devis gratuit",
+    secondaryCta: `Appeler le ${rawBusiness.phoneDisplay}`,
+  },
   services: {
     eyebrow: "Services",
     title: "Création et refonte de site internet",
+    titleHighlight: "site internet",
     description:
       "Trois offres simples pour être trouvé sur Google, rassurer vos clients et recevoir des demandes.",
     linkLabel: "Voir les tarifs",
@@ -217,11 +244,13 @@ const rawHome = {
   projects: {
     eyebrow: "Réalisations",
     title: "Des sites créés pour de vrais clients",
+    titleHighlight: "vrais clients",
     description: "Quelques projets récents, avec leur objectif et ce qu'ils ont changé.",
   },
   reviews: {
     eyebrow: "Avis clients",
     title: "Ce que mes clients en disent",
+    titleHighlight: "en disent",
     description: "Les avis publiés sur ma fiche Google.",
     cta: "Voir tous les avis sur Google",
     leaveReviewCta: "Laisser un avis Google",
@@ -229,6 +258,7 @@ const rawHome = {
   reassurance: {
     eyebrow: "Pourquoi moi",
     title: "Pourquoi travailler avec moi",
+    titleHighlight: "avec moi",
     items: [
       { id: "contact", title: "Un seul interlocuteur, joignable par téléphone" },
       { id: "google", title: "Un site rapide sur mobile et bien référencé sur Google" },
@@ -242,12 +272,14 @@ const rawHome = {
   about: {
     eyebrow: "À propos",
     title: "Un développeur web près de chez vous",
+    titleHighlight: "près de chez vous",
     text: "Je suis Frédérik Thyssen, développeur web basé dans les Hauts-de-France, à la frontière de la Somme, du Pas-de-Calais et du Nord. Je crée des sites web et des applications pour les artisans, commerçants et TPE de la région. Ma méthode : comprendre votre activité, vous expliquer chaque étape simplement et tenir les délais annoncés. Avec moi, un seul interlocuteur, joignable, et un site qui vous appartient.",
     signature: "Frédérik Thyssen, Thyssen Digital",
   },
   process: {
     eyebrow: "Processus",
     title: "Comment se passe la création de votre site",
+    titleHighlight: "votre site",
     description: "Cinq étapes simples, du premier appel au suivi après la mise en ligne.",
     steps: [
       {
@@ -285,11 +317,13 @@ const rawHome = {
   faq: {
     eyebrow: "FAQ",
     title: "Questions fréquentes sur la création de site",
+    titleHighlight: "fréquentes",
     description: "Prix, délais, paiement : les réponses aux questions qu'on me pose le plus.",
   },
   contact: {
     eyebrow: "Contact",
     title: "Demandez votre devis gratuit",
+    titleHighlight: "devis gratuit",
     description:
       "Décrivez votre activité et votre besoin en quelques lignes. Je vous rappelle ou vous réponds par email avec une proposition claire.",
     phoneLabel: "Téléphone",
@@ -324,6 +358,7 @@ const rawProjects: Project[] = [
   {
     id: "fred-music",
     name: "Fred Music",
+    kicker: "Refonte complète",
     description:
       "Refonte complète du site d'un DJ mariage & événementiel : nouveau design, espace d'administration, QR code, formulaire de contact. Une image plus professionnelle et des demandes simplifiées.",
     url: "https://fredmusic.fr",
@@ -432,9 +467,11 @@ const rawFaq: FaqItem[] = [
 const rawPricingPage = {
   eyebrow: "Tarifs",
   title: "Des tarifs clairs, sans surprise.",
+  titleHighlight: "sans surprise.",
   subtitle: "Pour les artisans, indépendants, commerçants et TPE des Hauts-de-France.",
   offersEyebrow: "Mes offres",
   offersTitle: "Création de site internet",
+  offersTitleHighlight: "site internet",
   offersDescription:
     "Trois formules selon votre besoin. Le prix est confirmé dans un devis gratuit avant de commencer.",
   redesignLine: "Vous avez déjà un site ? La refonte suit les mêmes tarifs.",
@@ -449,6 +486,7 @@ const rawPricingPage = {
   ],
   maintenanceEyebrow: "Maintenance",
   maintenanceTitle: "Maintenance de votre site",
+  maintenanceTitleHighlight: "votre site",
   maintenanceDescription:
     "Paiement annuel. L'équivalent mensuel est indiqué à titre indicatif.",
   termsTitle: "Modalités",

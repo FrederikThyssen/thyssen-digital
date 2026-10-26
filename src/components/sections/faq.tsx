@@ -14,6 +14,7 @@ export function FaqSection() {
           <SectionHeading
             description={home.faq.description}
             eyebrow={home.faq.eyebrow}
+            highlight={home.faq.titleHighlight}
             title={home.faq.title}
           />
           <Button

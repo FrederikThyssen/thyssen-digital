@@ -5,7 +5,9 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { AboutSection } from "@/components/sections/about";
 import { ContactSection } from "@/components/sections/contact";
 import { FaqSection } from "@/components/sections/faq";
+import { FinalCtaSection } from "@/components/sections/final-cta";
 import { Hero } from "@/components/sections/hero";
+import { MarqueeBand } from "@/components/sections/marquee-band";
 import { ProcessSection } from "@/components/sections/process";
 import { ProjectsSection } from "@/components/sections/projects";
 import { ServicesSection } from "@/components/sections/services";
@@ -30,6 +32,7 @@ export default function Home() {
       <SiteHeader />
       <main className="relative overflow-hidden bg-background" id="contenu">
         <Hero />
+        <MarqueeBand />
         <ServicesSection />
         <ProjectsSection />
         <TestimonialsSection />
@@ -37,6 +40,7 @@ export default function Home() {
         <AboutSection />
         <ProcessSection />
         <FaqSection />
+        <FinalCtaSection />
         <ContactSection />
       </main>
       <SiteFooter />

@@ -10,6 +10,7 @@ import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { home, projects, type Project } from "@/content/site";
+import { cn } from "@/lib/utils";
 
 // Evaluated at build time (static page): lets a project card ship before its screenshot exists.
 function hasPublicImage(src: string): boolean {
@@ -23,13 +24,18 @@ export function ProjectsSection() {
         <SectionHeading
           description={home.projects.description}
           eyebrow={home.projects.eyebrow}
+          highlight={home.projects.titleHighlight}
           title={home.projects.title}
         />
 
-        <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <li key={project.id}>
-              <ProjectCard hasImage={hasPublicImage(project.image)} project={project} />
+        <ul className="mt-12 grid gap-6 md:grid-cols-2">
+          {projects.map((project, index) => (
+            <li className={index === 0 ? "reveal-scale md:col-span-2" : "reveal-scale"} key={project.id}>
+              <ProjectCard
+                featured={index === 0}
+                hasImage={hasPublicImage(project.image)}
+                project={project}
+              />
             </li>
           ))}
         </ul>
@@ -38,16 +44,35 @@ export function ProjectsSection() {
   );
 }
 
-function ProjectCard({ hasImage, project }: { hasImage: boolean; project: Project }) {
+function ProjectCard({
+  featured = false,
+  hasImage,
+  project,
+}: {
+  featured?: boolean;
+  hasImage: boolean;
+  project: Project;
+}) {
   return (
-    <Card className="group flex h-full flex-col overflow-hidden" interactive>
-      <div className="relative aspect-[16/10] overflow-hidden border-b border-border bg-surface-subtle">
+    <Card
+      className={cn(
+        "card-glow group flex h-full flex-col overflow-hidden",
+        featured && "md:grid md:grid-cols-[1.35fr_1fr]",
+      )}
+      interactive
+    >
+      <div
+        className={cn(
+          "relative aspect-[16/10] overflow-hidden border-b border-border bg-surface-subtle",
+          featured && "md:aspect-auto md:min-h-[24rem] md:border-b-0 md:border-r",
+        )}
+      >
         {hasImage ? (
           <Image
             alt={project.imageAlt}
-            className="object-cover transition-transform duration-500 ease-standard group-hover:scale-[1.03] motion-reduce:transform-none"
+            className="object-cover transition-transform duration-700 ease-expressive group-hover:scale-[1.05] motion-reduce:transform-none"
             fill
-            sizes="(min-width: 1024px) 400px, (min-width: 768px) 50vw, 100vw"
+            sizes={featured ? "(min-width: 768px) 720px, 100vw" : "(min-width: 768px) 600px, 100vw"}
             src={project.image}
             style={{ objectPosition: project.imagePosition }}
           />
@@ -59,8 +84,18 @@ function ProjectCard({ hasImage, project }: { hasImage: boolean; project: Projec
         )}
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
-        <h3 className="font-display text-xl font-semibold text-ink">{project.name}</h3>
+      <div className={cn("flex flex-1 flex-col p-6", featured && "md:justify-center md:p-10")}>
+        {featured && project.kicker ? (
+          <p className="mb-3 text-sm font-semibold text-primary">{project.kicker}</p>
+        ) : null}
+        <h3
+          className={cn(
+            "font-display font-semibold text-ink",
+            featured ? "text-2xl sm:text-3xl" : "text-xl",
+          )}
+        >
+          {project.name}
+        </h3>
         <p className="mt-3 text-[0.95rem] leading-7 text-muted-foreground">{project.description}</p>
         {project.partnerNote ? (
           <p className="mt-3 text-sm font-medium text-primary">{project.partnerNote}</p>

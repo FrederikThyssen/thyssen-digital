@@ -51,7 +51,7 @@ function PriceCard({
   return (
     <article
       className={cn(
-        "relative flex h-full flex-col rounded-3xl border bg-white p-7",
+        "card-glow relative flex h-full flex-col rounded-3xl border bg-white p-7 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 motion-reduce:transform-none",
         featured
           ? "border-primary shadow-lift ring-4 ring-primary/10"
           : "border-border shadow-soft",
@@ -80,12 +80,13 @@ export function PricingSection() {
           <SectionHeading
             description={pricingPage.offersDescription}
             eyebrow={pricingPage.offersEyebrow}
+            highlight={pricingPage.offersTitleHighlight}
             title={pricingPage.offersTitle}
           />
 
           <ul className="mt-14 grid gap-8 lg:grid-cols-3 lg:gap-6">
             {websiteOffers.map((offer) => (
-              <li key={offer.id}>
+              <li className="reveal" key={offer.id}>
                 <PriceCard
                   description={offer.description}
                   featured={offer.featured}
@@ -135,12 +136,13 @@ export function PricingSection() {
           <SectionHeading
             description={pricingPage.maintenanceDescription}
             eyebrow={pricingPage.maintenanceEyebrow}
+            highlight={pricingPage.maintenanceTitleHighlight}
             title={pricingPage.maintenanceTitle}
           />
 
           <ul className="mt-14 grid gap-8 lg:grid-cols-3 lg:gap-6">
             {maintenancePlans.map((plan) => (
-              <li key={plan.name}>
+              <li className="reveal" key={plan.name}>
                 <PriceCard
                   description={plan.description}
                   featured={plan.featured}

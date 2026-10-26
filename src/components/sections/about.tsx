@@ -11,16 +11,16 @@ export function AboutSection() {
     <Section id="a-propos" tone="soft">
       <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <div>
-          <SectionHeading eyebrow={about.eyebrow} title={about.title} />
+          <SectionHeading eyebrow={about.eyebrow} highlight={about.titleHighlight} title={about.title} />
           <div
             aria-hidden="true"
-            className="mt-10 hidden size-40 items-center justify-center rounded-[2rem] border border-border bg-white shadow-card lg:flex"
+            className="float-slow mt-10 hidden size-40 items-center justify-center rounded-[2rem] border border-border bg-white shadow-card lg:flex"
           >
             <BrandLogo className="[&_svg]:h-16 [&_svg]:w-auto" decorative tone="light" variant="mark" />
           </div>
         </div>
 
-        <figure className="relative rounded-3xl border border-border bg-white p-8 shadow-card sm:p-10">
+        <figure className="reveal relative rounded-3xl border border-border bg-white p-8 shadow-card sm:p-10">
           <span
             aria-hidden="true"
             className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-[linear-gradient(90deg,#1350ff,#00e5ff,#7d2cff)] sm:inset-x-10"

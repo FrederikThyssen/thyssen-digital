@@ -8,7 +8,25 @@ type SectionHeadingProps = {
   className?: string;
   /** Heading level: h2 for page sections (default), h1 when the heading is the page title. */
   as?: "h1" | "h2";
+  /** Part of `title` rendered in the serif italic accent. */
+  highlight?: string;
 };
+
+function HighlightedTitle({ highlight, title }: { highlight?: string; title: string }) {
+  const index = highlight ? title.indexOf(highlight) : -1;
+
+  if (!highlight || index === -1) {
+    return <>{title}</>;
+  }
+
+  return (
+    <>
+      {title.slice(0, index)}
+      <span className="accent-serif">{highlight}</span>
+      {title.slice(index + highlight.length)}
+    </>
+  );
+}
 
 export function SectionHeading({
   eyebrow,
@@ -17,11 +35,12 @@ export function SectionHeading({
   align = "left",
   className,
   as: Heading = "h2",
+  highlight,
 }: SectionHeadingProps) {
   return (
     <div
       className={cn(
-        "max-w-3xl",
+        "reveal max-w-3xl",
         align === "center" && "mx-auto text-center",
         className,
       )}
@@ -38,7 +57,7 @@ export function SectionHeading({
           Heading === "h1" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl lg:text-[2.75rem]",
         )}
       >
-        {title}
+        <HighlightedTitle highlight={highlight} title={title} />
       </Heading>
       {description ? (
         <p

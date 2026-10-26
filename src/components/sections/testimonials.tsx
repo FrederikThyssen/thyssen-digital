@@ -60,6 +60,7 @@ export async function TestimonialsSection() {
           <SectionHeading
             description={home.reviews.description}
             eyebrow={home.reviews.eyebrow}
+            highlight={home.reviews.titleHighlight}
             title={home.reviews.title}
           />
           {summary && summary.userRatingCount > 0 ? (
@@ -75,8 +76,8 @@ export async function TestimonialsSection() {
 
         <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {reviews.map((review) => (
-            <li key={review.id}>
-              <figure className="relative h-full rounded-2xl border border-border bg-white p-7 shadow-soft">
+            <li className="reveal" key={review.id}>
+              <figure className="card-glow relative h-full rounded-2xl border border-border bg-white p-7 shadow-soft">
                 <Quote aria-hidden="true" className="absolute right-6 top-6 size-8 text-primary/15" />
                 <Stars className="size-4" rating={review.rating} />
                 <blockquote className="mt-5 line-clamp-6 text-lg leading-8 text-ink">

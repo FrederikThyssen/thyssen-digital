@@ -149,7 +149,205 @@
   background-size: 22px 22px;
 }
 
+/* ------------------------------------------------------------------------
+ * Effets visuels (CSS uniquement, désactivés si prefers-reduced-motion)
+ * --------------------------------------------------------------------- */
+
+/* Italic serif accent with an animated brand gradient. */
+.accent-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  background: linear-gradient(100deg, #1350ff 0%, #2377ff 30%, #7d2cff 60%, #1350ff 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-right: 0.06em;
+  animation: gradient-pan 9s ease-in-out infinite alternate;
+}
+
+/* Lighter gradient for dark backgrounds (AA contrast on ink). */
+.accent-serif-on-dark {
+  background-image: linear-gradient(100deg, #6ee7ff 0%, #8fb0ff 35%, #c3a3ff 65%, #6ee7ff 100%);
+}
+
+@keyframes gradient-pan {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+/* Soft "aurora" blobs in the logo colours. */
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(64px);
+  opacity: 0.55;
+  will-change: transform;
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, -4%, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(-4%, 5%, 0) scale(0.96);
+  }
+}
+
+/* Gentle floating for decorative cards. */
+.float-slow {
+  animation: float 7s ease-in-out infinite;
+}
+
+.float-slower {
+  animation: float 9s ease-in-out -3s infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+/* 3D tilted mockup that straightens on hover (desktop only). */
+@media (min-width: 1024px) {
+  .tilt-3d {
+    transform: perspective(1800px) rotateY(-9deg) rotateX(5deg) rotateZ(0.5deg);
+    transition: transform 700ms var(--ease-expressive);
+  }
+
+  .tilt-3d:hover {
+    transform: perspective(1800px) rotateY(-3deg) rotateX(2deg);
+  }
+}
+
+/* Infinite marquee (content duplicated twice in the markup). */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Gradient border that lights up on hover. */
+.card-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, #1350ff, #00e5ff 50%, #7d2cff);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 300ms var(--ease-standard);
+}
+
+.card-glow:hover::before,
+.card-glow:focus-within::before {
+  opacity: 1;
+}
+
+/* Scroll-driven reveal: progressive enhancement, content stays visible without support. */
+@supports (animation-timeline: view()) {
+  .reveal {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+
+  .reveal-scale {
+    animation: reveal-scale linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+
+  .progress-fill {
+    transform-origin: left center;
+    animation: progress-fill linear both;
+    animation-timeline: view();
+    animation-range: entry 40% cover 55%;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .accent-serif,
+  .aurora,
+  .float-slow,
+  .float-slower,
+  .marquee-track,
+  .reveal,
+  .reveal-scale,
+  .progress-fill {
+    animation: none !important;
+  }
+
+  .tilt-3d,
+  .tilt-3d:hover {
+    transform: none !important;
+  }
+
   *,
   *::before,
   *::after {

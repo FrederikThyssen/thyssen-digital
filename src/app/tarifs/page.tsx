@@ -53,7 +53,8 @@ export default function PricingPage() {
               </ol>
             </nav>
             <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.06] tracking-[-0.03em] text-ink sm:text-5xl lg:text-6xl">
-              {pricingPage.title}
+              {pricingPage.title.replace(pricingPage.titleHighlight, "")}
+              <span className="accent-serif">{pricingPage.titleHighlight}</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
               <NoBreakPlaces text={pricingPage.subtitle} />

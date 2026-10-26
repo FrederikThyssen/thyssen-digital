@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Serif, Inter } from "next/font/google";
 
 import { defaultMetadata } from "@/lib/metadata";
 
@@ -18,6 +18,15 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
+// Editorial italic accent for a few highlighted words (italic only, to keep the weight low).
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: "italic",
+  display: "swap",
+});
+
 export const metadata: Metadata = defaultMetadata;
 
 export default function RootLayout({
@@ -26,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={`${inter.variable} ${bricolage.variable} h-full antialiased`}>
+    <html lang="fr" className={`${inter.variable} ${bricolage.variable} ${instrumentSerif.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         <a
           className="sr-only z-[60] rounded-md bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4"

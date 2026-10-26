@@ -80,6 +80,7 @@ export function ContactSection() {
           <SectionHeading
             description={contact.description}
             eyebrow={contact.eyebrow}
+            highlight={contact.titleHighlight}
             title={contact.title}
           />
           <ul className="mt-8 grid gap-3 text-sm">
