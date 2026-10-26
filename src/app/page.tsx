@@ -1,6 +1,5 @@
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { BrandSignatureBand } from "@/components/sections/brand-signature-band";
 import { ContactSection } from "@/components/sections/contact";
 import { FaqSection } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
@@ -19,7 +18,6 @@ export default function Home() {
         id="contenu"
       >
         <Hero />
-        <BrandSignatureBand />
         <ServicesSection />
         <ProjectsSection />
         <StandardsSection />
