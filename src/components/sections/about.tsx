@@ -9,7 +9,7 @@ const { about } = home;
 export function AboutSection() {
   return (
     <Section id="a-propos" tone="soft">
-      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <div>
           <SectionHeading eyebrow={about.eyebrow} title={about.title} />
           <div

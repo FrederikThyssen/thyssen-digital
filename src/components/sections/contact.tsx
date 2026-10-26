@@ -75,7 +75,7 @@ export function ContactSection() {
 
   return (
     <Section id="contact">
-      <Container className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
         <div>
           <SectionHeading
             description={contact.description}
@@ -124,8 +124,8 @@ export function ContactSection() {
               tabIndex={-1}
               {...register("website")}
             />
-            <div className="grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field
                   autoComplete="name"
                   error={errors.name?.message}
@@ -147,7 +147,7 @@ export function ContactSection() {
                   {...register("email")}
                 />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field
                   autoComplete="tel"
                   error={errors.phone?.message}
@@ -166,7 +166,7 @@ export function ContactSection() {
                   {...register("company")}
                 />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <SelectField
                   id="contact-project-type"
                   label="Type de projet (optionnel)"
@@ -180,7 +180,7 @@ export function ContactSection() {
                   {...register("budget")}
                 />
               </div>
-              <div className="grid gap-2">
+              <div className="grid min-w-0 gap-2">
                 <label className="text-sm font-semibold text-ink" htmlFor="contact-message">
                   Message <span aria-hidden="true">*</span>
                 </label>
@@ -286,7 +286,7 @@ function Field({
   const errorId = `${id}-error`;
 
   return (
-    <div className="grid gap-2">
+    <div className="grid min-w-0 gap-2">
       <label className="text-sm font-semibold text-ink" htmlFor={id}>
         {label}
         {required ? <span aria-hidden="true"> *</span> : null}
@@ -323,7 +323,7 @@ function SelectField({
   options: SelectOption[];
 } & UseFormRegisterReturn) {
   return (
-    <div className="grid gap-2">
+    <div className="grid min-w-0 gap-2">
       <label className="text-sm font-semibold text-ink" htmlFor={id}>
         {label}
       </label>

@@ -87,7 +87,7 @@ export function Hero() {
         aria-hidden="true"
         className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_75%_20%,black,transparent_65%)]"
       />
-      <Container className="grid items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-28 lg:pt-16 xl:gap-20">
+      <Container className="grid grid-cols-1 items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-28 lg:pt-16 xl:gap-20">
         <div>
           <p className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-3 py-1 text-sm sm:rounded-full font-medium text-muted-foreground shadow-soft">
             <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-[linear-gradient(135deg,#1350ff,#7d2cff)]" />

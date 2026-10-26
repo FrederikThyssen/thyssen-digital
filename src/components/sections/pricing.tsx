@@ -159,7 +159,7 @@ export function PricingSection() {
       </Section>
 
       <Section>
-        <Container className="grid gap-6 lg:grid-cols-2">
+        <Container className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="rounded-3xl border border-border bg-white p-7 shadow-soft sm:p-8">
             <h2 className="flex items-center gap-3 font-display text-2xl font-semibold text-ink">
               <Info aria-hidden="true" className="size-6 text-primary" />

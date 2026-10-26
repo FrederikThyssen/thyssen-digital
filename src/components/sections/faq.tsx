@@ -9,7 +9,7 @@ import { business, faq, home } from "@/content/site";
 export function FaqSection() {
   return (
     <Section id="faq" tone="soft">
-      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <Container className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
             description={home.faq.description}
