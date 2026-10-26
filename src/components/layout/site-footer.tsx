@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 
 import { BrandLogo } from "@/components/brand/brand-logo";
+import { MobileCtaBar } from "@/components/layout/mobile-cta-bar";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
 import { BRAND_NAME, BRAND_SIGNATURE, CONTACT_EMAIL } from "@/lib/constants";
@@ -22,7 +23,7 @@ const legalLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="pb-10 pt-16">
+    <footer className="pb-28 pt-16 lg:pb-10">
       <Container>
         <Divider className="mb-10" variant="gradient" />
         <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-start">
@@ -94,6 +95,7 @@ export function SiteFooter() {
           © {new Date().getFullYear()} {BRAND_NAME}. Tous droits réservés.
         </p>
       </Container>
+      <MobileCtaBar />
     </footer>
   );
 }
