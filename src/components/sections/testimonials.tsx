@@ -1,10 +1,9 @@
-import { ExternalLink, Star } from "lucide-react";
+import { ExternalLink, Quote, Star } from "lucide-react";
 import Image from "next/image";
 
-import { BackgroundGlow } from "@/components/backgrounds";
-import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { business, fallbackReviews, home } from "@/content/site";
 import { GOOGLE_WRITE_REVIEW_URL } from "@/lib/google";
@@ -21,7 +20,7 @@ type DisplayedReview = {
 
 function Stars({ className, rating }: { className: string; rating: number }) {
   return (
-    <div aria-label={`${rating} étoiles sur 5`} className="flex items-center gap-0.5 text-[#fbbc04]" role="img">
+    <div aria-label={`${rating} étoiles sur 5`} className="flex items-center gap-0.5 text-[#f5a400]" role="img">
       {Array.from({ length: 5 }, (_, index) => (
         <Star
           aria-hidden="true"
@@ -55,44 +54,35 @@ export async function TestimonialsSection() {
         }));
 
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="avis">
-      <BackgroundGlow
-        className="hidden lg:block"
-        intensity="low"
-        position="top-right"
-        size="lg"
-        tone="cyan"
-      />
-      <Container className="relative">
-        <FadeUp>
+    <Section id="avis" tone="soft">
+      <Container>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
             description={home.reviews.description}
             eyebrow={home.reviews.eyebrow}
             title={home.reviews.title}
           />
-        </FadeUp>
-
-        {summary && summary.userRatingCount > 0 ? (
-          <FadeUp className="mt-8" delay={0.05}>
-            <div className="flex flex-wrap items-center gap-3">
-              <Stars className="size-4" rating={Math.round(summary.rating)} />
-              <p className="text-sm font-medium text-foreground">
+          {summary && summary.userRatingCount > 0 ? (
+            <div className="flex items-center gap-3 rounded-2xl border border-border bg-white px-5 py-4 shadow-soft">
+              <Stars className="size-5" rating={Math.round(summary.rating)} />
+              <p className="text-sm font-semibold text-ink">
                 {summary.rating.toFixed(1).replace(".", ",")}/5 sur {summary.userRatingCount} avis
                 Google
               </p>
             </div>
-          </FadeUp>
-        ) : null}
+          ) : null}
+        </div>
 
-        <Stagger className="mt-8 grid gap-4 md:grid-cols-2">
+        <ul className="mt-12 grid gap-6 md:grid-cols-2">
           {reviews.map((review) => (
-            <StaggerItem key={review.id}>
-              <figure className="h-full rounded-2xl border border-white/10 bg-[linear-gradient(180deg,rgb(255_255_255_/_0.045),rgb(255_255_255_/_0.018))] p-6 shadow-[0_18px_70px_rgb(0_0_0_/_0.22)]">
+            <li key={review.id}>
+              <figure className="relative h-full rounded-2xl border border-border bg-white p-7 shadow-soft">
+                <Quote aria-hidden="true" className="absolute right-6 top-6 size-8 text-primary/15" />
                 <Stars className="size-4" rating={review.rating} />
-                <blockquote className="mt-4 line-clamp-6 text-base leading-7 text-foreground/84">
+                <blockquote className="mt-5 line-clamp-6 text-lg leading-8 text-ink">
                   {review.text}
                 </blockquote>
-                <figcaption className="mt-5 flex items-center gap-3">
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-border pt-5">
                   {review.authorPhotoUrl ? (
                     <Image
                       alt=""
@@ -103,39 +93,46 @@ export async function TestimonialsSection() {
                       unoptimized
                       width={36}
                     />
-                  ) : null}
-                  <span className="text-sm font-semibold text-foreground">{review.author}</span>
+                  ) : (
+                    <span
+                      aria-hidden="true"
+                      className="inline-flex size-9 items-center justify-center rounded-full bg-primary-soft font-semibold text-primary"
+                    >
+                      {review.author.replace(/[^\p{L}]/gu, "").charAt(0) || "?"}
+                    </span>
+                  )}
+                  <span className="text-sm font-semibold text-ink">{review.author}</span>
                   {review.relativeTime ? (
-                    <span className="text-xs text-muted-foreground">{review.relativeTime}</span>
+                    <span className="text-sm text-subtle-foreground">{review.relativeTime}</span>
                   ) : null}
                 </figcaption>
               </figure>
-            </StaggerItem>
+            </li>
           ))}
-        </Stagger>
+        </ul>
 
-        <FadeUp className="mt-10 flex flex-wrap items-center gap-4" delay={0.1}>
+        <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
           <Button
             href={business.googleProfileUrl}
             rel="noopener noreferrer"
             target="_blank"
             trailingIcon={<ExternalLink aria-hidden="true" className="size-4" />}
+            variant="secondary"
           >
             {home.reviews.cta}
             <span className="sr-only"> (nouvel onglet)</span>
           </Button>
           <a
-            className="inline-flex min-h-11 items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+            className="inline-flex min-h-11 items-center gap-1.5 rounded-md text-sm font-medium text-muted-foreground underline underline-offset-4 transition-colors duration-200 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             href={GOOGLE_WRITE_REVIEW_URL}
             rel="noopener noreferrer"
             target="_blank"
           >
             {home.reviews.leaveReviewCta}
             <span className="sr-only"> (nouvel onglet)</span>
-            <ExternalLink aria-hidden="true" className="size-3.5" />
           </a>
-        </FadeUp>
+        </div>
       </Container>
-    </section>
+    </Section>
   );
 }

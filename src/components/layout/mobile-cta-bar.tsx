@@ -16,7 +16,8 @@ export function MobileCtaBar() {
           href={business.phoneHref}
         >
           <Phone aria-hidden="true" className="size-4 text-primary" />
-          Appeler
+          <span className="sr-only">Appeler le </span>
+          {business.phoneDisplay}
         </a>
         <Link
           className={`${linkClassName} bg-primary text-white hover:bg-primary-hover`}

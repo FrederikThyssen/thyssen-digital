@@ -1,9 +1,6 @@
-import Image from "next/image";
-
-import { BackgroundGlow } from "@/components/backgrounds";
-import { FadeUp } from "@/components/motion";
+import { BrandLogo } from "@/components/brand/brand-logo";
 import { Container } from "@/components/ui/container";
-import { GlassPanel } from "@/components/ui/glass-panel";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { home } from "@/content/site";
 
@@ -11,49 +8,34 @@ const { about } = home;
 
 export function AboutSection() {
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24" id="a-propos">
-      <BackgroundGlow
-        className="hidden lg:block"
-        intensity="low"
-        position="top-left"
-        size="lg"
-        tone="violet"
-      />
-      <Container className="relative">
-        <FadeUp>
+    <Section id="a-propos" tone="soft">
+      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <div>
           <SectionHeading eyebrow={about.eyebrow} title={about.title} />
-        </FadeUp>
+          <div
+            aria-hidden="true"
+            className="mt-10 hidden size-40 items-center justify-center rounded-[2rem] border border-border bg-white shadow-card lg:flex"
+          >
+            <BrandLogo className="[&_svg]:h-16 [&_svg]:w-auto" decorative tone="light" variant="mark" />
+          </div>
+        </div>
 
-        <FadeUp className="mt-10" delay={0.05}>
-          <GlassPanel className="relative overflow-hidden border-white/12 p-6 shadow-[0_28px_100px_rgb(0_0_0_/_0.32)] sm:p-10">
-            <div
-              aria-hidden="true"
-              className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-cyan/70 to-transparent"
-            />
-            <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-start md:gap-10">
-              <div className="flex size-20 items-center justify-center rounded-2xl border border-accent-cyan/20 bg-primary/10 shadow-[0_0_40px_rgb(34_211_238_/_0.12)] sm:size-24">
-                <Image
-                  alt=""
-                  aria-hidden="true"
-                  className="h-auto w-12 sm:w-14"
-                  height={96}
-                  src="/brand/td-mark-accent.svg"
-                  unoptimized
-                  width={128}
-                />
-              </div>
-              <div>
-                <p className="text-lg leading-8 text-foreground/88 sm:text-xl sm:leading-9">
-                  {about.text}
-                </p>
-                <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-accent-cyan">
-                  {about.signature}
-                </p>
-              </div>
-            </div>
-          </GlassPanel>
-        </FadeUp>
+        <figure className="relative rounded-3xl border border-border bg-white p-8 shadow-card sm:p-10">
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-[linear-gradient(90deg,#1350ff,#00e5ff,#7d2cff)] sm:inset-x-10"
+          />
+          <blockquote className="text-lg leading-8 text-ink sm:text-xl sm:leading-9">
+            {about.text}
+          </blockquote>
+          <figcaption className="mt-8 flex items-center gap-4 border-t border-border pt-6">
+            <span className="inline-flex size-12 items-center justify-center rounded-2xl border border-border bg-surface-subtle lg:hidden">
+              <BrandLogo className="[&_svg]:h-6 [&_svg]:w-auto" decorative tone="light" variant="mark" />
+            </span>
+            <span className="text-sm font-semibold text-ink">{about.signature}</span>
+          </figcaption>
+        </figure>
       </Container>
-    </section>
+    </Section>
   );
 }

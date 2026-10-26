@@ -1,55 +1,54 @@
-import { ChevronDown } from "lucide-react";
+import { Phone, Plus } from "lucide-react";
 
-import { BackgroundGlow } from "@/components/backgrounds";
-import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
+import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { Divider } from "@/components/ui/divider";
+import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { faq, home } from "@/content/site";
+import { business, faq, home } from "@/content/site";
 
 export function FaqSection() {
   return (
-    <section className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28" id="faq">
-      <BackgroundGlow
-        className="hidden lg:block"
-        intensity="low"
-        position="top-left"
-        size="lg"
-        tone="violet"
-      />
-      <Container className="relative">
-        <Divider className="mb-10 opacity-70 sm:mb-12" variant="gradient" />
-        <FadeUp>
+    <Section id="faq" tone="soft">
+      <Container className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="lg:sticky lg:top-28 lg:self-start">
           <SectionHeading
             description={home.faq.description}
             eyebrow={home.faq.eyebrow}
             title={home.faq.title}
           />
-        </FadeUp>
+          <Button
+            className="mt-8"
+            href={business.phoneHref}
+            leadingIcon={<Phone aria-hidden="true" className="size-4 text-primary" />}
+            variant="secondary"
+          >
+            {home.hero.secondaryCta}
+          </Button>
+        </div>
 
-        <Stagger className="mt-10 grid gap-3">
+        <ul className="grid gap-3">
           {faq.map((item) => (
-            <StaggerItem key={item.question}>
-              <details className="group rounded-lg border border-white/10 bg-[linear-gradient(180deg,rgb(255_255_255_/_0.052),rgb(255_255_255_/_0.024))] shadow-[0_18px_70px_rgb(0_0_0_/_0.2)] backdrop-blur-md transition-[border-color,background-color,box-shadow,transform] duration-200 ease-standard open:border-accent-cyan/30 open:bg-surface-elevated open:shadow-[0_20px_80px_rgb(19_80_255_/_0.1)] hover:-translate-y-0.5 motion-reduce:transform-none">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 rounded-lg px-5 py-5 text-left text-base font-semibold text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan">
-                  <h3 className="text-base font-semibold">{item.question}</h3>
-                  <ChevronDown
+            <li key={item.question}>
+              <details className="group rounded-2xl border border-border bg-white shadow-soft transition-[border-color,box-shadow] duration-200 open:border-primary/30 open:shadow-card">
+                <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 rounded-2xl px-6 py-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
+                  <h3 className="font-display text-base font-semibold text-ink sm:text-lg">
+                    {item.question}
+                  </h3>
+                  <span
                     aria-hidden="true"
-                    className="size-5 shrink-0 text-accent-cyan transition-transform duration-200 ease-standard group-open:rotate-180"
-                  />
+                    className="inline-flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-soft text-primary transition-transform duration-200 group-open:rotate-45 motion-reduce:transition-none"
+                  >
+                    <Plus className="size-4" />
+                  </span>
                 </summary>
-                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-standard group-open:grid-rows-[1fr] motion-reduce:transition-none">
-                  <div className="overflow-hidden px-5">
-                    <p className="max-w-3xl pb-5 pt-0 text-sm leading-7 text-foreground/78">
-                      {item.answer}
-                    </p>
-                  </div>
-                </div>
+                <p className="px-6 pb-6 text-[0.95rem] leading-7 text-muted-foreground">
+                  {item.answer}
+                </p>
               </details>
-            </StaggerItem>
+            </li>
           ))}
-        </Stagger>
+        </ul>
       </Container>
-    </section>
+    </Section>
   );
 }

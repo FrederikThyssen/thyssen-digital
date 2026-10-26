@@ -1,19 +1,17 @@
-const NBSP = " ";
-const NARROW_NBSP = " ";
+const NBSP = "\u00a0";
 
 // Strings that must never be altered: links, anchors, phone/email hrefs and asset paths.
 const RAW_STRING_PATTERN = /^(https?:|\/|#|tel:|mailto:)/;
 
 /**
  * Applies French typography rules to a plain sentence:
- * non-breaking spaces before ; ! ? : » and after «, after numbers (prices, phone, durations),
- * and typographic apostrophes.
+ * non-breaking spaces (U+00A0, present in every web font) before ; ! ? : » and after «,
+ * after numbers (prices, phone, durations), and typographic apostrophes.
  */
 export function fr(text: string): string {
   return text
     .replace(/'/g, "’")
-    .replace(/ ([;!?])/g, `${NARROW_NBSP}$1`)
-    .replace(/ ([:»])/g, `${NBSP}$1`)
+    .replace(/ ([;!?:»])/g, `${NBSP}$1`)
     .replace(/« /g, `«${NBSP}`)
     .replace(/(\d) (?=\S)/g, `$1${NBSP}`);
 }
@@ -39,5 +37,6 @@ export function withFrenchTypography<T>(value: T): T {
 
 /** Formats an amount in euros, French style: "1 490 €". */
 export function formatEuro(amount: number): string {
-  return `${amount.toLocaleString("fr-FR")}${NBSP}€`;
+  // toLocaleString uses U+202F as thousands separator, missing from some fonts: normalise it.
+  return `${amount.toLocaleString("fr-FR").replace(/[\u202f\u00a0]/g, NBSP)}${NBSP}€`;
 }
