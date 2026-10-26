@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
@@ -90,6 +91,7 @@ export default function LegalNoticePage() {
           </div>
         </Container>
       </main>
+      <SiteFooter />
     </>
   );
 }
