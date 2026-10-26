@@ -14,11 +14,11 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      // Enforce a single canonical host (www) to avoid duplicate-content SEO issues.
+      // Enforce a single canonical host (no www) to avoid duplicate-content SEO issues.
       {
         source: "/:path*",
-        has: [{ type: "host", value: "thyssendigital.fr" }],
-        destination: "https://www.thyssendigital.fr/:path*",
+        has: [{ type: "host", value: "www.thyssendigital.fr" }],
+        destination: "https://thyssendigital.fr/:path*",
         permanent: true,
       },
     ];
