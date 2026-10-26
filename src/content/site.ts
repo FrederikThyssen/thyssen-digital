@@ -161,6 +161,9 @@ const rawNavItems: NavItem[] = [
 
 const rawHome = {
   hero: {
+    eyebrow: "Développeur web freelance · Hauts-de-France",
+    // Part of the title displayed with the brand gradient (must appear in `title`).
+    titleHighlight: "artisans, commerçants et TPE",
     title:
       "Création de sites web pour les artisans, commerçants et TPE des Hauts-de-France",
     subtitle: `Un site professionnel qui vous rend visible sur Google et vous apporte des demandes clients. Dès ${euro(PRICES.essentiel)}, livré en 2 à 4 semaines.`,
@@ -170,6 +173,14 @@ const rawHome = {
     secondaryCta: `Appeler le ${rawBusiness.phoneDisplay}`,
     trustLabel: "Ils m'ont fait confiance",
     trustItems: ["Fred Music", "Maison Marcelito"],
+    visual: {
+      imageAlt: "Site Fred Music, refonte réalisée par Thyssen Digital, affiché dans un navigateur.",
+      browserUrl: "fredmusic.fr",
+      requestTitle: "Nouvelle demande de devis",
+      requestText: "Reçue via votre site, directement par email",
+      mobileTitle: "Pensé pour le mobile",
+      mobileText: "Rapide et lisible sur téléphone",
+    },
   },
   services: {
     eyebrow: "Services",

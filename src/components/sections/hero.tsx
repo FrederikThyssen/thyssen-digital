@@ -1,125 +1,163 @@
-import { ArrowRight, ChevronDown, Phone, Star } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Phone, Smartphone, Star } from "lucide-react";
+import Image from "next/image";
 
-import { FadeUp, SlowZoomBackground } from "@/components/motion";
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
 import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { business, home } from "@/content/site";
 
 const { hero } = home;
 
+function HeroTitle() {
+  const [before, after] = hero.title.split(hero.titleHighlight);
+
+  if (after === undefined) {
+    return <NoBreakPlaces text={hero.title} />;
+  }
+
+  return (
+    <>
+      <NoBreakPlaces text={before} />
+      <span className="text-gradient-brand">{hero.titleHighlight}</span>
+      <NoBreakPlaces text={after} />
+    </>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
+      <div
+        aria-hidden="true"
+        className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-[linear-gradient(135deg,rgb(19_80_255_/_0.14),rgb(0_229_255_/_0.1)_45%,rgb(125_44_255_/_0.14))] blur-2xl"
+      />
+      <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_40px_80px_-32px_rgb(16_24_40_/_0.35)]">
+        <div className="flex h-9 items-center gap-2 border-b border-border bg-surface-subtle px-4">
+          <span aria-hidden="true" className="size-2.5 rounded-full bg-[#ff5f57]" />
+          <span aria-hidden="true" className="size-2.5 rounded-full bg-[#febc2e]" />
+          <span aria-hidden="true" className="size-2.5 rounded-full bg-[#28c840]" />
+          <span className="ml-3 min-w-0 flex-1 truncate rounded-md bg-white px-3 py-0.5 text-center text-xs text-subtle-foreground">
+            {hero.visual.browserUrl}
+          </span>
+        </div>
+        <div className="relative aspect-[16/10]">
+          <Image
+            alt={hero.visual.imageAlt}
+            className="object-cover object-top"
+            fetchPriority="high"
+            fill
+            loading="eager"
+            sizes="(min-width: 1024px) 560px, (min-width: 640px) 576px, 100vw"
+            src="/images/image-fredmusic.png"
+          />
+        </div>
+      </div>
+
+      <div className="absolute -bottom-6 left-3 flex max-w-[19rem] items-center gap-3 rounded-2xl border border-border bg-white p-3.5 shadow-card sm:-left-6">
+        <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-white">
+          <Mail aria-hidden="true" className="size-5" />
+        </span>
+        <span className="grid">
+          <span className="text-sm font-semibold text-ink">{hero.visual.requestTitle}</span>
+          <span className="text-xs leading-5 text-muted-foreground">{hero.visual.requestText}</span>
+        </span>
+      </div>
+
+      <div className="absolute right-3 top-16 hidden items-center gap-3 rounded-2xl border border-border bg-white p-3 shadow-card sm:flex sm:-right-5">
+        <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-primary">
+          <Smartphone aria-hidden="true" className="size-5" />
+        </span>
+        <span className="grid">
+          <span className="text-sm font-semibold text-ink">{hero.visual.mobileTitle}</span>
+          <span className="text-xs text-muted-foreground">{hero.visual.mobileText}</span>
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate min-h-svh overflow-hidden bg-background"
+      className="relative isolate overflow-hidden bg-white"
       id="accueil"
     >
-      <SlowZoomBackground
-        className="absolute inset-0"
-        image="/images/hero-definitif.png"
-        imageClassName="object-contain object-[62%_center] lg:object-center"
-        priority
-      />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(90deg,rgb(5_7_13_/_0.92),rgb(5_7_13_/_0.78)_43%,rgb(5_7_13_/_0.5)_72%,rgb(5_7_13_/_0.35))] lg:bg-[linear-gradient(90deg,rgb(5_7_13_/_0.8),rgb(5_7_13_/_0.5)_38%,rgb(5_7_13_/_0.08)_67%,rgb(5_7_13_/_0))]"
+        className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_75%_20%,black,transparent_65%)]"
       />
-      <div
-        aria-hidden="true"
-        className="absolute left-0 top-1/4 h-[32rem] w-[34rem] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgb(47_124_255_/_0.2),transparent_64%)] blur-3xl"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 left-[18%] h-40 w-[42rem] rounded-full bg-[radial-gradient(ellipse,rgb(34_211_238_/_0.16),transparent_68%)] blur-3xl"
-      />
-
-      <div className="relative z-10 flex min-h-svh flex-col justify-center px-6 pb-12 pt-32 sm:px-10 lg:px-[5.45vw] lg:pb-10 lg:pt-36">
-        {/* Rendered without entrance animation so the headline paints immediately (LCP). */}
-        <div className="max-w-xl lg:max-w-[50rem] xl:max-w-[54rem]">
-          <div>
-            <h1
-              className="text-[clamp(2rem,8.4vw,3.1rem)] font-semibold leading-[1.08] tracking-normal text-foreground lg:text-[clamp(3rem,4vw,4.1rem)]"
-              id="hero-title"
-            >
-              <NoBreakPlaces text={hero.title} />
-            </h1>
-          </div>
-
-          <div>
-            <p className="mt-6 max-w-[36rem] text-base leading-8 text-foreground/84 lg:max-w-[40rem] lg:text-[1.15rem] lg:leading-8">
-              {hero.subtitle}
-            </p>
-            <p className="mt-4 max-w-[36rem] text-sm leading-6 text-foreground/72 lg:max-w-[40rem] lg:text-base">
+      <Container className="grid items-center gap-14 pb-20 pt-10 sm:pt-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-28 lg:pt-16 xl:gap-20">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-3 py-1 text-sm sm:rounded-full font-medium text-muted-foreground shadow-soft">
+            <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-[linear-gradient(135deg,#1350ff,#7d2cff)]" />
+            <span>
+              <NoBreakPlaces text={hero.eyebrow} />
+            </span>
+          </p>
+          <h1
+            className="mt-6 font-display text-[2.35rem] font-semibold leading-[1.06] tracking-[-0.03em] text-ink sm:text-5xl lg:text-[3.25rem] xl:text-[3.6rem]"
+            id="hero-title"
+          >
+            <HeroTitle />
+          </h1>
+          <p className="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">{hero.subtitle}</p>
+          <p className="mt-4 flex max-w-xl gap-2 text-[0.95rem] leading-7 text-muted-foreground">
+            <MapPin aria-hidden="true" className="mt-1 size-4 shrink-0 text-primary" />
+            <span>
               <NoBreakPlaces text={hero.localLine} />
-            </p>
-          </div>
+            </span>
+          </p>
 
-          <div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:mt-10 lg:gap-5">
-              <Button
-                className="min-h-14 rounded-2xl border-white/10 bg-[linear-gradient(135deg,#1350ff,#5b2cff)] px-6 shadow-[0_0_48px_rgb(47_124_255_/_0.46),inset_0_1px_0_rgb(255_255_255_/_0.18)] transition-[box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_60px_rgb(80_227_255_/_0.34),0_18px_42px_rgb(47_124_255_/_0.22)] motion-reduce:transform-none lg:min-h-16 lg:px-8 lg:text-base"
-                href="#contact"
-                size="lg"
-                trailingIcon={<ArrowRight aria-hidden="true" className="size-5" />}
-              >
-                {hero.primaryCta}
-              </Button>
-              <Button
-                className="min-h-14 rounded-2xl border-white/14 bg-white/[0.04] px-6 text-foreground shadow-[inset_0_1px_0_rgb(255_255_255_/_0.1)] backdrop-blur-md transition-[border-color,background-color,transform] duration-300 hover:-translate-y-0.5 hover:border-accent-cyan/30 hover:bg-white/[0.07] motion-reduce:transform-none lg:min-h-16 lg:px-8 lg:text-base"
-                href={business.phoneHref}
-                leadingIcon={<Phone aria-hidden="true" className="size-5 text-accent-cyan" />}
-                size="lg"
-                variant="secondary"
-              >
-                {hero.secondaryCta}
-              </Button>
-            </div>
-            <a
-              className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-foreground/84 underline-offset-4 transition-colors duration-200 hover:text-white hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
-              href={business.googleProfileUrl}
-              rel="noopener noreferrer"
-              target="_blank"
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button
+              href="#contact"
+              size="lg"
+              trailingIcon={<ArrowRight aria-hidden="true" className="size-5" />}
             >
-              <span aria-hidden="true" className="flex gap-0.5 text-[#fbbc04]">
-                {Array.from({ length: 5 }, (_, index) => (
-                  <Star className="size-4" fill="currentColor" key={index} />
-                ))}
-              </span>
-              <span>
-                {business.googleRatingLabel}
-                <span className="sr-only"> (ouvre ma fiche Google dans un nouvel onglet)</span>
-              </span>
-            </a>
+              {hero.primaryCta}
+            </Button>
+            <Button
+              href={business.phoneHref}
+              leadingIcon={<Phone aria-hidden="true" className="size-5 text-primary" />}
+              size="lg"
+              variant="secondary"
+            >
+              {hero.secondaryCta}
+            </Button>
           </div>
 
-          <div>
-            <div className="mt-10 max-w-[42rem] lg:mt-12">
-              <p className="text-xs text-foreground/72">{hero.trustLabel}</p>
-              <div className="mt-4 inline-flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-2xl border border-white/10 bg-background/20 p-1 text-sm font-medium text-foreground/80 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.06)] backdrop-blur-md">
-                {hero.trustItems.map((item) => (
-                  <span
-                    className="inline-flex items-center gap-2 rounded-xl px-3 py-2 transition-colors duration-200 hover:bg-white/[0.045] hover:text-foreground/84"
-                    key={item}
-                  >
-                    <span aria-hidden="true" className="size-4 rounded-full border border-white/18 bg-white/[0.04] shadow-[0_0_18px_rgb(80_227_255_/_0.1)]" />
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <a
+            className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-medium text-ink underline-offset-4 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            href={business.googleProfileUrl}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <span aria-hidden="true" className="flex gap-0.5 text-[#f5a400]">
+              {Array.from({ length: 5 }, (_, index) => (
+                <Star className="size-4" fill="currentColor" key={index} />
+              ))}
+            </span>
+            <span>
+              {business.googleRatingLabel}
+              <span className="sr-only"> (ouvre ma fiche Google dans un nouvel onglet)</span>
+            </span>
+          </a>
+
+          <div className="mt-8 border-t border-border pt-6">
+            <p className="text-sm text-subtle-foreground">{hero.trustLabel}</p>
+            <ul className="mt-3 flex flex-wrap items-center gap-x-8 gap-y-2">
+              {hero.trustItems.map((item) => (
+                <li className="font-display text-lg font-semibold tracking-tight text-ink/80" key={item}>
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
-        <FadeUp className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 lg:block" delay={0.4}>
-          <a
-            aria-label="Faire défiler vers les services"
-            className="inline-flex size-9 animate-[hero-chevron_3.4s_ease-in-out_infinite] items-center justify-center rounded-full border border-white/10 bg-white/[0.025] text-white/58 backdrop-blur-sm transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan motion-reduce:animate-none"
-            href="#services"
-          >
-            <ChevronDown aria-hidden="true" className="size-5" />
-          </a>
-        </FadeUp>
-      </div>
+        <HeroVisual />
+      </Container>
     </section>
   );
 }
