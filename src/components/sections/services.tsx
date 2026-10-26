@@ -1,14 +1,5 @@
-import {
-  AppWindow,
-  Braces,
-  Database,
-  Gauge,
-  Monitor,
-  PanelsTopLeft,
-  RefreshCw,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowRight, Monitor, RefreshCw, Wrench, type LucideIcon } from "lucide-react";
+import Link from "next/link";
 
 import { FadeUp, Stagger, StaggerItem } from "@/components/motion";
 import {
@@ -21,64 +12,15 @@ import {
 import { Container } from "@/components/ui/container";
 import { Divider } from "@/components/ui/divider";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { home, type HomeService } from "@/content/site";
 
-type Service = {
-  title: string;
-  description: string;
-  outcome: string;
-  icon: LucideIcon;
+const { services } = home;
+
+const serviceIcons: Record<HomeService["id"], LucideIcon> = {
+  vitrine: Monitor,
+  refonte: RefreshCw,
+  maintenance: Wrench,
 };
-
-const services: Service[] = [
-  {
-    title: "Site vitrine",
-    description: "Une présence rapide, claire et soignée pour présenter votre activité.",
-    outcome: "Image de marque, conversion, SEO local",
-    icon: Monitor,
-  },
-  {
-    title: "Application Web",
-    description: "Des interfaces robustes pour vos clients, équipes ou opérations.",
-    outcome: "Parcours fluides, logique métier, produit évolutif",
-    icon: AppWindow,
-  },
-  {
-    title: "Refonte",
-    description: "Moderniser l'expérience sans perdre ce qui fait déjà votre force.",
-    outcome: "Structure clarifiée, design actuel, performance",
-    icon: RefreshCw,
-  },
-  {
-    title: "API",
-    description: "Des fondations fiables pour connecter vos outils et vos données.",
-    outcome: "Endpoints propres, sécurité, intégrations",
-    icon: Braces,
-  },
-  {
-    title: "Base de données",
-    description: "Des modèles structurés pour soutenir la croissance du produit.",
-    outcome: "Données fiables, requêtes optimisées, scalabilité",
-    icon: Database,
-  },
-  {
-    title: "Interface d'administration",
-    description: "Des outils internes efficaces, lisibles et pensés pour le quotidien.",
-    outcome: "Gestion simple, droits, tableaux de bord",
-    icon: PanelsTopLeft,
-  },
-  {
-    title: "Automatisation",
-    description: "Des workflows qui réduisent les tâches répétitives et les frictions.",
-    outcome: "Gain de temps, moins d'erreurs, suivi clair",
-    icon: Gauge,
-  },
-  {
-    title: "Maintenance",
-    description: "Un accompagnement durable pour garder un produit propre et stable.",
-    outcome: "Corrections, évolutions, stabilité long terme",
-    icon: Wrench,
-  },
-];
 
 export function ServicesSection() {
   return (
@@ -107,20 +49,20 @@ export function ServicesSection() {
         <FadeUp>
           <SectionHeading
             className="relative"
-            description="Sites web, applications, API et outils métiers conçus avec une attention particulière portée à la performance, l'expérience utilisateur et la maintenabilité."
-            eyebrow="Services"
-            title="Des solutions digitales pensées pour durer."
+            description={services.description}
+            eyebrow={services.eyebrow}
+            title={services.title}
           />
         </FadeUp>
 
-        <Stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service) => {
-            const Icon = service.icon;
+        <Stagger className="mt-10 grid gap-4 md:grid-cols-3">
+          {services.items.map((service) => {
+            const Icon = serviceIcons[service.id];
 
             return (
               <StaggerItem key={service.title}>
                 <Card
-                  className="group relative h-full min-h-[15.5rem] overflow-hidden border-white/10 bg-[linear-gradient(155deg,rgb(255_255_255_/_0.075),rgb(255_255_255_/_0.026)_48%,rgb(47_124_255_/_0.045))] shadow-[0_22px_80px_rgb(0_0_0_/_0.28)]"
+                  className="group relative flex h-full flex-col overflow-hidden border-white/10 bg-[linear-gradient(155deg,rgb(255_255_255_/_0.075),rgb(255_255_255_/_0.026)_48%,rgb(47_124_255_/_0.045))] shadow-[0_22px_80px_rgb(0_0_0_/_0.28)]"
                   interactive
                   variant="glass"
                 >
@@ -144,19 +86,41 @@ export function ServicesSection() {
                     <span className="inline-flex size-11 items-center justify-center rounded-md border border-accent-cyan/20 bg-primary/10 text-accent-cyan shadow-[0_0_28px_rgb(34_211_238_/_0.1)]">
                       <Icon aria-hidden="true" className="size-5" />
                     </span>
-                    <CardTitle>{service.title}</CardTitle>
+                    <CardTitle className="text-xl">{service.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="relative">
-                    <CardDescription>{service.description}</CardDescription>
-                    <div className="mt-5 rounded-md border border-white/10 bg-background/35 px-3 py-2 text-[0.72rem] font-medium leading-5 text-foreground/70 transition-colors duration-200 group-hover:border-accent-cyan/25 group-hover:text-foreground">
-                      {service.outcome}
-                    </div>
+                  <CardContent className="relative flex flex-1 flex-col">
+                    <CardDescription className="text-foreground/78">
+                      {service.description}
+                    </CardDescription>
+                    <p className="mt-5 rounded-md border border-white/10 bg-background/35 px-3 py-2 text-sm font-semibold leading-6 text-accent-cyan transition-colors duration-200 group-hover:border-accent-cyan/25">
+                      {service.priceLabel}
+                    </p>
+                    <Link
+                      className="mt-auto inline-flex min-h-11 items-center gap-1.5 self-start rounded-md pt-4 text-sm font-semibold text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+                      href="/tarifs"
+                    >
+                      {services.linkLabel}
+                      <span className="sr-only"> : {service.title}</span>
+                      <ArrowRight aria-hidden="true" className="size-4" />
+                    </Link>
                   </CardContent>
                 </Card>
               </StaggerItem>
             );
           })}
         </Stagger>
+
+        <FadeUp className="mt-8">
+          <p className="text-center text-base leading-7 text-foreground/78">
+            {services.specificNeed}{" "}
+            <a
+              className="inline-flex min-h-11 items-center rounded-md font-semibold text-accent-cyan underline underline-offset-4 transition-colors duration-200 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan"
+              href="#contact"
+            >
+              {services.specificNeedCta}
+            </a>
+          </p>
+        </FadeUp>
       </Container>
     </section>
   );
