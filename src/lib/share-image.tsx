@@ -30,20 +30,23 @@ export async function renderShareImage({
           justifyContent: "space-between",
           padding: "64px 72px",
           background:
-            "radial-gradient(circle at 85% 15%, rgba(47,124,255,0.35), transparent 45%), radial-gradient(circle at 10% 90%, rgba(140,109,255,0.25), transparent 40%), #070b14",
-          color: "#f7f9fc",
+            "radial-gradient(circle at 88% 12%, rgba(19,80,255,0.16), transparent 42%), radial-gradient(circle at 8% 95%, rgba(125,44,255,0.12), transparent 40%), #ffffff",
+          color: "#0b1220",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
           {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse needs a plain img */}
           <img alt="" height={96} src={logoSrc} width={96} />
-          <div style={{ display: "flex", fontSize: 36, letterSpacing: 6 }}>THYSSEN DIGITAL</div>
+          <div style={{ display: "flex", flexDirection: "column", lineHeight: 1.1 }}>
+            <div style={{ display: "flex", fontSize: 34, letterSpacing: 8 }}>THYSSEN</div>
+            <div style={{ display: "flex", fontSize: 22, letterSpacing: 12, color: "#1350ff" }}>DIGITAL</div>
+          </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", fontSize: 58, lineHeight: 1.12, maxWidth: 1080 }}>{title}</div>
-          <div style={{ display: "flex", fontSize: 34, color: "#50e3ff" }}>{subtitle}</div>
+          <div style={{ display: "flex", fontSize: 34, color: "#1350ff" }}>{subtitle}</div>
         </div>
-        <div style={{ display: "flex", fontSize: 28, color: "#c9d3e3" }}>
+        <div style={{ display: "flex", fontSize: 28, color: "#475369" }}>
           {`thyssendigital.fr · ${business.phoneDisplay}`}
         </div>
       </div>

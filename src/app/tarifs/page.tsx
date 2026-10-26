@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Link from "next/link";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ContactSection } from "@/components/sections/contact";
 import { PricingSection } from "@/components/sections/pricing";
 import { Container } from "@/components/ui/container";
-import { pricingPage } from "@/content/site";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
 import { JsonLd } from "@/components/seo/json-ld";
+import { pricingPage } from "@/content/site";
 import { buildPageMetadata } from "@/lib/metadata";
 import { breadcrumbJsonLd } from "@/lib/structured-data";
 
@@ -28,38 +29,35 @@ export default function PricingPage() {
         ])}
       />
       <SiteHeader />
-      <main
-        className="relative overflow-hidden bg-[#050712]"
-        id="contenu"
-      >
+      <main className="bg-background" id="contenu">
         <section
-          className="relative isolate overflow-hidden pb-16 pt-32 sm:pb-20 lg:pt-40"
+          className="relative isolate overflow-hidden border-b border-border bg-background-secondary"
           id="accueil"
         >
-          <Image
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 -z-20 size-full object-cover opacity-55"
-            fill
-            sizes="100vw"
-            src="/images/hero-definitif.png"
-          />
           <div
             aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(5_7_18_/_0.96)_0%,rgb(5_7_18_/_0.78)_44%,rgb(5_7_18_/_0.44)_100%),linear-gradient(180deg,rgb(5_7_18_/_0.28)_0%,rgb(5_7_18_/_0.88)_100%)]"
+            className="bg-dots absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_80%_10%,black,transparent_60%)]"
           />
-          <Container className="relative">
-            <div className="max-w-3xl">
-              <p className="text-xs font-semibold uppercase tracking-[0.34em] text-accent-cyan">
-                {pricingPage.eyebrow}
-              </p>
-              <h1 className="mt-6 text-[clamp(2.4rem,7vw,5rem)] font-semibold leading-[1] tracking-[-0.04em] text-foreground">
-                {pricingPage.title}
-              </h1>
-              <p className="mt-7 max-w-2xl text-base leading-8 text-foreground/84 sm:text-lg">
-                {pricingPage.subtitle}
-              </p>
-            </div>
+          <Container className="py-14 sm:py-20 lg:py-24">
+            <nav aria-label="Fil d'Ariane">
+              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+                <li>
+                  <Link className="rounded-sm hover:text-primary hover:underline" href="/">
+                    Accueil
+                  </Link>
+                </li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="font-medium text-ink">
+                  Tarifs
+                </li>
+              </ol>
+            </nav>
+            <h1 className="mt-6 max-w-3xl font-display text-4xl font-semibold leading-[1.06] tracking-[-0.03em] text-ink sm:text-5xl lg:text-6xl">
+              {pricingPage.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
+              <NoBreakPlaces text={pricingPage.subtitle} />
+            </p>
           </Container>
         </section>
         <PricingSection />

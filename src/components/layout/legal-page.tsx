@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
+import { fr } from "@/lib/typography";
 
 export const legalLinkClassName =
   "font-medium text-primary underline underline-offset-4 transition-colors duration-200 hover:text-primary-hover";
@@ -25,7 +26,7 @@ export function LegalPage({
       <main id="contenu">
         <div className="border-b border-border bg-background-secondary">
           <Container className="py-14 sm:py-20">
-            <SectionHeading as="h1" description={description} eyebrow={eyebrow} title={title} />
+            <SectionHeading as="h1" description={fr(description)} eyebrow={eyebrow} title={title} />
           </Container>
         </div>
         <Container className="py-14 sm:py-16">
