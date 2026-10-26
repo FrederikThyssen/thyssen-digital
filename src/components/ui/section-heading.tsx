@@ -27,15 +27,26 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-accent-cyan">
+        <p className="mb-4 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+          <span aria-hidden="true" className="h-px w-6 bg-primary" />
           {eyebrow}
         </p>
       ) : null}
-      <Heading className="text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
+      <Heading
+        className={cn(
+          "font-display font-semibold leading-[1.1] tracking-[-0.02em] text-ink",
+          Heading === "h1" ? "text-4xl sm:text-5xl lg:text-6xl" : "text-3xl sm:text-4xl lg:text-[2.75rem]",
+        )}
+      >
         {title}
       </Heading>
       {description ? (
-        <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+        <p
+          className={cn(
+            "mt-5 max-w-2xl text-lg leading-8 text-muted-foreground",
+            align === "center" && "mx-auto",
+          )}
+        >
           {description}
         </p>
       ) : null}

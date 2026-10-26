@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const cardVariants = cva("rounded-lg border text-foreground", {
+const cardVariants = cva("rounded-2xl border text-foreground", {
   variants: {
     variant: {
       glass: "border-border bg-surface-glass shadow-card backdrop-blur-md",
@@ -11,7 +11,7 @@ const cardVariants = cva("rounded-lg border text-foreground", {
       outline: "border-border bg-transparent",
     },
     interactive: {
-      true: "transition-[border-color,background-color,box-shadow,transform] duration-200 ease-standard hover:-translate-y-0.5 hover:border-border-strong hover:bg-surface-hover hover:shadow-[0_18px_60px_rgb(19_80_255_/_0.08)] motion-reduce:transform-none",
+      true: "transition-[border-color,box-shadow,transform] duration-200 ease-standard hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lift motion-reduce:transform-none",
       false: "",
     },
   },
@@ -42,7 +42,7 @@ export function CardHeader({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("space-y-2 p-5 pb-0", className)} {...props} />;
+  return <div className={cn("space-y-2 p-6 pb-0", className)} {...props} />;
 }
 
 export function CardTitle({
@@ -51,7 +51,7 @@ export function CardTitle({
 }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h3
-      className={cn("text-base font-semibold leading-6 text-foreground", className)}
+      className={cn("font-display text-lg font-semibold leading-7 text-ink", className)}
       {...props}
     />
   );
@@ -63,7 +63,7 @@ export function CardDescription({
 }: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("text-sm leading-6 text-muted-foreground", className)}
+      className={cn("text-[0.95rem] leading-7 text-muted-foreground", className)}
       {...props}
     />
   );
@@ -73,7 +73,7 @@ export function CardContent({
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-5", className)} {...props} />;
+  return <div className={cn("p-6", className)} {...props} />;
 }
 
 export function CardFooter({
@@ -82,7 +82,7 @@ export function CardFooter({
 }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("flex items-center gap-3 p-5 pt-0", className)}
+      className={cn("flex items-center gap-3 p-6 pt-0", className)}
       {...props}
     />
   );

@@ -4,19 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "group relative inline-flex h-fit items-center justify-center gap-2 overflow-hidden rounded-md border text-sm font-semibold transition-colors duration-200 before:pointer-events-none before:absolute before:inset-y-0 before:left-[-45%] before:w-1/3 before:skew-x-[-18deg] before:bg-white/12 before:opacity-0 before:transition-all before:duration-500 hover:before:left-[115%] hover:before:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent-cyan disabled:pointer-events-none disabled:opacity-50 motion-reduce:before:hidden",
+  "group relative inline-flex h-fit items-center justify-center gap-2 rounded-xl border text-sm font-semibold transition-[background-color,border-color,color,box-shadow,transform] duration-200 ease-standard focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:pointer-events-none disabled:opacity-60",
   {
     variants: {
       variant: {
         primary:
-          "border-[#1350ff] bg-[#1350ff] px-5 text-primary-foreground shadow-glow hover:border-accent-cyan hover:bg-accent-cyan hover:text-background active:bg-[#1350ff]",
+          "border-primary bg-primary px-5 text-primary-foreground shadow-glow hover:-translate-y-px hover:border-primary-hover hover:bg-primary-hover active:translate-y-0 motion-reduce:transform-none",
         secondary:
-          "border-border bg-surface px-5 text-foreground hover:bg-surface-hover active:bg-surface",
+          "border-border-strong bg-surface px-5 text-ink shadow-soft hover:border-primary/40 hover:bg-surface-hover",
         ghost:
-          "border-transparent bg-transparent px-4 text-muted-foreground hover:bg-surface hover:text-foreground active:bg-surface-hover",
+          "border-transparent bg-transparent px-4 text-muted-foreground hover:bg-surface-subtle hover:text-ink",
+        inverse:
+          "border-white bg-white px-5 text-ink hover:bg-primary-soft",
       },
       size: {
-        sm: "min-h-9 px-3 text-xs",
+        sm: "min-h-10 px-4 text-sm",
         md: "min-h-11",
         lg: "min-h-12 px-6 text-base",
       },
@@ -59,13 +61,11 @@ export function Button(props: ButtonProps) {
   const content = (
     <>
       {leadingIcon ? (
-        <span className="relative z-10 inline-flex transition-transform duration-200 group-hover:-translate-x-0.5 motion-reduce:transform-none">
-          {leadingIcon}
-        </span>
+        <span className="inline-flex">{leadingIcon}</span>
       ) : null}
-      <span className="relative z-10">{children}</span>
+      <span>{children}</span>
       {trailingIcon ? (
-        <span className="relative z-10 inline-flex transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transform-none">
+        <span className="inline-flex transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transform-none">
           {trailingIcon}
         </span>
       ) : null}

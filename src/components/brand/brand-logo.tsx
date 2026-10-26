@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
   variant?: "mark" | "horizontal" | "full";
-  tone?: "default" | "white" | "black" | "accent";
+  /** "accent": official raster logo (dark backgrounds). "light": vector logo for light backgrounds. */
+  tone?: "default" | "white" | "black" | "accent" | "light";
   className?: string;
   imageClassName?: string;
   showSignature?: boolean;
@@ -20,6 +21,7 @@ const toneClassName = {
   white: "text-white",
   black: "text-black",
   accent: "text-foreground",
+  light: "text-ink",
 };
 
 export function BrandLogo({
@@ -82,7 +84,12 @@ export function BrandLogo({
       <BrandMarkSvg gradientId={gradientId} tone={tone} />
       {variant !== "mark" ? (
         <span className="grid gap-1 leading-none">
-          <span className="text-sm font-semibold tracking-[0.28em] text-white">
+          <span
+            className={cn(
+              "text-sm font-semibold tracking-[0.28em]",
+              tone === "light" ? "text-ink" : "text-white",
+            )}
+          >
             THYSSEN
           </span>
           <span className="text-[0.65rem] font-semibold tracking-[0.42em] text-primary">
@@ -106,7 +113,8 @@ function BrandMarkSvg({
   gradientId: string;
   tone: BrandLogoProps["tone"];
 }) {
-  const baseFill = tone === "accent" ? `url(#${gradientId}-base)` : "currentColor";
+  const hasGradient = tone === "accent" || tone === "light";
+  const baseFill = hasGradient ? `url(#${gradientId}-base)` : "currentColor";
   const glowId = `${gradientId}-glow`;
 
   return (
@@ -116,7 +124,7 @@ function BrandMarkSvg({
       focusable="false"
       viewBox="0 0 128 96"
     >
-      {tone === "accent" ? (
+      {hasGradient ? (
         <defs>
           <linearGradient
             gradientUnits="userSpaceOnUse"
@@ -194,6 +202,17 @@ function BrandMarkSvg({
         fill={baseFill}
         fillRule="evenodd"
       />
+      {tone === "light" ? (
+        <>
+          <path d="M12 17h76l8 25H20L12 17Z" fill={`url(#${gradientId}-top)`} />
+          <path d="M42 42h22v54L42 84V42Z" fill={`url(#${gradientId}-stem)`} opacity=".92" />
+          <path
+            d="M72 17h10c27.5 0 44 17.4 44 39 0 22.6-17.6 40-45.5 40H72V72h8.5c12.2 0 21-6.4 21-16 0-9.8-8.8-16-21-16H72V17Z"
+            fill={`url(#${gradientId}-edge)`}
+            opacity=".82"
+          />
+        </>
+      ) : null}
       {tone === "accent" ? (
         <>
           <path
