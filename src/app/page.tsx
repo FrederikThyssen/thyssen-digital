@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { AboutSection } from "@/components/sections/about";
 import { ContactSection } from "@/components/sections/contact";
 import { FaqSection } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
@@ -22,6 +23,7 @@ export default function Home() {
         <ProjectsSection />
         <TestimonialsSection />
         <StandardsSection />
+        <AboutSection />
         <ProcessSection />
         <FaqSection />
         <ContactSection />
