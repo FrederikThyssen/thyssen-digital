@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
 
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
-import { Container } from "@/components/ui/container";
-import { Divider } from "@/components/ui/divider";
-import { SectionHeading } from "@/components/ui/section-heading";
-import { CONTACT_EMAIL, SITE_URL } from "@/lib/constants";
+import { LegalPage, LegalSection, legalLinkClassName } from "@/components/layout/legal-page";
+import { business, legal } from "@/content/site";
+import { SITE_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description:
-    "Collecte, utilisation et conservation des données personnelles transmises via le site Thyssen Digital.",
+    "Données collectées par le formulaire de contact Thyssen Digital : finalité, base légale, durée de conservation, prestataires et vos droits.",
   alternates: {
     canonical: `${SITE_URL}/politique-confidentialite`,
   },
@@ -18,72 +15,82 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <>
-      <SiteHeader />
-      <main className="min-h-screen pt-32" id="contenu">
-        <Container className="py-16">
-          <SectionHeading
-            description="Informations sur la collecte, l'utilisation et la protection des données personnelles."
-            eyebrow="Confidentialité"
-            title="Politique de confidentialité"
-          />
-          <Divider className="my-10" variant="gradient" />
-          <div className="max-w-3xl space-y-8 text-sm leading-7 text-muted-foreground">
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Données collectées</h2>
-              <p>
-                Les données transmises via le site se limitent aux informations que
-                vous choisissez de communiquer lors d&apos;une prise de contact : nom,
-                adresse email, entreprise, budget indicatif et contenu du message.
-              </p>
-            </section>
+    <LegalPage
+      description="Comment sont utilisées les informations que vous m'envoyez via le formulaire de contact."
+      eyebrow="Confidentialité"
+      title="Politique de confidentialité"
+    >
+      <LegalSection title="Responsable du traitement">
+        <p>
+          {business.owner} ({business.name}), {legal.address}. Contact :{" "}
+          <a className={legalLinkClassName} href={business.emailHref}>
+            {business.email}
+          </a>
+          .
+        </p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Finalité</h2>
-              <p>
-                Ces informations servent uniquement à comprendre votre demande,
-                répondre à votre message et préparer un éventuel échange autour de
-                votre projet digital.
-              </p>
-            </section>
+      <LegalSection title="Données collectées">
+        <p>
+          Uniquement les informations que vous saisissez dans le formulaire de contact : nom,
+          adresse email, et si vous les indiquez, téléphone, entreprise, type de projet, budget
+          indicatif, ainsi que le contenu de votre message.
+        </p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Conservation</h2>
-              <p>
-                Les messages reçus sont conservés le temps nécessaire au traitement de
-                la demande et au suivi de la relation professionnelle, sauf demande de
-                suppression de votre part.
-              </p>
-            </section>
+      <LegalSection title="Finalité et base légale">
+        <p>
+          Ces données servent uniquement à répondre à votre demande et à préparer un devis. Ce
+          traitement repose sur les mesures précontractuelles prises à votre demande (article 6.1.b
+          du RGPD). Elles ne sont jamais vendues ni utilisées à des fins publicitaires.
+        </p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Partage des données</h2>
-              <p>
-                Les données personnelles ne sont ni vendues ni transmises à des tiers
-                à des fins commerciales. Elles peuvent uniquement être traitées par les
-                services techniques nécessaires au fonctionnement du site et de la
-                messagerie.
-              </p>
-            </section>
+      <LegalSection title="Durée de conservation">
+        <p>{legal.retention}</p>
+      </LegalSection>
 
-            <section className="space-y-3">
-              <h2 className="text-lg font-semibold text-foreground">Vos droits</h2>
-              <p>
-                Vous pouvez demander l&apos;accès, la rectification ou la suppression de vos
-                données personnelles en écrivant à{" "}
-              <a
-                className="text-foreground underline decoration-border-strong underline-offset-4 transition-colors duration-200 hover:text-accent-cyan"
-                href={`mailto:${CONTACT_EMAIL}`}
-              >
-                {CONTACT_EMAIL}
-              </a>
-                .
-              </p>
-            </section>
-          </div>
-        </Container>
-      </main>
-      <SiteFooter />
-    </>
+      <LegalSection title="Destinataires et prestataires">
+        <p>
+          Je suis le seul destinataire de vos messages. Deux prestataires techniques interviennent :{" "}
+          {legal.host.name} pour l&apos;hébergement du site et {legal.emailProvider.name} pour
+          l&apos;acheminement des emails du formulaire. Ils peuvent traiter les données hors de
+          l&apos;Union européenne : {legal.transferSafeguards}
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Cookies et mesure d'audience">
+        <p>
+          Ce site ne dépose aucun cookie et n&apos;utilise aucun outil de suivi ni de mesure
+          d&apos;audience. Si des avis Google sont affichés, les photos de profil de leurs auteurs
+          sont chargées directement depuis les serveurs de Google.
+        </p>
+      </LegalSection>
+
+      <LegalSection title="Vos droits">
+        <p>
+          Vous pouvez demander l&apos;accès, la rectification, l&apos;effacement ou la limitation de
+          vos données, vous opposer à leur traitement ou demander leur portabilité, en écrivant à{" "}
+          <a className={legalLinkClassName} href={business.emailHref}>
+            {business.email}
+          </a>
+          . Je réponds dans un délai d&apos;un mois.
+        </p>
+        <p>
+          Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une
+          réclamation à la CNIL :{" "}
+          <a
+            className={legalLinkClassName}
+            href="https://www.cnil.fr/fr/plaintes"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            cnil.fr
+            <span className="sr-only"> (nouvel onglet)</span>
+          </a>
+          .
+        </p>
+      </LegalSection>
+    </LegalPage>
   );
 }

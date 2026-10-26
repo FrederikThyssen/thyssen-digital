@@ -570,6 +570,31 @@ const rawFooter = {
 };
 
 // ---------------------------------------------------------------------------
+// Informations légales (mentions légales et politique de confidentialité)
+// Les valeurs entre crochets sont à compléter : ne pas les inventer.
+// ---------------------------------------------------------------------------
+
+const rawLegal = {
+  status: "Entrepreneur individuel (micro-entreprise)",
+  siret: "[SIRET]",
+  address: "[ADRESSE_DOMICILIATION]",
+  publicationDirector: "Frédérik Thyssen",
+  vat: "TVA non applicable, art. 293 B du CGI.",
+  host: {
+    name: "Vercel Inc.",
+    address: "440 N Barranca Ave #4133, Covina, CA 91723, États-Unis",
+    website: "https://vercel.com",
+  },
+  emailProvider: {
+    name: "Resend",
+    website: "https://resend.com",
+  },
+  retention: "[DURÉE_CONSERVATION, ex. 3 ans après notre dernier échange]",
+  transferSafeguards:
+    "[GARANTIES_TRANSFERT_HORS_UE, ex. Data Privacy Framework ou clauses contractuelles types]",
+};
+
+// ---------------------------------------------------------------------------
 // Exports (typographie française appliquée)
 // ---------------------------------------------------------------------------
 
@@ -584,3 +609,4 @@ export const websiteOffers = withFrenchTypography(rawWebsiteOffers);
 export const maintenancePlans = withFrenchTypography(rawMaintenancePlans);
 export const complementaryServices = withFrenchTypography(rawComplementaryServices);
 export const footer = withFrenchTypography(rawFooter);
+export const legal = withFrenchTypography(rawLegal);

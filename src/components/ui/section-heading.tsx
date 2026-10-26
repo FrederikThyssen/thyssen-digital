@@ -6,6 +6,8 @@ type SectionHeadingProps = {
   description?: string;
   align?: "left" | "center";
   className?: string;
+  /** Heading level: h2 for page sections (default), h1 when the heading is the page title. */
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -14,6 +16,7 @@ export function SectionHeading({
   description,
   align = "left",
   className,
+  as: Heading = "h2",
 }: SectionHeadingProps) {
   return (
     <div
@@ -28,9 +31,9 @@ export function SectionHeading({
           {eyebrow}
         </p>
       ) : null}
-      <h2 className="text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
+      <Heading className="text-4xl font-semibold leading-tight text-foreground sm:text-5xl">
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
           {description}
