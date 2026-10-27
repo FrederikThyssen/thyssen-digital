@@ -77,7 +77,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-40 border-b bg-white/90 backdrop-blur-lg transition-[border-color,box-shadow] duration-200 ease-standard",
+        "sticky top-0 z-40 border-b bg-white lg:bg-white/90 lg:backdrop-blur-lg transition-[border-color,box-shadow] duration-200 ease-standard",
         isScrolled || isOpen
           ? "border-border shadow-[0_8px_24px_-18px_rgb(16_24_40_/_0.3)]"
           : "border-transparent",
