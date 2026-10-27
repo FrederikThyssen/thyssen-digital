@@ -771,13 +771,12 @@ const rawLocalPagesSection = {
 
 // ---------------------------------------------------------------------------
 // Informations légales (mentions légales et politique de confidentialité)
-// Les valeurs entre crochets sont à compléter : ne pas les inventer.
 // ---------------------------------------------------------------------------
 
 const rawLegal = {
   status: "Entrepreneur individuel (micro-entreprise)",
-  siret: "[SIRET]",
-  address: "[ADRESSE_DOMICILIATION]",
+  siret: "107 843 187 00017",
+  address: "21 bis rue du Commandant Thierry, 80360 Sailly-Saillisel",
   publicationDirector: "Frédérik Thyssen",
   vat: "TVA non applicable, art. 293 B du CGI.",
   host: {
@@ -789,9 +788,10 @@ const rawLegal = {
     name: "Resend",
     website: "https://resend.com",
   },
-  retention: "[DURÉE_CONSERVATION, ex. 3 ans après le dernier échange]",
+  retention:
+    "Les messages reçus via le formulaire sont conservés 3 ans à compter du dernier échange, puis supprimés.",
   transferSafeguards:
-    "[GARANTIES_TRANSFERT_HORS_UE, ex. Data Privacy Framework ou clauses contractuelles types]",
+    "Ces transferts sont encadrés par les garanties prévues par le RGPD (Data Privacy Framework ou clauses contractuelles types de la Commission européenne).",
 };
 
 // ---------------------------------------------------------------------------

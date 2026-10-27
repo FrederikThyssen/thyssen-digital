@@ -54,7 +54,7 @@ export default function PrivacyPolicyPage() {
           Je suis le seul destinataire de vos messages. Deux prestataires techniques interviennent :{" "}
           {legal.host.name} pour l&apos;hébergement du site et {legal.emailProvider.name} pour
           l&apos;acheminement des emails du formulaire. Ils peuvent traiter les données hors de
-          l&apos;Union européenne : {legal.transferSafeguards}
+          l&apos;Union européenne. {legal.transferSafeguards}
         </p>
       </LegalSection>
 
