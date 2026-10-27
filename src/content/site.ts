@@ -776,7 +776,7 @@ const rawLocalPagesSection = {
 
 const rawLegal = {
   status: "Entrepreneur individuel (micro-entreprise)",
-  siret: "[SIRET]",
+  siret: "107 843 187 00017",
   address: "[ADRESSE_DOMICILIATION]",
   publicationDirector: "Frédérik Thyssen",
   vat: "TVA non applicable, art. 293 B du CGI.",
