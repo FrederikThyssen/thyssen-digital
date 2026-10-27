@@ -1,99 +1,66 @@
-# Components - Design Language
+# Composants
 
-Sprint 1.5 fournit des primitives réutilisables pour assembler les écrans des prochains sprints sans créer encore le Hero, la navigation ou les contenus marketing finaux.
+Les textes et les prix ne sont jamais écrits dans les composants : ils viennent de `src/content/site.ts`.
 
 ## Imports
 
 ```tsx
-import { BackgroundGlow, BackgroundGrid, NoiseOverlay } from "@/components/backgrounds";
 import { BrandLogo } from "@/components/brand/brand-logo";
-import { FadeIn, FadeUp, ScaleIn, Stagger, StaggerItem } from "@/components/motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Divider } from "@/components/ui/divider";
-import { GlassPanel } from "@/components/ui/glass-panel";
+import { Card } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
+import { NoBreakPlaces } from "@/components/ui/no-break-places";
+import { Section } from "@/components/ui/section";
+import { SectionHeading } from "@/components/ui/section-heading";
+```
+
+## Section et SectionHeading
+
+`Section` donne le rythme vertical et la bande de fond (`tone="white"` par défaut, `tone="soft"` pour la bande gris-bleu). Alterner les deux d'une section à l'autre.
+
+`SectionHeading` affiche le sur-titre, le titre (H2, ou H1 avec `as="h1"`) et la description. La prop `highlight` met une partie du titre en serif italique au dégradé du logo ; sa valeur se règle dans le fichier de contenu (`titleHighlight`).
+
+```tsx
+<Section id="services" tone="soft">
+  <Container>
+    <SectionHeading eyebrow="Services" highlight="site internet" title="Création et refonte de site internet" />
+  </Container>
+</Section>
 ```
 
 ## Button
 
-`Button` accepte `variant`, `size`, `href`, `disabled`, `leadingIcon`, `trailingIcon` et `className`.
-
-```tsx
-<Button trailingIcon={<ArrowRight aria-hidden="true" className="size-4" />}>
-  Demander un audit
-</Button>
-```
-
-Utiliser `primary` pour l'action principale d'un contexte, `secondary` pour une action visible mais calme, et `ghost` pour les commandes légères.
+Variantes : `primary` (action principale, bleu du logo), `secondary` (action visible mais calme), `ghost`, `inverse` (sur fond sombre). Tailles : `sm`, `md`, `lg`. Fonctionne comme bouton natif ou comme lien via `href`. Le texte peut passer à la ligne sous 640 px.
 
 ## Card
 
-Variantes disponibles : `glass`, `surface`, `outline`. La prop `interactive` active un hover subtil.
-
-```tsx
-<Card variant="surface" interactive>
-  <CardHeader>
-    <CardTitle>Performance</CardTitle>
-  </CardHeader>
-  <CardContent>Contenu court et scannable.</CardContent>
-</Card>
-```
-
-Ne pas imbriquer des cartes décoratives dans d'autres cartes.
+Variantes : `surface` (par défaut), `outline`, `glass`. `interactive` ajoute une légère élévation au survol ; la classe `card-glow` ajoute la bordure lumineuse au dégradé du logo.
 
 ## Badge
 
-Variantes : `neutral`, `accent`, `outline`. Usage prévu : catégories, statuts, technologies, labels courts.
-
-## GlassPanel
-
-Surface glassmorphism très mesurée. À réserver aux zones qui bénéficient réellement d'une profondeur légère. Ne pas l'utiliser comme style par défaut de toute la page.
-
-## Divider
-
-`Divider` propose `simple` et `gradient`. Par défaut il est décoratif et masqué aux technologies d'assistance.
+Variantes : `neutral`, `accent`, `outline`. Pour les catégories et les technologies des réalisations.
 
 ## BrandLogo
 
-Affiche le monogramme officiel ou la version horizontale.
+- `tone="light"` : logo vectoriel pour fond clair (header, à propos).
+- `tone="accent"` : logo officiel en image, pour fond sombre (footer).
+- `variant` : `mark` ou `horizontal`. `decorative` si le nom de marque est déjà lisible à côté.
 
-```tsx
-<BrandLogo tone="accent" variant="horizontal" />
-<BrandLogo tone="white" variant="mark" />
-```
+## NoBreakPlaces
 
-Utiliser `decorative` lorsque le nom de marque est déjà présent dans un texte accessible proche.
+Empêche les noms de lieux composés (Hauts-de-France, Pas-de-Calais…) de se couper à un trait d'union, sans modifier le texte lu par Google.
 
-## Project visuals
+## Effets visuels (CSS, dans `globals.css`)
 
-Les réalisations utilisent des captures réelles (`next/image`) dans `src/components/sections/projects.tsx`, pas de composants d'aperçu stylisés dédiés.
+- `accent-serif` : mots clés en serif italique au dégradé du logo.
+- `aurora` : taches de couleur en dégradé radial (couleur via une classe `text-*`). Pas de `filter: blur` : il figeait Safari sur iPhone.
+- `float-slow`, `float-slower`, `tilt-3d`, `marquee-track`, `reveal`, `reveal-scale`, `progress-fill`.
 
-## Backgrounds
-
-- `BackgroundGlow` : halo décoratif subtil, `aria-hidden`, sans interaction.
-- `BackgroundGrid` : grille très discrète en CSS, sans JavaScript.
-- `NoiseOverlay` : texture CSS légère. À éviter si elle nuit à la lisibilité.
-
-Ces composants doivent rester décoratifs et ne jamais porter d'information.
-
-## Motion
-
-Primitives disponibles : `FadeIn`, `FadeUp`, `FadeLeft`, `FadeRight`, `ScaleIn`, `Stagger`, `StaggerItem`.
-
-```tsx
-<Stagger>
-  <StaggerItem>Premier bloc</StaggerItem>
-  <StaggerItem>Deuxième bloc</StaggerItem>
-</Stagger>
-```
-
-Les animations sont jouées une seule fois par défaut et respectent `prefers-reduced-motion`. Ne pas les utiliser pour du scroll hijacking, de la parallaxe, des effets 3D ou des animations spécifiques au Hero avant Sprint 2.
+Les animations continues ne tournent que sur ordinateur (`min-width: 1024px` et `hover: hover`) et toutes sont coupées si `prefers-reduced-motion` est actif. Pas de `backdrop-filter` sur mobile.
 
 ## Accessibilité
 
-- Garder les icônes décoratives en `aria-hidden`.
+- Icônes décoratives en `aria-hidden`.
 - Ne jamais transmettre une information uniquement par la couleur.
-- Conserver un focus visible.
-- Maintenir des zones tactiles confortables.
-- Désactiver ou réduire les mouvements quand l'utilisateur le demande.
+- Focus visible, zones tactiles d'au moins 44 px sur mobile.

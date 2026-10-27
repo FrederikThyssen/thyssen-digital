@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { business } from "@/content/site";
 
+// Next.js already adds <meta name="robots" content="noindex"> to the 404 page.
 export const metadata: Metadata = {
   title: "Page introuvable",
-  robots: { index: false, follow: true },
 };
 
 export default function NotFound() {

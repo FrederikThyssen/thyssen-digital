@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useId } from "react";
 
-import { BRAND_NAME, BRAND_SIGNATURE } from "@/lib/constants";
+import { BRAND_NAME } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 type BrandLogoProps = {
@@ -10,7 +10,6 @@ type BrandLogoProps = {
   tone?: "default" | "white" | "black" | "accent" | "light";
   className?: string;
   imageClassName?: string;
-  showSignature?: boolean;
   decorative?: boolean;
   /** Set to "eager" when the logo is visible on arrival (header). */
   loading?: "eager" | "lazy";
@@ -29,12 +28,11 @@ export function BrandLogo({
   tone = "default",
   className,
   imageClassName,
-  showSignature = false,
   decorative = false,
   loading,
 }: BrandLogoProps) {
   const gradientId = useId();
-  const label = showSignature ? `${BRAND_NAME} - ${BRAND_SIGNATURE}` : BRAND_NAME;
+  const label = BRAND_NAME;
   const useOfficialRaster = tone === "accent";
 
   if (useOfficialRaster) {
@@ -95,11 +93,6 @@ export function BrandLogo({
           <span className="text-[0.65rem] font-semibold tracking-[0.42em] text-primary">
             DIGITAL
           </span>
-          {showSignature ? (
-            <span className="text-[0.625rem] font-medium tracking-[0.14em] text-muted-foreground">
-              {BRAND_SIGNATURE}
-            </span>
-          ) : null}
         </span>
       ) : null}
     </span>

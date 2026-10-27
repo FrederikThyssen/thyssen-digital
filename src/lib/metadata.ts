@@ -72,10 +72,7 @@ export const defaultMetadata: Metadata = {
     template: `%s | ${BRAND_NAME}`,
   },
   applicationName: BRAND_NAME,
-  robots: {
-    index: true,
-    follow: true,
-  },
+  // No robots tag: pages are indexable by default; Next.js adds noindex to the 404 page.
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
