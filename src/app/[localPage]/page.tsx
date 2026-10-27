@@ -81,8 +81,8 @@ export default async function LocalLandingPage({ params }: PageProps<"/[localPag
       <main className="bg-background" id="contenu">
         <section className="relative isolate overflow-hidden border-b border-border bg-background-secondary" id="accueil">
           <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-            <span className="aurora -right-[8%] -top-[30%] h-[30rem] w-[30rem] bg-[#1350ff]/25" />
-            <span className="aurora -left-[10%] bottom-[-40%] h-[26rem] w-[26rem] bg-[#7d2cff]/20 [animation-delay:-8s]" />
+            <span className="aurora -right-[8%] -top-[30%] h-[30rem] w-[30rem] text-[#1350ff]/25" />
+            <span className="aurora -left-[10%] bottom-[-40%] h-[26rem] w-[26rem] text-[#7d2cff]/20 [animation-delay:-8s]" />
             <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_80%_10%,black,transparent_60%)]" />
           </div>
           <Container className="py-14 sm:py-20 lg:py-24">

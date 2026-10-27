@@ -82,7 +82,7 @@ function HeroVisual({ ratingLabel }: { ratingLabel: string }) {
           <PhoneFrame />
         </div>
 
-        <div className="float-slow absolute -left-3 bottom-10 hidden max-w-[17rem] items-center gap-3 rounded-2xl border border-white/60 bg-white/85 p-3.5 shadow-card backdrop-blur-md sm:flex sm:-left-8">
+        <div className="float-slow absolute -left-3 bottom-10 hidden max-w-[17rem] items-center gap-3 rounded-2xl border border-white/60 bg-white p-3.5 shadow-card sm:flex sm:-left-8">
           <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#1350ff,#7d2cff)] text-white">
             <Mail aria-hidden="true" className="size-5" />
           </span>
@@ -92,7 +92,7 @@ function HeroVisual({ ratingLabel }: { ratingLabel: string }) {
           </span>
         </div>
 
-        <div className="float-slower absolute -top-12 left-4 hidden items-center gap-2 rounded-full border border-white/60 bg-white/90 px-3.5 py-2 shadow-card backdrop-blur-md sm:flex">
+        <div className="float-slower absolute -top-12 left-4 hidden items-center gap-2 rounded-full border border-white/60 bg-white px-3.5 py-2 shadow-card sm:flex">
           <span aria-hidden="true" className="flex gap-0.5 text-[#f5a400]">
             {Array.from({ length: 5 }, (_, index) => (
               <Star className="size-3.5" fill="currentColor" key={index} />
@@ -101,7 +101,7 @@ function HeroVisual({ ratingLabel }: { ratingLabel: string }) {
           <span className="text-xs font-semibold text-ink">{ratingLabel}</span>
         </div>
 
-        <div className="float-slow absolute -top-14 right-4 hidden items-center gap-2 rounded-2xl border border-white/60 bg-white/90 px-3.5 py-2.5 shadow-card backdrop-blur-md md:flex">
+        <div className="float-slow absolute -top-14 right-4 hidden items-center gap-2 rounded-2xl border border-white/60 bg-white px-3.5 py-2.5 shadow-card md:flex">
           <span className="inline-flex size-6 items-center justify-center rounded-full bg-emerald-500 text-white">
             <Check aria-hidden="true" className="size-3.5" strokeWidth={3} />
           </span>
@@ -129,19 +129,19 @@ export async function Hero() {
       className="relative isolate overflow-hidden bg-white"
       id="accueil"
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_85%,transparent)]">
-        <span className="aurora -right-[10%] -top-[20%] h-[38rem] w-[38rem] bg-[#1350ff]/35" />
-        <span className="aurora right-[18%] top-[30%] h-[26rem] w-[26rem] bg-[#00e5ff]/30 [animation-delay:-6s]" />
-        <span className="aurora -left-[12%] bottom-[-25%] h-[30rem] w-[30rem] bg-[#7d2cff]/25 [animation-delay:-11s]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <span className="aurora -right-[10%] -top-[8%] h-[38rem] w-[38rem] text-[#1350ff]/35" />
+        <span className="aurora right-[18%] top-[30%] h-[26rem] w-[26rem] text-[#00e5ff]/30 [animation-delay:-6s]" />
+        <span className="aurora -left-[12%] bottom-[-25%] h-[30rem] w-[30rem] text-[#7d2cff]/25 [animation-delay:-11s]" />
         <div className="bg-dots absolute inset-0 [mask-image:radial-gradient(ellipse_at_70%_30%,black,transparent_70%)]" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-white" />
       </div>
 
       <Container className="grid grid-cols-1 items-center gap-16 pb-24 pt-10 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 lg:pb-32 lg:pt-20 xl:gap-20">
         <div>
-          <p className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white/80 px-3 py-1 text-sm font-medium text-muted-foreground shadow-soft backdrop-blur sm:rounded-full">
+          <p className="inline-flex items-center gap-2 rounded-2xl border border-border bg-white px-3 py-1 text-sm font-medium text-muted-foreground shadow-soft sm:rounded-full">
             <span aria-hidden="true" className="relative flex size-2 shrink-0">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary/60 motion-reduce:hidden" />
+              <span className="absolute inline-flex size-full rounded-full lg:animate-ping bg-primary/60 motion-reduce:hidden" />
               <span className="relative inline-flex size-2 rounded-full bg-primary" />
             </span>
             <span>

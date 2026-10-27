@@ -28,9 +28,9 @@ export function FinalCtaSection() {
     <section aria-labelledby="final-cta-title" className="bg-white px-3 py-10 sm:px-6 sm:py-16">
       <div className="relative isolate mx-auto max-w-[90rem] overflow-hidden rounded-[2.5rem] bg-ink px-6 py-20 text-center sm:py-28">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-          <span className="aurora -left-[10%] -top-[40%] h-[30rem] w-[30rem] bg-[#1350ff]/70" />
-          <span className="aurora -right-[8%] top-[10%] h-[26rem] w-[26rem] bg-[#7d2cff]/60 [animation-delay:-7s]" />
-          <span className="aurora bottom-[-45%] left-[35%] h-[24rem] w-[24rem] bg-[#00e5ff]/35 [animation-delay:-12s]" />
+          <span className="aurora -left-[10%] -top-[40%] h-[30rem] w-[30rem] text-[#1350ff]/70" />
+          <span className="aurora -right-[8%] top-[10%] h-[26rem] w-[26rem] text-[#7d2cff]/60 [animation-delay:-7s]" />
+          <span className="aurora bottom-[-45%] left-[35%] h-[24rem] w-[24rem] text-[#00e5ff]/35 [animation-delay:-12s]" />
           <div className="absolute inset-0 bg-[radial-gradient(rgb(255_255_255_/_0.08)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
         </div>
         <Container className="reveal max-w-3xl">
@@ -54,7 +54,7 @@ export function FinalCtaSection() {
               {finalCta.primaryCta}
             </Button>
             <Button
-              className="border-white/30 bg-white/5 text-white shadow-none backdrop-blur hover:border-white/60 hover:bg-white/10"
+              className="border-white/30 bg-white/5 text-white shadow-none hover:border-white/60 hover:bg-white/10"
               href={business.phoneHref}
               leadingIcon={<Phone aria-hidden="true" className="size-5" />}
               size="lg"
