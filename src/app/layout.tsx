@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Instrument_Serif, Inter } from "next/font/google";
 
@@ -44,6 +45,8 @@ export default function RootLayout({
           Aller au contenu
         </a>
         {children}
+        {/* Cookieless audience measurement (no-op in development). */}
+        <Analytics />
       </body>
     </html>
   );

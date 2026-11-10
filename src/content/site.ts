@@ -354,6 +354,8 @@ const rawHome = {
     submitting: "Envoi en cours...",
     success: "Merci, votre demande est bien envoyée. Je vous réponds sous 24 h ouvrées.",
     error: `L'envoi n'a pas fonctionné. Réessayez, ou appelez-moi au ${rawBusiness.phoneDisplay}.`,
+    verificationPending:
+      "La vérification anti-robot n'est pas encore terminée. Patientez une seconde puis réessayez.",
     privacyNotice: "Vos données servent uniquement à répondre à votre demande.",
     privacyLinkLabel: "Politique de confidentialité",
     budgetOptions: [
@@ -788,6 +790,16 @@ const rawLegal = {
     name: "Resend",
     website: "https://resend.com",
   },
+  antiBotProvider: {
+    name: "Cloudflare Turnstile",
+    website: "https://www.cloudflare.com/products/turnstile/",
+  },
+  analyticsProvider: {
+    name: "Vercel Web Analytics",
+    website: "https://vercel.com/docs/analytics",
+  },
+  technicalDataRetention:
+    "Ces données techniques sont conservées avec le message correspondant pendant 12 mois au maximum, puis supprimées.",
   retention:
     "Les messages reçus via le formulaire sont conservés 3 ans à compter du dernier échange, puis supprimés.",
   transferSafeguards:

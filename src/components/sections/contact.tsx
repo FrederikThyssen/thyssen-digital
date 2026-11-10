@@ -3,10 +3,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import Link from "next/link";
-import { useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useForm, type UseFormRegisterReturn } from "react-hook-form";
 import { z } from "zod";
 
+import { TURNSTILE_SITE_KEY, Turnstile, type TurnstileHandle } from "@/components/forms/turnstile";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { NoBreakPlaces } from "@/components/ui/no-break-places";
@@ -39,10 +40,20 @@ const contactFormSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
-type SubmitStatus = "idle" | "success" | "error";
+type SubmitStatus = "idle" | "success" | "error" | "verification-pending";
 
 export function ContactSection() {
   const [status, setStatus] = useState<SubmitStatus>("idle");
+  // Anti-spam: time at which the form was displayed, and the Turnstile token (single use).
+  const startedAtRef = useRef<number | null>(null);
+  const turnstileRef = useRef<TurnstileHandle>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const handleTurnstileToken = useCallback((token: string) => setTurnstileToken(token), []);
+  const clearTurnstileToken = useCallback(() => setTurnstileToken(null), []);
+
+  useEffect(() => {
+    startedAtRef.current = Date.now();
+  }, []);
   const {
     register,
     handleSubmit,
@@ -54,11 +65,20 @@ export function ContactSection() {
 
   async function onSubmit(values: ContactFormValues) {
     setStatus("idle");
+
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
+      // The challenge has not finished yet (slow network) or has expired: ask for a retry.
+      setStatus("verification-pending");
+      return;
+    }
+
+    const elapsedMs = startedAtRef.current === null ? undefined : Date.now() - startedAtRef.current;
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, elapsedMs, turnstileToken: turnstileToken ?? undefined }),
       });
 
       if (!response.ok) {
@@ -70,6 +90,10 @@ export function ContactSection() {
       reset();
     } catch {
       setStatus("error");
+    } finally {
+      // Tokens are single use: get a fresh one for the next submission.
+      setTurnstileToken(null);
+      turnstileRef.current?.reset();
     }
   }
 
@@ -117,7 +141,7 @@ export function ContactSection() {
             aria-hidden="true"
             className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-[linear-gradient(90deg,#1350ff,#00e5ff,#7d2cff)]"
           />
-          <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <form noValidate onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
             <input
               aria-hidden="true"
               autoComplete="off"
@@ -205,14 +229,26 @@ export function ContactSection() {
                 className={
                   status === "success"
                     ? "rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium leading-6 text-emerald-800"
-                    : status === "error"
+                    : status === "error" || status === "verification-pending"
                       ? "rounded-xl bg-red-50 px-4 py-3 text-sm font-medium leading-6 text-red-800"
                       : "sr-only"
                 }
                 role="status"
               >
-                {status === "success" ? contact.success : status === "error" ? contact.error : ""}
+                {status === "success"
+                  ? contact.success
+                  : status === "error"
+                    ? contact.error
+                    : status === "verification-pending"
+                      ? contact.verificationPending
+                      : ""}
               </p>
+              <Turnstile
+                onError={clearTurnstileToken}
+                onExpire={clearTurnstileToken}
+                onToken={handleTurnstileToken}
+                ref={turnstileRef}
+              />
               <div>
                 <Button
                   aria-busy={isSubmitting || undefined}
