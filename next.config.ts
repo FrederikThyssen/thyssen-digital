@@ -8,17 +8,21 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 // Vercel preview deployments inject the vercel.live feedback toolbar.
 const vercelLive = process.env.VERCEL_ENV === "preview" ? " https://vercel.live" : "";
 
-// No external scripts are allowed. 'unsafe-inline' is kept for the inline scripts Next.js emits,
-// so pages stay statically generated (a nonce-based policy would make every page dynamic).
+// Cloudflare Turnstile (contact form anti-bot) is the only external script allowed.
+// https://developers.cloudflare.com/turnstile/reference/content-security-policy/
+const turnstile = "https://challenges.cloudflare.com";
+
+// 'unsafe-inline' is kept for the inline scripts Next.js emits, so pages stay statically
+// generated (a nonce-based policy would make every page dynamic).
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDevelopment ? " 'unsafe-eval'" : ""}${vercelLive}`,
+  `script-src 'self' 'unsafe-inline' ${turnstile}${isDevelopment ? " 'unsafe-eval'" : ""}${vercelLive}`,
   "style-src 'self' 'unsafe-inline'",
   // Google review author photos are served from googleusercontent.com.
   `img-src 'self' data: blob: https://*.googleusercontent.com${vercelLive}`,
   "font-src 'self'",
   `connect-src 'self'${vercelLive}${vercelLive ? " wss://ws-us3.pusher.com" : ""}`,
-  `frame-src 'self'${vercelLive}`,
+  `frame-src 'self' ${turnstile}${vercelLive}`,
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

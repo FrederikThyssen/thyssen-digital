@@ -31,9 +31,15 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection title="Données collectées">
         <p>
-          Uniquement les informations que vous saisissez dans le formulaire de contact : nom,
-          adresse email, et si vous les indiquez, téléphone, entreprise, type de projet, budget
-          indicatif, ainsi que le contenu de votre message.
+          Les informations que vous saisissez dans le formulaire de contact : nom, adresse email,
+          et si vous les indiquez, téléphone, entreprise, type de projet, budget indicatif, ainsi
+          que le contenu de votre message.
+        </p>
+        <p>
+          Lors de l&apos;envoi du formulaire, le site enregistre également des données techniques :
+          votre adresse IP, une localisation approximative déduite de cette adresse (ville, région,
+          pays), l&apos;identifiant technique de votre navigateur (user-agent), la page d&apos;origine
+          et l&apos;horodatage de l&apos;envoi. Ces informations sont jointes au message que je reçois.
         </p>
       </LegalSection>
 
@@ -45,24 +51,41 @@ export default function PrivacyPolicyPage() {
         </p>
       </LegalSection>
 
+      <LegalSection title="Lutte contre le spam et la fraude">
+        <p>
+          Les données techniques décrites ci-dessus servent exclusivement à détecter les envois
+          automatisés, les usurpations d&apos;identité et les tentatives de fraude via le formulaire.
+          Ce traitement repose sur mon intérêt légitime à protéger ce service et à ne traiter que des
+          demandes authentiques (article 6.1.f du RGPD). {legal.technicalDataRetention}
+        </p>
+        <p>
+          Le formulaire est également protégé par {legal.antiBotProvider.name}, qui analyse des
+          signaux techniques de votre navigateur pour distinguer un humain d&apos;un robot, sans
+          cookie ni suivi publicitaire.
+        </p>
+      </LegalSection>
+
       <LegalSection title="Durée de conservation">
         <p>{legal.retention}</p>
       </LegalSection>
 
       <LegalSection title="Destinataires et prestataires">
         <p>
-          Je suis le seul destinataire de vos messages. Deux prestataires techniques interviennent :{" "}
-          {legal.host.name} pour l&apos;hébergement du site et {legal.emailProvider.name} pour
-          l&apos;acheminement des emails du formulaire. Ils peuvent traiter les données hors de
-          l&apos;Union européenne. {legal.transferSafeguards}
+          Je suis le seul destinataire de vos messages. Trois prestataires techniques interviennent :{" "}
+          {legal.host.name} pour l&apos;hébergement du site et la mesure d&apos;audience,{" "}
+          {legal.emailProvider.name} pour l&apos;acheminement des emails du formulaire, et{" "}
+          {legal.antiBotProvider.name} pour la protection anti-robot du formulaire. Ils peuvent
+          traiter les données hors de l&apos;Union européenne. {legal.transferSafeguards}
         </p>
       </LegalSection>
 
       <LegalSection title="Cookies et mesure d'audience">
         <p>
-          Ce site ne dépose aucun cookie et n&apos;utilise aucun outil de suivi ni de mesure
-          d&apos;audience. Si des avis Google sont affichés, les photos de profil de leurs auteurs
-          sont chargées directement depuis les serveurs de Google.
+          Ce site ne dépose aucun cookie. La fréquentation est mesurée avec{" "}
+          {legal.analyticsProvider.name}, un outil sans cookie ni identifiant persistant, qui ne
+          permet pas de vous suivre d&apos;un site à l&apos;autre et ne nécessite donc pas votre
+          consentement. Si des avis Google sont affichés, les photos de profil de leurs auteurs sont
+          chargées directement depuis les serveurs de Google.
         </p>
       </LegalSection>
 
