@@ -35,7 +35,8 @@ const contactFormSchema = z.object({
   projectType: z.string().trim().optional(),
   budget: z.string().trim().optional(),
   message: z.string().trim().min(1, "Un message est requis."),
-  website: z.string().trim().optional(),
+  // Honeypot. The name must not look like anything a browser would autofill.
+  hp_field: z.string().trim().optional(),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -142,13 +143,13 @@ export function ContactSection() {
             className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-[linear-gradient(90deg,#1350ff,#00e5ff,#7d2cff)]"
           />
           <form noValidate onSubmit={(event) => void handleSubmit(onSubmit)(event)}>
-            <input
-              aria-hidden="true"
-              autoComplete="off"
-              className="sr-only"
-              tabIndex={-1}
-              {...register("website")}
-            />
+            {/* Honeypot: display:none so browser autofill never touches it; bots parsing the HTML still do. */}
+            <div aria-hidden="true" className="hidden">
+              <label>
+                Ne pas remplir
+                <input autoComplete="off" tabIndex={-1} type="text" {...register("hp_field")} />
+              </label>
+            </div>
             <div className="grid grid-cols-1 gap-4">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Field

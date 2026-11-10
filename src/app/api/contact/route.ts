@@ -15,7 +15,9 @@ const contactSchema = z.object({
   projectType: z.string().trim().max(100).optional().or(z.literal("")),
   budget: z.string().trim().max(200).optional().or(z.literal("")),
   message: z.string().trim().min(1).max(5000),
-  // Honeypot: only bots fill this hidden field.
+  // Honeypot: only bots fill this hidden field. "website" is the legacy name, still sent by
+  // pages loaded before the rename.
+  hp_field: z.string().max(200).optional().or(z.literal("")),
   website: z.string().max(200).optional().or(z.literal("")),
   // Milliseconds between the form being displayed and submitted (client-reported, best effort).
   elapsedMs: z.number().int().nonnegative().optional(),
@@ -47,8 +49,10 @@ function isRateLimited(ip: string): boolean {
   return false;
 }
 
-// Bots get the same answer as humans so they cannot tell they were filtered.
-function silentSuccess() {
+// Bots get the same answer as humans so they cannot tell they were filtered. The reason is
+// logged so a wrongly filtered human can be traced in the Vercel logs.
+function silentSuccess(reason: string, details: Record<string, unknown>) {
+  console.warn(`[contact] message filtré silencieusement (${reason})`, details);
   return NextResponse.json({ ok: true });
 }
 
@@ -75,19 +79,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Champs invalides." }, { status: 400 });
   }
 
-  const { name, email, phone, company, projectType, budget, message, website, elapsedMs, turnstileToken } =
+  const { name, email, phone, company, projectType, budget, message, hp_field, website, elapsedMs, turnstileToken } =
     parsed.data;
 
-  if (website) {
-    return silentSuccess();
+  if (hp_field || website) {
+    return silentSuccess("honeypot", { ip: meta.ip, email, userAgent: meta.userAgent });
   }
 
   if (elapsedMs !== undefined && elapsedMs < MIN_FILL_TIME_MS) {
-    return silentSuccess();
+    return silentSuccess("trop rapide", { ip: meta.ip, email, elapsedMs });
   }
 
   const turnstile = await verifyTurnstileToken(turnstileToken, meta.ip);
   if (turnstile.status === "failed") {
+    console.warn("[contact] vérification Turnstile échouée", { ip: meta.ip, email, errorCodes: turnstile.errorCodes });
     // Not silent: a human whose token expired must be able to retry.
     return NextResponse.json(
       { error: "La vérification anti-robot a échoué. Rechargez la page et réessayez." },
@@ -128,8 +133,11 @@ export async function POST(request: Request) {
   });
 
   if (error) {
+    console.error("[contact] échec d'envoi Resend", { ip: meta.ip, email, error });
     return NextResponse.json({ error: "Échec de l'envoi du message." }, { status: 502 });
   }
+
+  console.info("[contact] message transmis", { ip: meta.ip, email, suspect: isSuspect });
 
   return NextResponse.json({ ok: true });
 }
